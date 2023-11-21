@@ -14,14 +14,26 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace WingetUIWidgetProvider
 {
+
     internal class WingetUIConnector
     {
-        public event EventHandler<UpdatesCheckFinishedEventArgs> UpdateCheckFinished;
-        public event EventHandler<ConnectionEventArgs> Connected;
+        public event EventHandler<UpdatesCheckFinishedEventArgs>? UpdateCheckFinished;
+        public event EventHandler<ConnectionEventArgs>? Connected;
 
-        private string SessionToken;
+        private string SessionToken = "";
 
         private bool was_connected = false;
+
+        public Dictionary<string, string> WidgetSourceReference = new Dictionary<string, string>()
+        {
+            {Widgets.All, ""},
+            {Widgets.Winget, "Winget"},
+            {Widgets.Scoop, "Scoop"},
+            {Widgets.Chocolatey, "Chocolatey"},
+            {Widgets.Pip, "Pip"},
+            {Widgets.Npm, "Npm"},
+            {Widgets.Dotnet, ".NET Tool"},
+        };
 
         public WingetUIConnector() {
         }
@@ -31,7 +43,7 @@ namespace WingetUIWidgetProvider
             was_connected = false;
         }
 
-        async public void Connect(CompactWidgetInfo widget)
+        async public void Connect(GenericWidget widget)
         {
             ConnectionEventArgs args = new ConnectionEventArgs(widget);
             try
@@ -64,42 +76,16 @@ namespace WingetUIWidgetProvider
                 Console.WriteLine(ex.ToString());
                 args.Succeeded = was_connected = false;
             }
-            Connected(this, args);
+            if(Connected != null)
+                Connected(this, args);
         }
 
-        async public void GetAvailableUpdates(CompactWidgetInfo widget)
+        async public void GetAvailableUpdates(GenericWidget widget)
         {
             UpdatesCheckFinishedEventArgs args = new UpdatesCheckFinishedEventArgs(widget);
             try
             {
-                string AllowedSource = "";
-
-                switch (widget.widgetName)
-                {
-                    case (Widgets.Winget):
-                        AllowedSource = "Winget";
-                        break;
-
-                    case (Widgets.Scoop):
-                        AllowedSource = "Scoop";
-                        break;
-
-                    case (Widgets.Chocolatey):
-                        AllowedSource = "Chocolatey";
-                        break;
-
-                    case (Widgets.Dotnet):
-                        AllowedSource = ".NET Tool";
-                        break;
-
-                    case (Widgets.Npm):
-                        AllowedSource = "Npm";
-                        break;
-
-                    case (Widgets.Pip):
-                        AllowedSource = "Pip";
-                        break;
-                }
+                string AllowedSource = WidgetSourceReference[widget.Name];
 
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri("http://localhost:7058//");
@@ -144,7 +130,8 @@ namespace WingetUIWidgetProvider
                 args.Succeeded = false;
                 Console.WriteLine(ex.ToString());
             }
-            UpdateCheckFinished(this, args);
+            if (UpdateCheckFinished != null)
+                UpdateCheckFinished(this, args);
 
         }
         
@@ -215,6 +202,23 @@ namespace WingetUIWidgetProvider
                 Console.WriteLine(ex.ToString());
             }
         }
+
+        async public void UpdateAllPackagesForSource(string source)
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri("http://localhost:7058//");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                await client.GetAsync("/widgets/update_all_packages_for_source?token=" + SessionToken + "&source=" + source);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
     }
 
     public class Package
@@ -263,9 +267,9 @@ namespace WingetUIWidgetProvider
         public Package[] Updates { get; set; }
         public int Count { get; set; }
         public bool Succeeded { get; set; }
-        public CompactWidgetInfo widget {  get; set; }
+        public GenericWidget widget {  get; set; }
 
-        public UpdatesCheckFinishedEventArgs(CompactWidgetInfo widget)
+        public UpdatesCheckFinishedEventArgs(GenericWidget widget)
         {
             Updates = new Package[0];
             this.widget = widget;
@@ -274,12 +278,12 @@ namespace WingetUIWidgetProvider
 
     public class ConnectionEventArgs : EventArgs
     {
-        public ConnectionEventArgs(CompactWidgetInfo widget)
+        public ConnectionEventArgs(GenericWidget widget)
         {
             this.widget = widget;
         }
 
         public bool Succeeded = true;
-        public CompactWidgetInfo widget { get; set; }
+        public GenericWidget widget { get; set; }
     }
 }

@@ -17,15 +17,15 @@ namespace WingetUIWidgetProvider
 
     internal class WidgetProvider : IWidgetProvider
     {
-        public static Dictionary<string, CompactWidgetInfo> RunningWidgets = new Dictionary<string, CompactWidgetInfo>();
+        public static Dictionary<string, GenericWidget> RunningWidgets = new Dictionary<string, GenericWidget>();
 
-        WingetUIConnector wingetui;
+        WingetUIConnector WingetUI;
 
         public WidgetProvider()
         {
-            wingetui = new WingetUIConnector();
-            wingetui.UpdateCheckFinished += Wingetui_UpdateCheckFinished;
-            wingetui.Connected += Wingetui_Connected;
+            WingetUI = new WingetUIConnector();
+            WingetUI.UpdateCheckFinished += WingetUI_UpdateCheckFinished;
+            WingetUI.Connected += WingetUI_Connected;
 
             var runningWidgets = WidgetManager.GetDefault().GetWidgetInfos();
 
@@ -36,13 +36,13 @@ namespace WingetUIWidgetProvider
                 var widgetName = widgetContext.DefinitionId;
                 if (!RunningWidgets.ContainsKey(widgetId))
                 {
-                    CompactWidgetInfo runningWidgetInfo = new CompactWidgetInfo(widgetId, widgetName);
+                    GenericWidget runningWidgetInfo = new GenericWidget(widgetId, widgetName);
                     try
                     {
                         runningWidgetInfo.isActive = true;
                         runningWidgetInfo.size = widgetInfo.WidgetContext.Size;
                         runningWidgetInfo.customState = 0;
-    }
+                    }
                     catch
                     {
                         Console.WriteLine("Failed to import old widget!");
@@ -52,19 +52,19 @@ namespace WingetUIWidgetProvider
             }
         }
 
-        private void StartLoadingRoutine(CompactWidgetInfo widget)
+        private void StartLoadingRoutine(GenericWidget widget)
         {
-            WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(widget.widgetId);
+            WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(widget.Id);
             updateOptions.Data = "{ \"IsLoading\": true }";
             Console.WriteLine("Starting load routine...");
             updateOptions.Template = Templates.BaseTemplate;
-            wingetui.Connect(widget);
+            WingetUI.Connect(widget);
             WidgetManager.GetDefault().UpdateWidget(updateOptions);
         }
 
-        private void Wingetui_Connected(object? sender, ConnectionEventArgs e)
+        private void WingetUI_Connected(object? sender, ConnectionEventArgs e)
         {
-            WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(e.widget.widgetId);
+            WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(e.widget.Id);
             if (!e.Succeeded)
             {
                 updateOptions.Data = Templates.GetData_NoWingetUI();
@@ -74,16 +74,16 @@ namespace WingetUIWidgetProvider
             {
                 updateOptions.Data = Templates.GetData_IsLoading();
                 Console.WriteLine("Connected to WingetUI");
-                wingetui.GetAvailableUpdates(e.widget);
+                WingetUI.GetAvailableUpdates(e.widget);
             }
 
             updateOptions.Template = Templates.BaseTemplate;
             WidgetManager.GetDefault().UpdateWidget(updateOptions);
         }
 
-        private void Wingetui_UpdateCheckFinished(object? sender, UpdatesCheckFinishedEventArgs e)
+        private void WingetUI_UpdateCheckFinished(object? sender, UpdatesCheckFinishedEventArgs e)
         {
-            WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(e.widget.widgetId);
+            WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(e.widget.Id);
 
             updateOptions.Template = Templates.BaseTemplate;
             if (!e.Succeeded)
@@ -105,9 +105,9 @@ namespace WingetUIWidgetProvider
             }
         }
 
-        private void DrawUpdates(CompactWidgetInfo widget)
+        private void DrawUpdates(GenericWidget widget)
         { 
-            WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(widget.widgetId);
+            WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(widget.Id);
             
             Console.WriteLine("Showing available updates...");
             updateOptions.Template = Templates.UpdatesTemplate;
@@ -144,7 +144,7 @@ namespace WingetUIWidgetProvider
             } else {
                 updateOptions.Data = Templates.GetData_UpdatesList(widget.AvailableUpdates.Length, upgradablePackages);
             }
-            Console.WriteLine(widget.widgetName);
+            Console.WriteLine(widget.Name);
             Console.WriteLine(updateOptions.Template);
             Console.WriteLine(updateOptions.Data);
             WidgetManager.GetDefault().UpdateWidget(updateOptions);
@@ -154,7 +154,7 @@ namespace WingetUIWidgetProvider
         {
             var widgetId = widgetContext.Id;
             var widgetName = widgetContext.DefinitionId;
-            CompactWidgetInfo runningWidgetInfo = new CompactWidgetInfo(widgetId, widgetName);
+            GenericWidget runningWidgetInfo = new GenericWidget(widgetId, widgetName);
             RunningWidgets[widgetId] = runningWidgetInfo;
             StartLoadingRoutine(runningWidgetInfo);
         }
@@ -183,28 +183,31 @@ namespace WingetUIWidgetProvider
             WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(widgetId);
             if (RunningWidgets.ContainsKey(widgetId))
             {
-                var localWidgetInfo = RunningWidgets[widgetId];
+                GenericWidget widget = RunningWidgets[widgetId];
                 var verb = actionInvokedArgs.Verb;
 
                 switch (verb)
                 {
                     case (Verbs.Reload):
-                        localWidgetInfo.customState = 0;
-                        wingetui.ResetConnection();
-                        StartLoadingRoutine(localWidgetInfo);
+                        widget.customState = 0;
+                        WingetUI.ResetConnection();
+                        StartLoadingRoutine(widget);
                         break;
 
                     case (Verbs.ViewUpdatesOnWingetUI):
-                        wingetui.ViewOnWingetUI();
+                        WingetUI.ViewOnWingetUI();
                         break;
 
                     case (Verbs.OpenWingetUI):
-                        wingetui.OpenWingetUI();
+                        WingetUI.OpenWingetUI();
                         break;
 
                     case (Verbs.UpdateAll):
-                        localWidgetInfo.customState = 1;
-                        wingetui.UpdateAllPackages();
+                        widget.customState = 1;
+                        if (widget.Name == Widgets.All)
+                            WingetUI.UpdateAllPackages();
+                        else
+                            WingetUI.UpdateAllPackagesForSource(WingetUI.WidgetSourceReference[widget.Name]);
                         updateOptions.Data = Templates.GetData_UpdatesInCourse();
                         updateOptions.Template = Templates.BaseTemplate;
                         WidgetManager.GetDefault().UpdateWidget(updateOptions);
@@ -215,13 +218,13 @@ namespace WingetUIWidgetProvider
                         {
                             int index = int.Parse(verb.Replace(Verbs.UpdatePackage, ""));
                             Console.WriteLine(index);
-                            wingetui.UpdatePackage(localWidgetInfo.AvailableUpdates[index]);
-                            localWidgetInfo.AvailableUpdates = localWidgetInfo.AvailableUpdates.Where((val, idx) => idx != index).ToArray(); // Remove that widget from the current list
-                            DrawUpdates(localWidgetInfo);
+                            WingetUI.UpdatePackage(widget.AvailableUpdates[index]);
+                            widget.AvailableUpdates = widget.AvailableUpdates.Where((val, idx) => idx != index).ToArray(); // Remove that widget from the current list
+                            DrawUpdates(widget);
                         } else
                         {
                             Console.WriteLine("INVALID VERB " + verb);
-                            StartLoadingRoutine(localWidgetInfo);
+                            StartLoadingRoutine(widget);
                         }
                         break;
 
@@ -237,9 +240,9 @@ namespace WingetUIWidgetProvider
             var widgetSize = widgetContext.Size;
             if (RunningWidgets.ContainsKey(widgetId))
             {
-                var localWidgetInfo = RunningWidgets[widgetId];
-                localWidgetInfo.size = widgetContext.Size;
-                StartLoadingRoutine(localWidgetInfo);
+                var widget = RunningWidgets[widgetId];
+                widget.size = widgetContext.Size;
+                StartLoadingRoutine(widget);
 
             }
         }
@@ -250,32 +253,32 @@ namespace WingetUIWidgetProvider
 
             if (RunningWidgets.ContainsKey(widgetId))
             {
-                var localWidgetInfo = RunningWidgets[widgetId];
-                localWidgetInfo.isActive = true;
-                localWidgetInfo.size = widgetContext.Size;
-                StartLoadingRoutine(localWidgetInfo);
+                var widget = RunningWidgets[widgetId];
+                widget.isActive = true;
+                widget.size = widgetContext.Size;
+                StartLoadingRoutine(widget);
             }
         }
         public void Deactivate(string widgetId)
         {
             if (RunningWidgets.ContainsKey(widgetId))
             {
-                var localWidgetInfo = RunningWidgets[widgetId];
-                localWidgetInfo.isActive = false;
+                var widget = RunningWidgets[widgetId];
+                widget.isActive = false;
             }
         }
     }
 
-    public class CompactWidgetInfo
+    public class GenericWidget
     {
-        public CompactWidgetInfo(string widgetId, string widgetName) {
+        public GenericWidget(string widgetId, string widgetName) {
             AvailableUpdates = new Package[0];
-            this.widgetId = widgetId;
-            this.widgetName = widgetName;
+            this.Id = widgetId;
+            this.Name = widgetName;
         }
 
-        public string widgetId { get; set; }
-        public string widgetName { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
         public WidgetSize size { get; set; }
         public int customState = 0;
         public bool isActive = false;

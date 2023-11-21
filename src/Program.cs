@@ -25,7 +25,9 @@ Console.WriteLine("Registering Widget Provider");
 uint cookie;
 
 Guid CLSID_Factory = Guid.Parse("34D3940F-84D6-47C5-B446-32D6865D8852");
+
 CoRegisterClassObject(CLSID_Factory, new WidgetProviderFactory<WidgetProvider>(), 0x4, 0x1, out cookie);
+
 Console.WriteLine("Registered successfully. Press ENTER to exit.");
 Console.ReadLine();
 

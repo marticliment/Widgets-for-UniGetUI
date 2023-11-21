@@ -1,7 +1,7 @@
-WingetUI Widget Provider/bin
-WingetUI Widget Provider/obj
-WingetUI Widget Provider/.vs
-WingetUI Widget Provider/Widget Provider Package/obj
-WingetUI Widget Provider/Widget Provider Package/bin
-WingetUI Widget Provider/Widget Provider Package/.vs
-WingetUI Widget Provider/Widget Provider Package.assets.cache
+src/bin
+src/obj
+src/.vs
+src/Package/obj
+src/Package/bin
+src/Package/.vs
+src/Package.assets.cache
