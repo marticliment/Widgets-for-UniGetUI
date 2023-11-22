@@ -12,7 +12,7 @@
 	<!-- Name="9b0c4abb-ca72-42ec-936a-02d4830a14a9" -->
 	<Identity
 	  Name="34D3940F-84D6-47C5-B446-32D6865D8852"
-	  Publisher="CN=marti"
+	  Publisher="CN=Marti Climent, O=Marti Climent, L=Barcelona, C=ES"
 	  Version="1.0.0.0" />
 
 	<Properties>
