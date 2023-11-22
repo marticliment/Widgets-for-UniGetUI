@@ -101,53 +101,48 @@ namespace WingetUIWidgetProvider
             else
             {
                 e.widget.AvailableUpdates = e.Updates;
-                DrawUpdates(e.widget);
-            }
-        }
-
-        private void DrawUpdates(GenericWidget widget)
-        { 
-            WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(widget.Id);
-            
-            Console.WriteLine("Showing available updates...");
-            updateOptions.Template = Templates.UpdatesTemplate;
-            string packages = "";
-            Package[] upgradablePackages = new Package[widget.AvailableUpdates.Length];
-            int nullPackages = 0;
-            for (int i = 0; i < widget.AvailableUpdates.Length; i++)
-            {
-                if (widget.AvailableUpdates[i].Name == "")
+                Console.WriteLine("Showing available updates...");
+                updateOptions.Template = Templates.UpdatesTemplate;
+                string packages = "";
+                Package[] upgradablePackages = new Package[e.widget.AvailableUpdates.Length];
+                int nullPackages = 0;
+                for (int i = 0; i < e.widget.AvailableUpdates.Length; i++)
                 {
-                    nullPackages += 1;
+                    if (e.widget.AvailableUpdates[i].Name == "")
+                    {
+                        nullPackages += 1;
+                    }
+                    else
+                    {
+                        upgradablePackages[i] = e.widget.AvailableUpdates[i];
+                        if (e.widget.size == WidgetSize.Medium && i == (3 + nullPackages) && e.widget.AvailableUpdates.Length > (3 + nullPackages))
+                        {
+                            i++;
+                            packages += (e.widget.AvailableUpdates.Length - i).ToString() + " more packages can also be upgraded";
+                            i = e.widget.AvailableUpdates.Length;
+                        }
+                        else if (e.widget.size == WidgetSize.Large && i == (7 + nullPackages) && e.widget.AvailableUpdates.Length > (7 + nullPackages) && e.widget.AvailableUpdates.Length > 7)
+                        {
+                            i++;
+                            packages += (e.widget.AvailableUpdates.Length - i).ToString() + " more packages can also be upgraded";
+                            i = e.widget.AvailableUpdates.Length;
+                        }
+                    }
+                }
+                if ((e.widget.AvailableUpdates.Length - nullPackages) == 0)
+                {
+                    updateOptions.Template = Templates.BaseTemplate;
+                    updateOptions.Data = Templates.GetData_NoUpdatesFound();
                 }
                 else
                 {
-                    upgradablePackages[i] = widget.AvailableUpdates[i];
-                    if (widget.size == WidgetSize.Medium && i == (3 + nullPackages) && widget.AvailableUpdates.Length > (3 + nullPackages))
-                    {
-                        i++;
-                        packages += (widget.AvailableUpdates.Length - i).ToString() + " more packages can also be upgraded";
-                        i = widget.AvailableUpdates.Length;
-                    }
-                    else if (widget.size == WidgetSize.Large && i == (7 + nullPackages) && widget.AvailableUpdates.Length > (7 + nullPackages) && widget.AvailableUpdates.Length > 7)
-                    {
-                        i++;
-                        packages += (widget.AvailableUpdates.Length - i).ToString() + " more packages can also be upgraded";
-                        i = widget.AvailableUpdates.Length;
-                    }
+                    updateOptions.Data = Templates.GetData_UpdatesList(e.widget.AvailableUpdates.Length, upgradablePackages);
                 }
+                Debug.WriteLine(e.widget.Name);
+                Debug.WriteLine(updateOptions.Template);
+                Debug.WriteLine(updateOptions.Data);
+                WidgetManager.GetDefault().UpdateWidget(updateOptions);
             }
-            if ((widget.AvailableUpdates.Length - nullPackages) == 0)
-            {
-                updateOptions.Template = Templates.BaseTemplate;
-                updateOptions.Data = Templates.GetData_NoUpdatesFound();
-            } else {
-                updateOptions.Data = Templates.GetData_UpdatesList(widget.AvailableUpdates.Length, upgradablePackages);
-            }
-            Console.WriteLine(widget.Name);
-            Console.WriteLine(updateOptions.Template);
-            Console.WriteLine(updateOptions.Data);
-            WidgetManager.GetDefault().UpdateWidget(updateOptions);
         }
 
         public void CreateWidget(WidgetContext widgetContext)
@@ -219,8 +214,7 @@ namespace WingetUIWidgetProvider
                             int index = int.Parse(verb.Replace(Verbs.UpdatePackage, ""));
                             Console.WriteLine(index);
                             WingetUI.UpdatePackage(widget.AvailableUpdates[index]);
-                            widget.AvailableUpdates = widget.AvailableUpdates.Where((val, idx) => idx != index).ToArray(); // Remove that widget from the current list
-                            DrawUpdates(widget);
+                            WingetUI.GetAvailableUpdates(widget);
                         } else
                         {
                             Console.WriteLine("INVALID VERB " + verb);
@@ -242,7 +236,7 @@ namespace WingetUIWidgetProvider
             {
                 var widget = RunningWidgets[widgetId];
                 widget.size = widgetContext.Size;
-                StartLoadingRoutine(widget);
+                WingetUI.GetAvailableUpdates(widget);
 
             }
         }
@@ -256,7 +250,7 @@ namespace WingetUIWidgetProvider
                 var widget = RunningWidgets[widgetId];
                 widget.isActive = true;
                 widget.size = widgetContext.Size;
-                StartLoadingRoutine(widget);
+                WingetUI.GetAvailableUpdates(widget);
             }
         }
         public void Deactivate(string widgetId)
