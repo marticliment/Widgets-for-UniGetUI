@@ -26,6 +26,8 @@ cd ..
 MakeAppx.exe pack /d Release /p "WingetUI Widgets.msix"
 move "WingetUI Widgets.msix" ..\..\..\..\
 
+cd ..\..\..\..\
+
 "Y:\- Signing\signtool-x64\signtool.exe" sign /v /debug /fd SHA256 /tr "http://timestamp.acs.microsoft.com" /td SHA256 /dlib "Y:\- Signing\azure.codesigning.client\x64\Azure.CodeSigning.Dlib.dll" /dmdf "Y:\- Signing\metadata.json" "WingetUI Widgets.msix"
 
 pause
