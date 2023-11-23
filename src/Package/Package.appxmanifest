@@ -36,11 +36,15 @@
 			<uap:VisualElements
 			  DisplayName="WingetUI Widgets (Preview)"
 			  Description="A collection of Windows Widgets designed to manage your WingetUI updates from the Widgets Pane and Dev Home"
-			  BackgroundColor="transparent"
-			  Square150x150Logo="Images\icon.png"
+			  Square150x150Logo="Images\LargeTile.png"
 			  AppListEntry="none"
-			  Square44x44Logo="Images\icon.png">
-				<uap:DefaultTile Wide310x150Logo="Images\icon.png"  Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png"/>
+			  Square44x44Logo="Images\icon.png" BackgroundColor="transparent">
+				<uap:DefaultTile Wide310x150Logo="Images\icon.png"  Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png">
+					<uap:ShowNameOnTiles>
+						<uap:ShowOn Tile="square150x150Logo"/>
+						<uap:ShowOn Tile="wide310x150Logo"/>
+					</uap:ShowNameOnTiles>
+				</uap:DefaultTile >
 				<uap:SplashScreen Image="Images\icon.png" />
 				<uap:LockScreen BadgeLogo="Images\BadgeLogo.png" Notification="badge"/>
 			</uap:VisualElements>
