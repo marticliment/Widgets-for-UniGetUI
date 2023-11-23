@@ -63,20 +63,6 @@ namespace WingetUIWidgetProvider
             update_cache_is_valid = false;
         }
 
-        public async Task Connect(GenericWidget widget, UpdatesCheckFinishedEventArgs result)
-        {
-            try
-            {
-                
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-                result.Succeeded = is_connected_to_host = false;
-                result.ErrorReason = ex.Message;
-            }
-        }
 
         public void OnCacheExpire(object? source, ElapsedEventArgs? e)
         {
@@ -147,7 +133,7 @@ namespace WingetUIWidgetProvider
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine(ex.Message);
                 result.Succeeded = is_connected_to_host = false;
                 result.ErrorReason = "NO_WINGETUI";
                 if (UpdateCheckFinished != null)

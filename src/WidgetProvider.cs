@@ -69,14 +69,10 @@ namespace WingetUIWidgetProvider
             if (!e.Succeeded)
             {
                 if (e.ErrorReason == "NO_WINGETUI")
-                {
                     updateOptions.Data = Templates.GetData_NoWingetUI();
-                }
                 else
-                {   
                     updateOptions.Data = Templates.GetData_ErrorOccurred(e.ErrorReason);
-                    WidgetManager.GetDefault().UpdateWidget(updateOptions);
-                }
+                WidgetManager.GetDefault().UpdateWidget(updateOptions);
 
             }
             else if (e.Count == 0)
