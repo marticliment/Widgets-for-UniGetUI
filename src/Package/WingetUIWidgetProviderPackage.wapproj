@@ -160,6 +160,7 @@
     <Content Include="Images\WidgetCovers\scoop_light.png" />
     <Content Include="Images\WidgetCovers\winget_dark.png" />
     <Content Include="Images\WidgetCovers\winget_light.png" />
+    <Content Include="Images\wingetui_color.png" />
     <Content Include="Images\winget_color.png" />
   </ItemGroup>
   <ItemGroup>

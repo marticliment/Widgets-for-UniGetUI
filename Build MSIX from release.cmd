@@ -4,14 +4,14 @@ echo BEFORE RUNNING THIS COMMAND THE SOLUTION MUST BE BUILT WITH THE CONFIGURATI
 
 pause
 
-del "WingetUI Widgets.msix"
 cd src
 cd Package
 cd bin
 cd x64
-
+del "WingetUI Widgets.msix"
 cd Release
 
+rmdir /Q /S .\Images
 move .\Package\Images .\Images
 rmdir /Q /S Package
 cd WingetUIWidgetProvider
@@ -25,5 +25,7 @@ cd ..
 
 MakeAppx.exe pack /d Release /p "WingetUI Widgets.msix"
 move "WingetUI Widgets.msix" ..\..\..\..\
-echo You may want to sign your installer now
+
+"Y:\- Signing\signtool-x64\signtool.exe" sign /v /debug /fd SHA256 /tr "http://timestamp.acs.microsoft.com" /td SHA256 /dlib "Y:\- Signing\azure.codesigning.client\x64\Azure.CodeSigning.Dlib.dll" /dmdf "Y:\- Signing\metadata.json" "WingetUI Widgets.msix"
+
 pause
