@@ -4,11 +4,12 @@ echo BEFORE RUNNING THIS COMMAND THE SOLUTION MUST BE BUILT WITH THE CONFIGURATI
 
 pause
 
+del "WingetUI Widgets.msix"
 cd src
 cd Package
 cd bin
 cd x64
-del "WingetUI Widgets.msix"
+
 cd Release
 
 move .\Package\Images .\Images

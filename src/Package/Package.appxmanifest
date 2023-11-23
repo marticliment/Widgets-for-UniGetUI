@@ -61,7 +61,7 @@
 						<uap3:Properties>
 							<WidgetProvider>
 								<ProviderIcons>
-									<Icon Path="Images\icon.png" />
+									<Icon Path="Images\wingetui_color.png" />
 								</ProviderIcons>
 								<Activation>
 									<!-- Apps exports COM interface which implements IWidgetProvider -->
@@ -90,7 +90,7 @@
 										</Capabilities>
 										<ThemeResources>
 											<Icons>
-												<Icon Path="Images\icon.png" />
+												<Icon Path="Images\wingetui_color.png" />
 											</Icons>
 											<DarkMode>
 												<Screenshots>
