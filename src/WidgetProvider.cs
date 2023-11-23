@@ -25,7 +25,6 @@ namespace WingetUIWidgetProvider
         {
             WingetUI = new WingetUIConnector();
             WingetUI.UpdateCheckFinished += WingetUI_UpdateCheckFinished;
-            WingetUI.Connected += WingetUI_Connected;
 
             var runningWidgets = WidgetManager.GetDefault().GetWidgetInfos();
 
@@ -58,26 +57,7 @@ namespace WingetUIWidgetProvider
             updateOptions.Data = "{ \"IsLoading\": true }";
             Console.WriteLine("Starting load routine...");
             updateOptions.Template = Templates.BaseTemplate;
-            WingetUI.Connect(widget);
-            WidgetManager.GetDefault().UpdateWidget(updateOptions);
-        }
-
-        private void WingetUI_Connected(object? sender, ConnectionEventArgs e)
-        {
-            WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(e.widget.Id);
-            if (!e.Succeeded)
-            {
-                updateOptions.Data = Templates.GetData_NoWingetUI();
-                Console.WriteLine("Could not connect to WingetUI");
-            }
-            else
-            {
-                updateOptions.Data = Templates.GetData_IsLoading();
-                Console.WriteLine("Connected to WingetUI");
-                WingetUI.GetAvailableUpdates(e.widget);
-            }
-
-            updateOptions.Template = Templates.BaseTemplate;
+            WingetUI.GetAvailableUpdates(widget);
             WidgetManager.GetDefault().UpdateWidget(updateOptions);
         }
 
@@ -88,9 +68,16 @@ namespace WingetUIWidgetProvider
             updateOptions.Template = Templates.BaseTemplate;
             if (!e.Succeeded)
             {
-                updateOptions.Data = Templates.GetData_ErrorOccurred("UPDATE_CHECK_FAILED");
-                Console.WriteLine("Could not check for updates");
-                WidgetManager.GetDefault().UpdateWidget(updateOptions);
+                if (e.ErrorReason == "NO_WINGETUI")
+                {
+                    updateOptions.Data = Templates.GetData_NoWingetUI();
+                }
+                else
+                {   
+                    updateOptions.Data = Templates.GetData_ErrorOccurred(e.ErrorReason);
+                    WidgetManager.GetDefault().UpdateWidget(updateOptions);
+                }
+
             }
             else if (e.Count == 0)
             {

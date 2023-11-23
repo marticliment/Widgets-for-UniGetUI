@@ -1,4 +1,5 @@
 ﻿using Microsoft.Windows.ApplicationModel.DynamicDependency;
+using Microsoft.Windows.Widgets.Providers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Background;
+using Windows.Devices.Printers;
 using Windows.Management.Deployment;
 using Windows.Media.Protection.PlayReady;
 using static System.Net.Mime.MediaTypeNames;
@@ -21,11 +23,12 @@ namespace WingetUIWidgetProvider
 
     internal class WingetUIConnector
     {
+        private double minimum_required_host_version = 2.119;
+
         public event EventHandler<UpdatesCheckFinishedEventArgs>? UpdateCheckFinished;
-        public event EventHandler<ConnectionEventArgs>? Connected;
 
         private string SessionToken = "";
-        private bool was_connected = false;
+        private bool is_connected_to_host = false;
         private bool update_cache_is_valid = false;
         private Package[] cached_updates = new Package[0];
 
@@ -50,7 +53,7 @@ namespace WingetUIWidgetProvider
 
         public void ResetConnection()
         {
-            was_connected = false;
+            is_connected_to_host = false;
             ResetCachedUpdates();
         }
 
@@ -60,40 +63,19 @@ namespace WingetUIWidgetProvider
             update_cache_is_valid = false;
         }
 
-        async public void Connect(GenericWidget widget)
+        public async Task Connect(GenericWidget widget, UpdatesCheckFinishedEventArgs result)
         {
-            ConnectionEventArgs args = new ConnectionEventArgs(widget);
             try
             {
-                if (!was_connected)
-                {
-                    StreamReader reader = new StreamReader(Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%") + "\\.wingetui\\CurrentSessionToken");
-                    SessionToken = reader.ReadToEnd().ToString().Replace("\n", "").Trim();
-                    reader.Close();
+                
 
-                    HttpClient client = new HttpClient();
-                    client.BaseAddress = new Uri("http://localhost:7058//");
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                    HttpResponseMessage task = await client.GetAsync("/widgets/attempt_connection?token="+SessionToken);
-                    if (task.IsSuccessStatusCode)
-                        args.Succeeded = was_connected = true;
-                    else
-                        args.Succeeded = was_connected = false;
-                }
-                else
-                {
-                    args.Succeeded = true;
-                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                args.Succeeded = was_connected = false;
+                result.Succeeded = is_connected_to_host = false;
+                result.ErrorReason = ex.Message;
             }
-            if(Connected != null)
-                Connected(this, args);
         }
 
         public void OnCacheExpire(object? source, ElapsedEventArgs? e)
@@ -103,66 +85,130 @@ namespace WingetUIWidgetProvider
             CacheExpirationTimer.Stop();
         }
 
-        async public Task<Package[]> FetchAvailableUpdates(GenericWidget widget)
-        {
-            try
-            {
-                Console.WriteLine("Fetching updates from server");
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri("http://localhost:7058//");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                HttpResponseMessage task = await client.GetAsync("/widgets/get_updates?token=" + SessionToken);
-
-                string outputString = await task.Content.ReadAsStringAsync();
-
-                string purifiedString = outputString.Replace("\",\"status\":\"success\"}", "").Replace("{\"packages\":\"", "").Replace("\n", "").Trim();
-
-
-                string[] packageStrings = purifiedString.Split("&&");
-                int updateCount = packageStrings.Length;
-
-                Package[] updates = new Package[updateCount];
-                for (int i = 0; i < updateCount; i++)
-                {
-                    Package package = new Package(packageStrings[i]);
-                    updates[i] = package;
-                }
-                update_cache_is_valid = true;
-                cached_updates = updates;
-
-                CacheExpirationTimer.Stop();
-                CacheExpirationTimer.Start();
-
-                return cached_updates;
-            } 
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                update_cache_is_valid = false;
-                cached_updates = new Package[0];
-                return cached_updates;
-            }
-        }
-
         async public void GetAvailableUpdates(GenericWidget Widget, bool DeepCheck = false)
         {
-            UpdatesCheckFinishedEventArgs args = new UpdatesCheckFinishedEventArgs(Widget);
+            UpdatesCheckFinishedEventArgs result = new UpdatesCheckFinishedEventArgs(Widget);
+            string AllowedSource = WidgetSourceReference[Widget.Name];
+            Package[] found_updates;
+
+
+            // Connect to WingetUI if needed
+
             try
             {
-                string AllowedSource = WidgetSourceReference[Widget.Name];
 
-                Package[] found_updates;
-                Console.WriteLine(update_cache_is_valid);
-                if (!update_cache_is_valid || DeepCheck)
+
+                if (!is_connected_to_host)
                 {
-                    found_updates = await FetchAvailableUpdates(Widget);
-                    if (!update_cache_is_valid)
-                        throw new Exception("FetchAvailableUpdates failed");
+
+                    WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(Widget.Id);
+                    updateOptions.Template = Templates.BaseTemplate;
+                    updateOptions.Data = Templates.GetData_IsLoading();
+                    WidgetManager.GetDefault().UpdateWidget(updateOptions);
+
+                    StreamReader reader = new StreamReader(Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%") + "\\.wingetui\\CurrentSessionToken");
+                    SessionToken = reader.ReadToEnd().ToString().Replace("\n", "").Trim();
+                    reader.Close();
+
+                    HttpClient client = new HttpClient();
+                    client.BaseAddress = new Uri("http://localhost:7058//");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    HttpResponseMessage task = await client.GetAsync("/widgets/v1/get_wingetui_version?token=" + SessionToken);
+                    if (task.IsSuccessStatusCode)
+                    {
+                        double host_version;
+                        host_version = double.Parse(await task.Content.ReadAsStringAsync(), System.Globalization.CultureInfo.InvariantCulture);
+                        Console.WriteLine("Found WingetUI " + host_version.ToString());
+
+                        if (host_version < minimum_required_host_version)
+                        {
+                            result.Succeeded = is_connected_to_host = false;
+                            result.ErrorReason = "WingetUI " + minimum_required_host_version.ToString(System.Globalization.CultureInfo.InvariantCulture) + " is required. You are running WingetUI " + host_version.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                            if (UpdateCheckFinished != null)
+                                UpdateCheckFinished(this, result);
+                            return;
+                        }
+                        else
+                        {
+                            is_connected_to_host = true;
+                        }
+                    }
+                    else
+                    {
+                        result.Succeeded = is_connected_to_host = false;
+                        result.ErrorReason = "NO_WINGETUI";
+                        if (UpdateCheckFinished != null)
+                            UpdateCheckFinished(this, result);
+                        return;
+                    }
                 }
-                else
-                    found_updates = cached_updates;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                result.Succeeded = is_connected_to_host = false;
+                result.ErrorReason = "NO_WINGETUI";
+                if (UpdateCheckFinished != null)
+                    UpdateCheckFinished(this, result);
+                return;
+            }
+
+            // Get fresh updates from the host if cached ones are not valid
+
+            if (!update_cache_is_valid || DeepCheck)
+            {
+                try
+                {
+                    WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(Widget.Id);
+                    updateOptions.Template = Templates.BaseTemplate;
+                    updateOptions.Data = Templates.GetData_IsLoading();
+                    WidgetManager.GetDefault().UpdateWidget(updateOptions);
+
+                    Console.WriteLine("Fetching updates from server");
+                    HttpClient client = new HttpClient();
+                    client.BaseAddress = new Uri("http://localhost:7058//");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    HttpResponseMessage task = await client.GetAsync("/widgets/v1/get_updates?token=" + SessionToken);
+
+                    string outputString = await task.Content.ReadAsStringAsync();
+
+                    string purifiedString = outputString.Replace("\",\"status\":\"success\"}", "").Replace("{\"packages\":\"", "").Replace("\n", "").Trim();
+
+
+                    string[] packageStrings = purifiedString.Split("&&");
+                    int updateCount = packageStrings.Length;
+
+                    cached_updates = new Package[updateCount];
+                    for (int i = 0; i < updateCount; i++)
+                    {
+                        Package package = new Package(packageStrings[i]);
+                        cached_updates[i] = package;
+                    }
+                    update_cache_is_valid = true;
+                    CacheExpirationTimer.Stop();
+                    CacheExpirationTimer.Start();
+                }
+                catch (Exception ex)
+                {
+                    result.ErrorReason = "CANNOT_FETCH_UPDATES: " + ex.Message;
+                    result.Succeeded = false;
+                    if (UpdateCheckFinished != null)
+                        UpdateCheckFinished(this, result);
+                    Console.WriteLine("Failed to fetch updates!");
+                    Console.WriteLine(ex);
+                    return;
+                }
+            }
+
+            // Handle the updates and return only the requested ones.
+
+            try
+            {
+                found_updates = cached_updates;
 
                 Package[] valid_updates = new Package[found_updates.Length];
 
@@ -180,21 +226,25 @@ namespace WingetUIWidgetProvider
                 for(int i = 0;i < found_updates.Length - skippedPackages; i++)
                     updates[i] = valid_updates[i];
 
-                args.Updates = updates;
-                args.Count = found_updates.Length - skippedPackages;
-                args.Succeeded = true;
+                result.Updates = updates;
+                result.Count = found_updates.Length - skippedPackages;
+                result.Succeeded = true;
+                result.ErrorReason = "";
+                if (UpdateCheckFinished != null)
+                    UpdateCheckFinished(this, result);
+                return;
+
             }
             catch (Exception ex)
             {
-                args.Updates = new Package[0];
-                args.Count = 0;
-                args.Succeeded = false;
-                Console.WriteLine(ex.ToString());
-                ResetConnection();
+                result.ErrorReason = "CANNOT_PROCESS_UPDATES: " + ex.Message;
+                result.Succeeded = false;
+                if (UpdateCheckFinished != null)
+                    UpdateCheckFinished(this, result);
+                Console.WriteLine("Failed to process updates!");
+                Console.WriteLine(ex);
+                return;
             }
-            if (UpdateCheckFinished != null)
-                UpdateCheckFinished(this, args);
-
         }
         
         async public void OpenWingetUI()
@@ -206,7 +256,7 @@ namespace WingetUIWidgetProvider
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                await client.GetAsync("/widgets/open_wingetui?token=" + SessionToken);
+                await client.GetAsync("/widgets/v1/open_wingetui?token=" + SessionToken);
             }
             catch (Exception ex)
             {
@@ -224,7 +274,7 @@ namespace WingetUIWidgetProvider
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                await client.GetAsync("/widgets/view_on_wingetui?token=" + SessionToken);
+                await client.GetAsync("/widgets/v1/view_on_wingetui?token=" + SessionToken);
             }
             catch (Exception ex)
             {
@@ -243,7 +293,7 @@ namespace WingetUIWidgetProvider
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 cached_updates = cached_updates.Where((val, idx) => val != package).ToArray(); // Remove that widget from the current list
 
-                await client.GetAsync("/widgets/update_package?token=" + SessionToken + "&id=" + package.Id);
+                await client.GetAsync("/widgets/v1/update_package?token=" + SessionToken + "&id=" + package.Id);
             }
             catch (Exception ex)
             {
@@ -261,7 +311,7 @@ namespace WingetUIWidgetProvider
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                await client.GetAsync("/widgets/update_all_packages?token=" + SessionToken);
+                await client.GetAsync("/widgets/v1/update_all_packages?token=" + SessionToken);
             }
             catch (Exception ex)
             {
@@ -279,7 +329,7 @@ namespace WingetUIWidgetProvider
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                await client.GetAsync("/widgets/update_all_packages_for_source?token=" + SessionToken + "&source=" + source);
+                await client.GetAsync("/widgets/v1/update_all_packages_for_source?token=" + SessionToken + "&source=" + source);
             }
             catch (Exception ex)
             {
@@ -335,23 +385,13 @@ namespace WingetUIWidgetProvider
         public Package[] Updates { get; set; }
         public int Count { get; set; }
         public bool Succeeded { get; set; }
-        public GenericWidget widget {  get; set; }
+        public GenericWidget widget { get; set; }
+        public string ErrorReason { get; set; } = "";
 
         public UpdatesCheckFinishedEventArgs(GenericWidget widget)
         {
             Updates = new Package[0];
             this.widget = widget;
         }
-    }
-
-    public class ConnectionEventArgs : EventArgs
-    {
-        public ConnectionEventArgs(GenericWidget widget)
-        {
-            this.widget = widget;
-        }
-
-        public bool Succeeded = true;
-        public GenericWidget widget { get; set; }
     }
 }
