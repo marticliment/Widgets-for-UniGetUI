@@ -9,5 +9,14 @@
     <AppxShowAllApps>False</AppxShowAllApps>
     <AppxBuildConfigurationSelection>x64</AppxBuildConfigurationSelection>
     <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
+    <Source>Y:\WingetUI-Store\media\icon.png</Source>
+    <SmallTileSource>Y:\WingetUI-Store\media\icon.png</SmallTileSource>
+    <MediumTileSource>Y:\WingetUI-Store\media\icon.png</MediumTileSource>
+    <WideTileSource>Y:\WingetUI-Store\media\icon.png</WideTileSource>
+    <LargeTileSource>Y:\WingetUI-Store\media\icon.png</LargeTileSource>
+    <AppIconSource>Y:\WingetUI-Store\media\icon.png</AppIconSource>
+    <SplashScreenSource>Y:\WingetUI-Store\media\icon.png</SplashScreenSource>
+    <BadgeLogoSource>Y:\WingetUI-Store\media\icon.png</BadgeLogoSource>
+    <PackageLogoSource>Y:\WingetUI-Store\media\icon.png</PackageLogoSource>
   </PropertyGroup>
 </Project>

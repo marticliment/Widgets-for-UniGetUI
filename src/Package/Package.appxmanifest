@@ -13,10 +13,10 @@
 	<Identity
 	  Name="34D3940F-84D6-47C5-B446-32D6865D8852"
 	  Publisher="CN=Marti Climent, O=Marti Climent, L=Barcelona, C=ES"
-	  Version="1.0.0.0" />
+	  Version="0.1.0.0" />
 
 	<Properties>
-		<DisplayName>WingetUIWidgetProviderPackage</DisplayName>
+		<DisplayName>WingetUI Widgets (Preview)</DisplayName>
 		<PublisherDisplayName>Martí Climent</PublisherDisplayName>
 		<Logo>Images\StoreLogo.png</Logo>
 	</Properties>
@@ -34,20 +34,21 @@
 	<Applications>
 		<Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="null">
 			<uap:VisualElements
-			  DisplayName="WingetUI Updates Widget"
-			  Description="A widget to manage your WingetUI updates from the Widgets Pane"
+			  DisplayName="WingetUI Widgets (Preview)"
+			  Description="A collection of Windows Widgets designed to manage your WingetUI updates from the Widgets Pane and Dev Home"
 			  BackgroundColor="transparent"
 			  Square150x150Logo="Images\icon.png"
 			  AppListEntry="none"
 			  Square44x44Logo="Images\icon.png">
-				<uap:DefaultTile Wide310x150Logo="Images\icon.png" />
+				<uap:DefaultTile Wide310x150Logo="Images\icon.png"  Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png"/>
 				<uap:SplashScreen Image="Images\icon.png" />
+				<uap:LockScreen BadgeLogo="Images\BadgeLogo.png" Notification="badge"/>
 			</uap:VisualElements>
 			<Extensions>
 				<com:Extension Category="windows.comServer">
 					<com:ComServer>
 						<com:ExeServer Executable="WingetUIWidgetProvider\WingetUIWidgetProvider.exe" DisplayName="WingetUI Widget Extension">
-							<com:Class Id="34D3940F-84D6-47C5-B446-32D6865D8852" DisplayName="WingetUI Updates Widget" />
+							<com:Class Id="34D3940F-84D6-47C5-B446-32D6865D8852" DisplayName="WingetUI Widgets" />
 						</com:ExeServer>
 					</com:ComServer>
 				</com:Extension>
@@ -73,7 +74,7 @@
 									
 									<Definition Id="updates_all"
 											DisplayName="Package updates"
-											Description="Available updates found by WingetUI"
+											Description="Packages that can be updated"
 											AllowMultiple="true">
 										<Capabilities>
 											<Capability>
@@ -102,7 +103,7 @@
 
 									<Definition Id="updates_winget"
 										DisplayName="Winget updates"
-										Description="Available Winget updates found by WingetUI"
+										Description="Winget packages that can be updated"
 										AllowMultiple="true">
 										<Capabilities>
 											<Capability>
@@ -131,7 +132,7 @@
 
 									<Definition Id="updates_chocolatey"
 										DisplayName="Chocolatey updates"
-										Description="Available Chocolatey updates found by WingetUI"
+										Description="Chocolatey packages that can be updated"
 										AllowMultiple="true">
 										<Capabilities>
 											<Capability>
@@ -160,7 +161,7 @@
 
 									<Definition Id="updates_scoop"
 											DisplayName="Scoop updates"
-											Description="Available Scoop updates found by WingetUI"
+											Description="Scoop packages that can be updated"
 											AllowMultiple="true">
 										<Capabilities>
 											<Capability>
@@ -189,7 +190,7 @@
 
 									<Definition Id="updates_pip"
 										   DisplayName="Pip updates"
-										   Description="Available Pip updates found by WingetUI"
+										   Description="Pip packages that can be updated"
 										   AllowMultiple="true">
 										<Capabilities>
 											<Capability>
@@ -217,7 +218,7 @@
 									</Definition>
 									<Definition Id="updates_npm"
 										   DisplayName="NPM Updates"
-										   Description="Available NPM updates found by WingetUI"
+										   Description="NPM packages that can be updated"
 										   AllowMultiple="true">
 										<Capabilities>
 											<Capability>
@@ -245,7 +246,7 @@
 									</Definition>
 									<Definition Id="updates_dotnet"
 										   DisplayName=".NET Tool updates"
-										   Description="Available .NET Tool updates found by WingetUI"
+										   Description=".NET Tool packages that can be updated"
 										   AllowMultiple="true">
 										<Capabilities>
 											<Capability>
@@ -305,6 +306,5 @@
 
 	<Capabilities>
 		<rescap:Capability Name="runFullTrust" />
-		<Capability Name="internetClient"/>
 	</Capabilities>
 </Package>
