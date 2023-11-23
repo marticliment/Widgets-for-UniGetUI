@@ -5,3 +5,4 @@ src/Package/obj
 src/Package/bin
 src/Package/.vs
 src/Package.assets.cache
+src/WingetUI Widgets.msix
