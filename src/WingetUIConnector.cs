@@ -1,5 +1,4 @@
 ﻿using Microsoft.Windows.ApplicationModel.DynamicDependency;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
