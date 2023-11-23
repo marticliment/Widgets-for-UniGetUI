@@ -47,8 +47,8 @@
 			<Extensions>
 				<com:Extension Category="windows.comServer">
 					<com:ComServer>
-						<com:ExeServer Executable="WingetUIWidgetProvider\WingetUIWidgetProvider.exe" DisplayName="WingetUI Widget Extension">
-							<com:Class Id="34D3940F-84D6-47C5-B446-32D6865D8852" DisplayName="WingetUI Widgets" />
+						<com:ExeServer Executable="WingetUIWidgetProvider\WingetUIWidgetProvider.exe" DisplayName="WingetUI Widgets (Preview)">
+							<com:Class Id="34D3940F-84D6-47C5-B446-32D6865D8852" DisplayName="WingetUI Widgets (Preview)" />
 						</com:ExeServer>
 					</com:ComServer>
 				</com:Extension>
@@ -283,8 +283,8 @@
 					<uap3:AppExtension Name="com.microsoft.devhome"
 				   Id="9b0c4abb-ca72-42ec-936a-02d4830a14a9"
 				   PublicFolder="Public"
-				   DisplayName="WingetUI Widget"
-				   Description="WingetUI Widget">
+				   DisplayName="WingetUI Widgets (Preview)"
+				   Description="WingetUI Widgets (Preview)">
 						<uap3:Properties>
 							<DevHomeProvider>
 								<Activation>
