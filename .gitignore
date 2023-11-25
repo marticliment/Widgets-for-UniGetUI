@@ -6,4 +6,5 @@ src/Package/bin
 src/Package/.vs
 src/Package.assets.cache
 WingetUI Widgets.msix
+WingetUI Widgets Installer.msix
 Sign.lnk

@@ -162,6 +162,11 @@ namespace WingetUIWidgetProvider
 
                     string outputString = await task.Content.ReadAsStringAsync();
 
+                    if (!task.IsSuccessStatusCode)
+                    {
+                        throw new Exception("Update fetching failed with code "+task.StatusCode.ToString());
+                    }
+
                     string purifiedString = outputString.Replace("\",\"status\":\"success\"}", "").Replace("{\"packages\":\"", "").Replace("\n", "").Trim();
 
 
