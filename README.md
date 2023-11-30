@@ -4,7 +4,7 @@
 This repository contains the code of a set of Windows Widgets that can be used to interact with WingetUI. The widgets are available on the **Windows Widgets** pane and on **Dev Home**[^1].
 
 > [!WARNING]
-> These widgets require WingetUI source code from marticliment/WingetUI to be running on the background. There is no public beta or stable release that supports WingetUI Widgets yet.
+> These widgets require a beta version of WingetUI. You can get WingetUI Beta here: [WingetUI 2.1.2 beta](https://github.com/marticliment/WingetUI/releases/download/2.1.2-beta/WingetUI.Installer.exe) .
 
 <img src="src/Package/Images/WidgetCovers/all_dark.png" width=400px></img>
 <img src="src/Package/Images/WidgetCovers/all_light.png" width=400px></img>
