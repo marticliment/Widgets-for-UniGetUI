@@ -3,6 +3,8 @@
 
 This repository contains the code of a set of Windows Widgets that can be used to interact with WingetUI. The widgets are available on the **Windows Widgets** pane and on **Dev Home**[^1].
 
+WingetUI Widgets are **ONLY** compatible with Windows 11
+
 
 > [!WARNING]
 > These widgets require a beta version of WingetUI. You can get WingetUI Beta here: [WingetUI 2.1.2 beta](https://github.com/marticliment/WingetUI/releases/download/2.1.2-beta/WingetUI.Installer.exe) .
