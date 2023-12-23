@@ -11,9 +11,9 @@
 
 	<!-- Name="9b0c4abb-ca72-42ec-936a-02d4830a14a9" -->
 	<Identity
-	  Name="34D3940F-84D6-47C5-B446-32D6865D8852"
-	  Publisher="CN=Marti Climent, O=Marti Climent, L=Barcelona, C=ES"
-	  Version="0.2.0.0" />
+	  Name="9932MartCliment.WingetUIWidgets"
+	  Publisher="CN=7054F010-7BE3-4163-B64E-D51DF58CF867"
+	  Version="0.3.0.0" />
 
 	<Properties>
 		<DisplayName>WingetUI Widgets (Preview)</DisplayName>
@@ -272,6 +272,37 @@
 											<LightMode>
 												<Screenshots>
 													<Screenshot Path="Images\WidgetCovers\dotnet_light.png" />
+												</Screenshots>
+											</LightMode>
+										</ThemeResources>
+									</Definition>
+
+
+
+									<Definition Id="updates_powershell"
+										DisplayName="PowerShell updates"
+										Description="PowerShell modules that can be updated"
+										AllowMultiple="true">
+										<Capabilities>
+											<Capability>
+												<Size Name="medium" />
+											</Capability>
+											<Capability>
+												<Size Name="large" />
+											</Capability>
+										</Capabilities>
+										<ThemeResources>
+											<Icons>
+												<Icon Path="Images\powershell_color.png" />
+											</Icons>
+											<DarkMode>
+												<Screenshots>
+													<Screenshot Path="Images\WidgetCovers\powershell_dark.png" />
+												</Screenshots>
+											</DarkMode>
+											<LightMode>
+												<Screenshots>
+													<Screenshot Path="Images\WidgetCovers\powershell_light.png" />
 												</Screenshots>
 											</LightMode>
 										</ThemeResources>

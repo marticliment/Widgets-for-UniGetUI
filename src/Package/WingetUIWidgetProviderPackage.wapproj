@@ -52,7 +52,7 @@
   <PropertyGroup>
     <ProjectGuid>0cb7bf44-2619-4597-82c4-75f513345eba</ProjectGuid>
     <TargetPlatformVersion>10.0.22621.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.22000.0</TargetPlatformMinVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
     <NoWarn>$(NoWarn);NU1702</NoWarn>
@@ -135,6 +135,7 @@
     <Content Include="Images\LargeTile.scale-400.png" />
     <Content Include="Images\node_color.png" />
     <Content Include="Images\pip_color.png" />
+    <Content Include="Images\powershell_color.png" />
     <Content Include="Images\scoop_color.png" />
     <Content Include="Images\SmallTile.scale-100.png" />
     <Content Include="Images\SmallTile.scale-125.png" />
@@ -156,6 +157,8 @@
     <Content Include="Images\WidgetCovers\npm_light.png" />
     <Content Include="Images\WidgetCovers\pip_dark.png" />
     <Content Include="Images\WidgetCovers\pip_light.png" />
+    <Content Include="Images\WidgetCovers\powershell_dark.png" />
+    <Content Include="Images\WidgetCovers\powershell_light.png" />
     <Content Include="Images\WidgetCovers\scoop_dark.png" />
     <Content Include="Images\WidgetCovers\scoop_light.png" />
     <Content Include="Images\WidgetCovers\winget_dark.png" />
