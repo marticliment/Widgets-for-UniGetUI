@@ -11,8 +11,7 @@ WingetUI Widgets are **ONLY** compatible with Windows 11
 
 [<img alt="alt_text" width="240px" src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Get_it_from_Microsoft_Badge.svg" href=""/>](https://www.microsoft.com/store/apps/9NB9M5KZ8SLX)  
 
-<img src="src/Package/Images/WidgetCovers/all_dark.png" width=400px></img>
-<img src="src/Package/Images/WidgetCovers/all_light.png" width=400px></img>
+<img src="banner.png" width=800px></img>
 
 Currently, the widgets allow viewing available updates, updating specific packages and bulk-updating everything. A widget for each Package Manager is available, as well as a widget that will list every available package without source distinction.
 
