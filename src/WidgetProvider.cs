@@ -85,7 +85,6 @@ namespace WingetUIWidgetProvider
             {
                 e.widget.AvailableUpdates = e.Updates;
                 Console.WriteLine("Showing available updates...");
-                updateOptions.Template = Templates.UpdatesTemplate;
                 string packages = "";
                 Package[] upgradablePackages = new Package[e.widget.AvailableUpdates.Length];
                 int nullPackages = 0;
@@ -104,7 +103,7 @@ namespace WingetUIWidgetProvider
                             packages += (e.widget.AvailableUpdates.Length - i).ToString() + " more packages can also be upgraded";
                             i = e.widget.AvailableUpdates.Length;
                         }
-                        else if (e.widget.size == WidgetSize.Large && i == (7 + nullPackages) && e.widget.AvailableUpdates.Length > (7 + nullPackages) && e.widget.AvailableUpdates.Length > 7)
+                        else if (e.widget.size == WidgetSize.Large && i == (6 + nullPackages) && e.widget.AvailableUpdates.Length > (6 + nullPackages) && e.widget.AvailableUpdates.Length > 6)
                         {
                             i++;
                             packages += (e.widget.AvailableUpdates.Length - i).ToString() + " more packages can also be upgraded";
@@ -119,11 +118,12 @@ namespace WingetUIWidgetProvider
                 }
                 else
                 {
+                    updateOptions.Template = Templates.GetUpdatesTemplate(e.widget.AvailableUpdates.Length);
                     updateOptions.Data = Templates.GetData_UpdatesList(e.widget.AvailableUpdates.Length, upgradablePackages);
                 }
-                Debug.WriteLine(e.widget.Name);
-                Debug.WriteLine(updateOptions.Template);
-                Debug.WriteLine(updateOptions.Data);
+                Console.WriteLine(e.widget.Name);
+                Console.WriteLine(updateOptions.Template);
+                Console.WriteLine(updateOptions.Data);
                 WidgetManager.GetDefault().UpdateWidget(updateOptions);
             }
         }

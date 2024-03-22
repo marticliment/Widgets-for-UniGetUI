@@ -83,8 +83,6 @@ namespace WingetUIWidgetProvider
 
             try
             {
-
-
                 if (!is_connected_to_host)
                 {
 

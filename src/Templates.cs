@@ -1,10 +1,20 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using ABI.System;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.Graphics.Printing.PrintSupport;
+using Windows.UI.Text;
+using WingetUIWidgetProvider;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WingetUIWidgetProvider
 {
@@ -207,20 +217,15 @@ namespace WingetUIWidgetProvider
                             ""cells"": [
                                 {
                                     ""type"": ""TableCell"",
-                                    ""minHeight"": ""2px"",
                                     ""items"": [
                                         {
                                             ""type"": ""Image"",
-                                            ""url"": ""${Icon"+index.ToString()+ @"}"",
-                                            ""horizontalAlignment"": ""Center"",
-                                            ""width"": ""24px"",
-                                            ""spacing"": ""Padding""
+                                            ""url"": ""${Icon" + index.ToString()+ @"}""
                                         }
                                     ],
-                                    ""backgroundImage"": {
-                                        ""verticalAlignment"": ""Center""
-                                    },
-                                    ""verticalContentAlignment"": ""Center""
+                                    ""verticalContentAlignment"": ""Center"",
+                                    ""minHeight"": ""36px"",
+                                    ""spacing"": ""None""
                                 },
                                 {
                                     ""type"": ""TableCell"",
@@ -252,7 +257,8 @@ namespace WingetUIWidgetProvider
                                             ]
                                         }
                                     ],
-                                    ""verticalContentAlignment"": ""Center""
+                                    ""verticalContentAlignment"": ""Center"",
+                                    ""spacing"": ""None""
                                 },
                                 {
                                     ""type"": ""TableCell"",
@@ -265,17 +271,22 @@ namespace WingetUIWidgetProvider
                                                     ""title"": ""🡇"",
                                                     ""verb"": """ + Verbs.UpdatePackage + index.ToString() + @""",
                                                     ""data"": {},
-                                                    ""tooltip"": ""Update this package""
+                                                    ""tooltip"": ""Update this package"",
+                                                    ""spacing"": ""None""
                                                 }
                                             ],
-                                            ""horizontalAlignment"": ""Center""
+                                            ""horizontalAlignment"": ""Center"",
+                                            ""spacing"": ""None""
                                         }
                                     ],
                                     ""verticalContentAlignment"": ""Center"",
-                                    ""minHeight"": ""36px""
+                                    ""spacing"": ""None"",
+                                    ""minHeight"": ""36px"",
+                                    ""spacing"": ""None""
                                 }
                             ],
-                        ""$when"": ""${$root.Package" + index.ToString()+@"Visisble}""
+                        ""$when"": ""${$root.Package" + index.ToString()+ @"Visisble}"",
+                        ""spacing"": ""None""
                         }";
             return package;
         }
@@ -311,6 +322,92 @@ namespace WingetUIWidgetProvider
             }
 
             return data;
+        }
+
+        private static string GetUpdatesListTemplate(int numOfPackages)
+        {
+            string basestr = @"
+            {
+                ""type"": ""Container"",
+                ""items"": [
+                    {
+                        ""type"": ""TextBlock"",
+                        ""text"": ""Available Updates: ${count}"",
+                        ""wrap"": true,
+                        ""weight"": ""bolder"",
+                        ""size"": ""medium""
+                    },
+                    {
+                        ""type"": ""Table"",
+                        ""columns"": [
+                            {
+                                ""width"": ""32px""
+                            },
+                            {
+                                ""width"": 1
+                            },
+                            {
+                                ""width"": ""42px""
+                            }
+                        ],
+                        ""rows"": [";
+
+            for (int i = 0; i < numOfPackages; i++)
+                basestr += GeneratePackageStructure(i) + ((i+1 == numOfPackages)? "\n": ",\n");
+
+            basestr += @"],
+                        ""spacing"": ""None"",
+                        ""showGridLines"": false,
+                        ""height"": ""stretch"",
+                        ""verticalCellContentAlignment"": ""Top""
+                    },
+                    {
+                        ""type"": ""Container"",
+                        ""verticalContentAlignment"": ""Center"",
+                        ""items"": [
+                            {
+                                ""type"": ""TextBlock"",
+                                ""text"": ""${upgradablePackages}"",
+                                ""horizontalAlignment"": ""Center"",
+                                ""spacing"": ""None"",
+                                ""weight"": ""Lighter"",
+                                ""isSubtle"": true
+                            }
+                        ],
+                        ""height"": ""stretch"",
+                        ""spacing"": ""None""
+                    },
+                    {
+                        ""type"": ""ActionSet"",
+                        ""actions"": [
+                            {
+                            ""type"": ""Action.Execute"",
+                                ""title"": ""Update all"",
+                                ""verb"": """ + Verbs.UpdateAll + @"""
+                            },
+                            {
+                                ""type"": ""Action.Execute"",
+                                ""title"": ""Reload"",
+                                ""verb"": """ + Verbs.Reload + @"""
+                            },
+                            {
+                                ""type"": ""Action.Execute"",
+                                ""title"": ""WingetUI"",
+                                ""verb"": """ + Verbs.ViewUpdatesOnWingetUI + @"""
+                            }
+                        ],
+                        ""id"": ""buttons"",
+                        ""horizontalAlignment"": ""Center"",
+                        ""spacing"": ""None""
+                    }
+                ],
+                ""height"": ""stretch"",
+                ""$when"": ""${$root.UpdatesList}"",
+                ""spacing"": ""None"",
+                ""verticalContentAlignment"": ""Center""
+            }";
+
+            return basestr;
         }
 
         private static string UpdatesList = @"
@@ -529,13 +626,15 @@ namespace WingetUIWidgetProvider
                 }
             }";
 
-        public static string UpdatesTemplate = @"
+        public static string GetUpdatesTemplate(int numOfUpdates)
+        {
+            return @"
             {
                 ""type"": ""AdaptiveCard"",
                 ""$schema"": ""http://adaptivecards.io/schemas/adaptive-card.json"",
                 ""version"": ""1.5"",
                 ""body"": [
-                    " + UpdatesList + @"
+                    " + GetUpdatesListTemplate(numOfUpdates) + @"
                 ],
                 ""rtl"": false,
                 ""refresh"": {
@@ -545,7 +644,6 @@ namespace WingetUIWidgetProvider
                     }
                 }
             }";
-
-
+        }
     }
 }
