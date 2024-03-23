@@ -4,7 +4,9 @@ This repository contains the code of a set of Windows Widgets that can be used t
 
 WingetUI Widgets are **ONLY** compatible with Windows 11
 
-[<img alt="alt_text" width="240px" src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Get_it_from_Microsoft_Badge.svg" href=""/>](https://www.microsoft.com/store/apps/9NB9M5KZ8SLX)  
+[<img alt="alt_text" width="240px" src="https://get.microsoft.com/images/en-us%20dark.svg" href=""/>](https://www.microsoft.com/store/apps/9NB9M5KZ8SLX) 
+
+
 
 <img src="banner.png" width=800px></img>
 <img src="https://github.com/marticliment/WingetUI-Widgets/assets/53119851/af99fffb-700b-412a-b385-9b4132b56482" width=800px></img>
