@@ -96,14 +96,16 @@ namespace WingetUIWidgetProvider
                     }
                     else
                     {
+                        const int MEDIUM_MAX_UPDATES = 3; // Updates from 0 to 3 will be shown
+                        const int LARGE_MAX_UPDATES = 7; // Updates from 0 to 7 will be shown
                         upgradablePackages[i] = e.widget.AvailableUpdates[i];
-                        if (e.widget.size == WidgetSize.Medium && i == (3 + nullPackages) && e.widget.AvailableUpdates.Length > (3 + nullPackages))
+                        if (e.widget.size == WidgetSize.Medium && i == (MEDIUM_MAX_UPDATES + nullPackages) && e.widget.AvailableUpdates.Length > (MEDIUM_MAX_UPDATES + nullPackages))
                         {
                             i++;
                             packages += (e.widget.AvailableUpdates.Length - i).ToString() + " more packages can also be upgraded";
                             i = e.widget.AvailableUpdates.Length;
                         }
-                        else if (e.widget.size == WidgetSize.Large && i == (6 + nullPackages) && e.widget.AvailableUpdates.Length > (6 + nullPackages) && e.widget.AvailableUpdates.Length > 6)
+                        else if (e.widget.size == WidgetSize.Large && i == (LARGE_MAX_UPDATES + nullPackages) && e.widget.AvailableUpdates.Length > (LARGE_MAX_UPDATES + nullPackages) && e.widget.AvailableUpdates.Length > LARGE_MAX_UPDATES)
                         {
                             i++;
                             packages += (e.widget.AvailableUpdates.Length - i).ToString() + " more packages can also be upgraded";

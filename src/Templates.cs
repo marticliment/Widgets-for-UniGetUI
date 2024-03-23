@@ -47,6 +47,7 @@ namespace WingetUIWidgetProvider
         {
             return "{ \"NoWingetUI\": true }";
         }
+        
         private const string NoWingetUI = @"
             {
                 ""type"": ""Container"",
@@ -78,6 +79,7 @@ namespace WingetUIWidgetProvider
                                 ""size"": ""Small""
                             }
                         ],
+                        ""verticalContentAlignment"": ""Center"",
                         ""height"": ""stretch""
                     },
                     {
@@ -90,7 +92,9 @@ namespace WingetUIWidgetProvider
                             }
                         ],
                         ""horizontalAlignment"": ""Center"",
-                        ""$when"": ""${$host.widgetSize!=\""small\""}""
+                        ""verticalContentAlignment"": ""Center"",
+                        ""$when"": ""${$host.widgetSize!=\""small\""}"",
+                        ""size"": ""Medium""
                     }
                 ],
                 ""verticalContentAlignment"": ""Center"",
@@ -182,6 +186,7 @@ namespace WingetUIWidgetProvider
                                 ""$when"": ""${$host.widgetSize!=\""small\""}""
                             }
                         ],
+                        ""verticalContentAlignment"": ""Center"",
                         ""height"": ""stretch""
                     },
                     {
@@ -220,11 +225,15 @@ namespace WingetUIWidgetProvider
                                     ""items"": [
                                         {
                                             ""type"": ""Image"",
-                                            ""url"": ""${Icon" + index.ToString()+ @"}""
+                                            ""url"": ""${Icon" + index.ToString()+ @"}"",
+                                            ""width"": ""24px"",
+                                            ""height"": ""24px"",
+                                            ""horizontalAlignment"": ""Center"",
+                                            ""altText"": ""📦""
                                         }
                                     ],
                                     ""verticalContentAlignment"": ""Center"",
-                                    ""minHeight"": ""36px"",
+                                    ""minHeight"": ""34px"",
                                     ""spacing"": ""None""
                                 },
                                 {
@@ -281,7 +290,7 @@ namespace WingetUIWidgetProvider
                                     ],
                                     ""verticalContentAlignment"": ""Center"",
                                     ""spacing"": ""None"",
-                                    ""minHeight"": ""36px"",
+                                    ""minHeight"": ""34px"",
                                     ""spacing"": ""None""
                                 }
                             ],
@@ -358,7 +367,6 @@ namespace WingetUIWidgetProvider
             basestr += @"],
                         ""spacing"": ""None"",
                         ""showGridLines"": false,
-                        ""height"": ""stretch"",
                         ""verticalCellContentAlignment"": ""Top""
                     },
                     {
@@ -594,7 +602,8 @@ namespace WingetUIWidgetProvider
                             }
                         ],
                         ""horizontalAlignment"": ""Center"",
-                        ""$when"": ""${$host.widgetSize!=\""small\""}""
+                        ""$when"": ""${$host.widgetSize!=\""small\""}"",
+                            ""size"": ""Medium""
                     }
                 ],
                 ""verticalContentAlignment"": ""Center"",
