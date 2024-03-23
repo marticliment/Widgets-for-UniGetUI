@@ -233,7 +233,7 @@ namespace WingetUIWidgetProvider
                                         }
                                     ],
                                     ""verticalContentAlignment"": ""Center"",
-                                    ""minHeight"": ""34px"",
+                                    ""minHeight"": ""32px"",
                                     ""spacing"": ""None""
                                 },
                                 {
@@ -290,7 +290,7 @@ namespace WingetUIWidgetProvider
                                     ],
                                     ""verticalContentAlignment"": ""Center"",
                                     ""spacing"": ""None"",
-                                    ""minHeight"": ""34px"",
+                                    ""minHeight"": ""32px"",
                                     ""spacing"": ""None""
                                 }
                             ],
