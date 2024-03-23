@@ -11,12 +11,8 @@ cd x64
 del "WingetUI Widgets.msix"
 cd Release
 
-rmdir /Q /S .\Images
-move .\Package\Images .\Images
-rmdir /Q /S Package
 cd WingetUIWidgetProvider
 
-rmdir /Q /S .\Package
 del Microsoft.WinUI.dll
 del Microsoft.InteractiveExperiences.Projection.dll
 
