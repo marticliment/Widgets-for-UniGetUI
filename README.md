@@ -1,17 +1,14 @@
 # WingetUI Widgets (Preview)
 **This program is still under development**
 
-This repository contains the code of a set of Windows Widgets that can be used to interact with WingetUI. The widgets are available on the **Windows Widgets** pane and on **Dev Home**[^1].
+This repository contains the code of a set of Windows Widgets that can be used to interact with WingetUI. The widgets are available on the **Windows Widgets** pane and on **Dev Home**.
 
 WingetUI Widgets are **ONLY** compatible with Windows 11
-
-
-> [!WARNING]
-> These widgets require a beta version of WingetUI. You can get WingetUI Beta here: [WingetUI 2.1.2 beta](https://github.com/marticliment/WingetUI/releases/download/2.1.2-beta/WingetUI.Installer.exe) .
 
 [<img alt="alt_text" width="240px" src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Get_it_from_Microsoft_Badge.svg" href=""/>](https://www.microsoft.com/store/apps/9NB9M5KZ8SLX)  
 
 <img src="banner.png" width=800px></img>
+<img src="https://github.com/marticliment/WingetUI-Widgets/assets/53119851/af99fffb-700b-412a-b385-9b4132b56482" width=800px></img>
 
 Currently, the widgets allow viewing available updates, updating specific packages and bulk-updating everything. A widget for each Package Manager is available, as well as a widget that will list every available package without source distinction.
 
@@ -40,5 +37,3 @@ Currently, the widgets allow viewing available updates, updating specific packag
 
 </details>
 <br><br>
-
-[^1]: Dev Home widget support is still experimental, and some widgets may not render properly.
