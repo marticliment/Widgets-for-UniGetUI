@@ -92,7 +92,10 @@ namespace WingetUIWidgetProvider
                     updateOptions.Data = Templates.GetData_IsLoading();
                     WidgetManager.GetDefault().UpdateWidget(updateOptions);
 
-                    StreamReader reader = new StreamReader(Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%") + "\\.wingetui\\CurrentSessionToken");
+                    var old_path = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".wingetui", "CurrentSessionToken");
+                    var new_path = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "UniGetUI", "CurrentSessionToken");
+
+                    StreamReader reader = new StreamReader(File.Exists(new_path)? new_path: old_path);
                     SessionToken = reader.ReadToEnd().ToString().Replace("\n", "").Trim();
                     reader.Close();
 
@@ -110,6 +113,7 @@ namespace WingetUIWidgetProvider
 
                         if (host_version < minimum_required_host_version)
                         {
+                            Console.WriteLine("GetAvailableUpdates: ABORTED: minimum_required_host_version " + minimum_required_host_version.ToString() + " was not met by the host (host is " + host_version + ")");
                             result.Succeeded = is_connected_to_host = false;
                             result.ErrorReason = "WingetUI " + minimum_required_host_version.ToString(System.Globalization.CultureInfo.InvariantCulture) + " is required. You are running WingetUI " + host_version.ToString(System.Globalization.CultureInfo.InvariantCulture);
                             if (UpdateCheckFinished != null)
