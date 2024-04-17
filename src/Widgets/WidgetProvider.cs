@@ -55,7 +55,7 @@ namespace WingetUIWidgetProvider
         {
             WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(widget.Id);
             updateOptions.Data = "{ \"IsLoading\": true }";
-            Console.WriteLine("Starting load routine...");
+            Console.WriteLine("Calling to WingetUI.GetAvailableUpdates(widget) from widget");
             updateOptions.Template = Templates.BaseTemplate;
             WingetUI.GetAvailableUpdates(widget);
             WidgetManager.GetDefault().UpdateWidget(updateOptions);

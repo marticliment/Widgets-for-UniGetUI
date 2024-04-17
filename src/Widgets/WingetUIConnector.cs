@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Background;
+using Windows.ApplicationModel.UserDataTasks;
 using Windows.Devices.Printers;
 using Windows.Management.Deployment;
 using Windows.Media.Protection.PlayReady;
@@ -68,16 +69,16 @@ namespace WingetUIWidgetProvider
         public void OnCacheExpire(object? source, ElapsedEventArgs? e)
         {
             ResetCachedUpdates();
-            Console.WriteLine("Updates expired!");
+            Console.WriteLine("Updates expired");
             CacheExpirationTimer.Stop();
         }
 
         async public void GetAvailableUpdates(GenericWidget Widget, bool DeepCheck = false)
         {
+            Console.WriteLine("BEGIN GetAvailableUpdates(). Widget.Name=" + Widget.Name + ", DeepCheck=" + DeepCheck.ToString());
             UpdatesCheckFinishedEventArgs result = new UpdatesCheckFinishedEventArgs(Widget);
             string AllowedSource = WidgetSourceReference[Widget.Name];
             Package[] found_updates;
-
 
             // Connect to WingetUI if needed
 
@@ -85,7 +86,7 @@ namespace WingetUIWidgetProvider
             {
                 if (!is_connected_to_host)
                 {
-
+                    Console.WriteLine("GetAvailableUpdates: BEGIN connection to the host");
                     WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(Widget.Id);
                     updateOptions.Template = Templates.BaseTemplate;
                     updateOptions.Data = Templates.GetData_IsLoading();
@@ -117,11 +118,22 @@ namespace WingetUIWidgetProvider
                         }
                         else
                         {
+                            Console.WriteLine("GetAvailableUpdates: SUCCESS Connected to host successfully.");
                             is_connected_to_host = true;
                         }
                     }
+                    else if (task.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                    {
+                        Console.WriteLine("GetAvailableUpdates: ABORTED connection to WingetUI due to UNAUTHORIZED");
+                        result.Succeeded = is_connected_to_host = false;
+                        result.ErrorReason = "UNAUTHORIZED";
+                        if (UpdateCheckFinished != null)
+                            UpdateCheckFinished(this, result);
+                        return;
+                    }
                     else
                     {
+                        Console.WriteLine("GetAvailableUpdates: ABORTED connection to WingetUI due to StatusCode=" + task.StatusCode);
                         result.Succeeded = is_connected_to_host = false;
                         result.ErrorReason = "NO_WINGETUI";
                         if (UpdateCheckFinished != null)
@@ -132,11 +144,13 @@ namespace WingetUIWidgetProvider
             }
             catch (Exception ex)
             {
+                Console.WriteLine("GetAvailableUpdates: ABORTED connection to host: An exception was thrown");
                 Console.WriteLine(ex.Message);
                 result.Succeeded = is_connected_to_host = false;
                 result.ErrorReason = "NO_WINGETUI";
                 if (UpdateCheckFinished != null)
                     UpdateCheckFinished(this, result);
+                Console.WriteLine("END of GetAvailableUpdates()");
                 return;
             }
 
@@ -146,6 +160,7 @@ namespace WingetUIWidgetProvider
             {
                 try
                 {
+                    Console.WriteLine("GetAvailableUpdates: BEGIN retrieving updates from the host");
                     WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(Widget.Id);
                     updateOptions.Template = Templates.BaseTemplate;
                     updateOptions.Data = Templates.GetData_IsLoading();
@@ -163,6 +178,7 @@ namespace WingetUIWidgetProvider
 
                     if (!task.IsSuccessStatusCode)
                     {
+                        Console.WriteLine("GetAvailableUpdates: ABORT checking for updates due to StatusCode=" + task.StatusCode.ToString());
                         throw new Exception("Update fetching failed with code "+task.StatusCode.ToString());
                     }
 
@@ -181,15 +197,18 @@ namespace WingetUIWidgetProvider
                     update_cache_is_valid = true;
                     CacheExpirationTimer.Stop();
                     CacheExpirationTimer.Start();
+                    Console.WriteLine("GetAvailableUpdates: SUCCESS checking for updates successfully");
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine("GetAvailableUpdates: ABORTED checking for updates: An exception was thrown.");
                     result.ErrorReason = "CANNOT_FETCH_UPDATES: " + ex.Message;
                     result.Succeeded = false;
                     if (UpdateCheckFinished != null)
                         UpdateCheckFinished(this, result);
                     Console.WriteLine("Failed to fetch updates!");
                     Console.WriteLine(ex);
+                    Console.WriteLine("END of GetAvailableUpdates()");
                     return;
                 }
             }
@@ -198,6 +217,7 @@ namespace WingetUIWidgetProvider
 
             try
             {
+                Console.WriteLine("GetAvailableUpdates: BEGIN parsing updates");
                 found_updates = cached_updates;
 
                 Package[] valid_updates = new Package[found_updates.Length];
@@ -222,17 +242,21 @@ namespace WingetUIWidgetProvider
                 result.ErrorReason = "";
                 if (UpdateCheckFinished != null)
                     UpdateCheckFinished(this, result);
+                Console.WriteLine("GetAvailableUpdates: SUCCESS parsing updates.");
+                Console.WriteLine("END of GetAvailableUpdates()");
                 return;
 
             }
             catch (Exception ex)
             {
+                Console.WriteLine("GetAvailableUpdates: ABORT parsing updates due to an exception thrown.");
                 result.ErrorReason = "CANNOT_PROCESS_UPDATES: " + ex.Message;
                 result.Succeeded = false;
                 if (UpdateCheckFinished != null)
                     UpdateCheckFinished(this, result);
                 Console.WriteLine("Failed to process updates!");
                 Console.WriteLine(ex);
+                Console.WriteLine("END of GetAvailableUpdates()");
                 return;
             }
         }
