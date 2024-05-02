@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using Widgets_for_UniGetUI;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.UserDataTasks;
@@ -69,13 +70,13 @@ namespace WingetUIWidgetProvider
         public void OnCacheExpire(object? source, ElapsedEventArgs? e)
         {
             ResetCachedUpdates();
-            Console.WriteLine("Updates expired");
+            Logger.Log("Updates expired");
             CacheExpirationTimer.Stop();
         }
 
         async public void GetAvailableUpdates(GenericWidget Widget, bool DeepCheck = false)
         {
-            Console.WriteLine("BEGIN GetAvailableUpdates(). Widget.Name=" + Widget.Name + ", DeepCheck=" + DeepCheck.ToString());
+            Logger.Log("BEGIN GetAvailableUpdates(). Widget.Name=" + Widget.Name + ", DeepCheck=" + DeepCheck.ToString());
             UpdatesCheckFinishedEventArgs result = new UpdatesCheckFinishedEventArgs(Widget);
             string AllowedSource = WidgetSourceReference[Widget.Name];
             Package[] found_updates;
@@ -86,7 +87,7 @@ namespace WingetUIWidgetProvider
             {
                 if (!is_connected_to_host)
                 {
-                    Console.WriteLine("GetAvailableUpdates: BEGIN connection to the host");
+                    Logger.Log("GetAvailableUpdates: BEGIN connection to the host");
                     WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(Widget.Id);
                     updateOptions.Template = Templates.BaseTemplate;
                     updateOptions.Data = Templates.GetData_IsLoading();
@@ -95,7 +96,21 @@ namespace WingetUIWidgetProvider
                     var old_path = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".wingetui", "CurrentSessionToken");
                     var new_path = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "UniGetUI", "CurrentSessionToken");
 
-                    StreamReader reader = new StreamReader(File.Exists(new_path)? new_path: old_path);
+                    string SessionTokenFile;
+                    if(!File.Exists(new_path))
+                        SessionTokenFile = new_path;
+                    else if(!File.Exists(old_path))
+                        SessionTokenFile = old_path;
+                    else
+                    {
+                        FileInfo old_path_data = new FileInfo(old_path);
+                        var old_created = old_path_data.LastWriteTimeUtc; //File Creation
+                        FileInfo new_path_data = new FileInfo(new_path);
+                        var new_created = new_path_data.LastWriteTimeUtc; //File Creation
+                        SessionTokenFile = old_created > new_created ? old_path : new_path;
+                    }
+
+                    StreamReader reader = new StreamReader(SessionTokenFile);
                     SessionToken = reader.ReadToEnd().ToString().Replace("\n", "").Trim();
                     reader.Close();
 
@@ -109,11 +124,11 @@ namespace WingetUIWidgetProvider
                     {
                         double host_version;
                         host_version = double.Parse(await task.Content.ReadAsStringAsync(), System.Globalization.CultureInfo.InvariantCulture);
-                        Console.WriteLine("Found WingetUI " + host_version.ToString());
+                        Logger.Log("Found WingetUI " + host_version.ToString());
 
                         if (host_version < minimum_required_host_version)
                         {
-                            Console.WriteLine("GetAvailableUpdates: ABORTED: minimum_required_host_version " + minimum_required_host_version.ToString() + " was not met by the host (host is " + host_version + ")");
+                            Logger.Log("GetAvailableUpdates: ABORTED: minimum_required_host_version " + minimum_required_host_version.ToString() + " was not met by the host (host is " + host_version + ")");
                             result.Succeeded = is_connected_to_host = false;
                             result.ErrorReason = "WingetUI " + minimum_required_host_version.ToString(System.Globalization.CultureInfo.InvariantCulture) + " is required. You are running WingetUI " + host_version.ToString(System.Globalization.CultureInfo.InvariantCulture);
                             if (UpdateCheckFinished != null)
@@ -122,13 +137,13 @@ namespace WingetUIWidgetProvider
                         }
                         else
                         {
-                            Console.WriteLine("GetAvailableUpdates: SUCCESS Connected to host successfully.");
+                            Logger.Log("GetAvailableUpdates: SUCCESS Connected to host successfully.");
                             is_connected_to_host = true;
                         }
                     }
                     else if (task.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                     {
-                        Console.WriteLine("GetAvailableUpdates: ABORTED connection to WingetUI due to UNAUTHORIZED");
+                        Logger.Log("GetAvailableUpdates: ABORTED connection to WingetUI due to UNAUTHORIZED");
                         result.Succeeded = is_connected_to_host = false;
                         result.ErrorReason = "UNAUTHORIZED";
                         if (UpdateCheckFinished != null)
@@ -137,7 +152,7 @@ namespace WingetUIWidgetProvider
                     }
                     else
                     {
-                        Console.WriteLine("GetAvailableUpdates: ABORTED connection to WingetUI due to StatusCode=" + task.StatusCode);
+                        Logger.Log("GetAvailableUpdates: ABORTED connection to WingetUI due to StatusCode=" + task.StatusCode);
                         result.Succeeded = is_connected_to_host = false;
                         result.ErrorReason = "NO_WINGETUI";
                         if (UpdateCheckFinished != null)
@@ -148,13 +163,13 @@ namespace WingetUIWidgetProvider
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetAvailableUpdates: ABORTED connection to host: An exception was thrown");
-                Console.WriteLine(ex.Message);
+                Logger.Log("GetAvailableUpdates: ABORTED connection to host: An exception was thrown");
+                Logger.Log(ex.Message);
                 result.Succeeded = is_connected_to_host = false;
                 result.ErrorReason = "NO_WINGETUI";
                 if (UpdateCheckFinished != null)
                     UpdateCheckFinished(this, result);
-                Console.WriteLine("END of GetAvailableUpdates()");
+                Logger.Log("END of GetAvailableUpdates()");
                 return;
             }
 
@@ -164,13 +179,13 @@ namespace WingetUIWidgetProvider
             {
                 try
                 {
-                    Console.WriteLine("GetAvailableUpdates: BEGIN retrieving updates from the host");
+                    Logger.Log("GetAvailableUpdates: BEGIN retrieving updates from the host");
                     WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(Widget.Id);
                     updateOptions.Template = Templates.BaseTemplate;
                     updateOptions.Data = Templates.GetData_IsLoading();
                     WidgetManager.GetDefault().UpdateWidget(updateOptions);
 
-                    Console.WriteLine("Fetching updates from server");
+                    Logger.Log("Fetching updates from server");
                     HttpClient client = new HttpClient();
                     client.BaseAddress = new Uri("http://localhost:7058//");
                     client.DefaultRequestHeaders.Accept.Clear();
@@ -182,7 +197,7 @@ namespace WingetUIWidgetProvider
 
                     if (!task.IsSuccessStatusCode)
                     {
-                        Console.WriteLine("GetAvailableUpdates: ABORT checking for updates due to StatusCode=" + task.StatusCode.ToString());
+                        Logger.Log("GetAvailableUpdates: ABORT checking for updates due to StatusCode=" + task.StatusCode.ToString());
                         throw new Exception("Update fetching failed with code "+task.StatusCode.ToString());
                     }
 
@@ -201,18 +216,18 @@ namespace WingetUIWidgetProvider
                     update_cache_is_valid = true;
                     CacheExpirationTimer.Stop();
                     CacheExpirationTimer.Start();
-                    Console.WriteLine("GetAvailableUpdates: SUCCESS checking for updates successfully");
+                    Logger.Log("GetAvailableUpdates: SUCCESS checking for updates successfully");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("GetAvailableUpdates: ABORTED checking for updates: An exception was thrown.");
+                    Logger.Log("GetAvailableUpdates: ABORTED checking for updates: An exception was thrown.");
                     result.ErrorReason = "CANNOT_FETCH_UPDATES: " + ex.Message;
                     result.Succeeded = false;
                     if (UpdateCheckFinished != null)
                         UpdateCheckFinished(this, result);
-                    Console.WriteLine("Failed to fetch updates!");
-                    Console.WriteLine(ex);
-                    Console.WriteLine("END of GetAvailableUpdates()");
+                    Logger.Log("Failed to fetch updates!");
+                    Logger.Log(ex);
+                    Logger.Log("END of GetAvailableUpdates()");
                     return;
                 }
             }
@@ -221,7 +236,7 @@ namespace WingetUIWidgetProvider
 
             try
             {
-                Console.WriteLine("GetAvailableUpdates: BEGIN parsing updates");
+                Logger.Log("GetAvailableUpdates: BEGIN parsing updates");
                 found_updates = cached_updates;
 
                 Package[] valid_updates = new Package[found_updates.Length];
@@ -246,21 +261,21 @@ namespace WingetUIWidgetProvider
                 result.ErrorReason = "";
                 if (UpdateCheckFinished != null)
                     UpdateCheckFinished(this, result);
-                Console.WriteLine("GetAvailableUpdates: SUCCESS parsing updates.");
-                Console.WriteLine("END of GetAvailableUpdates()");
+                Logger.Log("GetAvailableUpdates: SUCCESS parsing updates.");
+                Logger.Log("END of GetAvailableUpdates()");
                 return;
 
             }
             catch (Exception ex)
             {
-                Console.WriteLine("GetAvailableUpdates: ABORT parsing updates due to an exception thrown.");
+                Logger.Log("GetAvailableUpdates: ABORT parsing updates due to an exception thrown.");
                 result.ErrorReason = "CANNOT_PROCESS_UPDATES: " + ex.Message;
                 result.Succeeded = false;
                 if (UpdateCheckFinished != null)
                     UpdateCheckFinished(this, result);
-                Console.WriteLine("Failed to process updates!");
-                Console.WriteLine(ex);
-                Console.WriteLine("END of GetAvailableUpdates()");
+                Logger.Log("Failed to process updates!");
+                Logger.Log(ex);
+                Logger.Log("END of GetAvailableUpdates()");
                 return;
             }
         }
@@ -278,7 +293,7 @@ namespace WingetUIWidgetProvider
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Logger.Log(ex.ToString());
                 ResetConnection();
             }
         }
@@ -296,7 +311,7 @@ namespace WingetUIWidgetProvider
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Logger.Log(ex.ToString());
                 ResetConnection();
             }
         }
@@ -315,7 +330,7 @@ namespace WingetUIWidgetProvider
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Logger.Log(ex.ToString());
                 ResetConnection();
             }
         }
@@ -333,7 +348,7 @@ namespace WingetUIWidgetProvider
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Logger.Log(ex.ToString());
                 ResetConnection();
             }
         }
@@ -351,7 +366,7 @@ namespace WingetUIWidgetProvider
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Logger.Log(ex.ToString());
                 ResetConnection();
             }
         }
@@ -393,7 +408,7 @@ namespace WingetUIWidgetProvider
                 Source = "";
                 ManagerName = "";
                 Icon = "https://marticliment.com/resources/widgets/package_color.png";
-                Console.WriteLine("Can't construct package, given packageString=" + packageString);
+                Logger.Log("Can't construct package, given packageString=" + packageString);
             }
         }
     }

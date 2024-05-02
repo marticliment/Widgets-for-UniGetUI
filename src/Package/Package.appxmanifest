@@ -13,10 +13,10 @@
 	<Identity
 	  Name="9932MartCliment.WingetUIWidgets"
 	  Publisher="CN=7054F010-7BE3-4163-B64E-D51DF58CF867"
-	  Version="0.4.0.0" />
+	  Version="0.5.0.0" />
 
 	<Properties>
-		<DisplayName>WingetUI Widgets (Preview)</DisplayName>
+		<DisplayName>Widgets for WingetUI</DisplayName>
 		<PublisherDisplayName>Martí Climent</PublisherDisplayName>
 		<Logo>Images\StoreLogo.png</Logo>
 	</Properties>
@@ -24,7 +24,7 @@
 	<Dependencies>
 		<TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
 		<TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.22000.0" MaxVersionTested="10.0.22635.0" />
-		<PackageDependency Name="Microsoft.WindowsAppRuntime.1.4" MinVersion="1.4.0.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+		<PackageDependency Name="Microsoft.WindowsAppRuntime.1.5" MinVersion="1.5.3.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
 	</Dependencies>
 
 	<Resources>
@@ -34,7 +34,7 @@
 	<Applications>
 		<Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="null">
 			<uap:VisualElements
-			  DisplayName="WingetUI Widgets (Preview)"
+			  DisplayName="Widgets for WingetUI"
 			  Description="A collection of Windows Widgets designed to manage your WingetUI updates from the Widgets Pane and Dev Home"
 			  Square150x150Logo="Images\LargeTile.png"
 			  AppListEntry="none"
@@ -51,8 +51,8 @@
 			<Extensions>
 				<com:Extension Category="windows.comServer">
 					<com:ComServer>
-						<com:ExeServer Executable="WingetUIWidgetProvider\WingetUIWidgetProvider.exe" DisplayName="WingetUI Widgets (Preview)">
-							<com:Class Id="34D3940F-84D6-47C5-B446-32D6865D8852" DisplayName="WingetUI Widgets (Preview)" />
+						<com:ExeServer Executable="Widgets for UniGetUI\Widgets for UniGetUI.exe" DisplayName="Widgets for WingetUI">
+							<com:Class Id="34D3940F-84D6-47C5-B446-32D6865D8852" DisplayName="Widgets for WingetUI" />
 						</com:ExeServer>
 					</com:ComServer>
 				</com:Extension>

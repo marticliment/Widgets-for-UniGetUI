@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Widgets_for_UniGetUI;
 using Windows.ApplicationModel.Chat;
 using Windows.Management.Deployment;
 using Windows.Security.Cryptography.Core;
@@ -44,7 +45,7 @@ namespace WingetUIWidgetProvider
                     }
                     catch
                     {
-                        Console.WriteLine("Failed to import old widget!");
+                        Logger.Log("Failed to import old widget!");
                     }
                     RunningWidgets[widgetId] = runningWidgetInfo;
                 }
@@ -55,7 +56,7 @@ namespace WingetUIWidgetProvider
         {
             WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(widget.Id);
             updateOptions.Data = "{ \"IsLoading\": true }";
-            Console.WriteLine("Calling to WingetUI.GetAvailableUpdates(widget) from widget");
+            Logger.Log("Calling to WingetUI.GetAvailableUpdates(widget) from widget");
             updateOptions.Template = Templates.BaseTemplate;
             WingetUI.GetAvailableUpdates(widget);
             WidgetManager.GetDefault().UpdateWidget(updateOptions);
@@ -78,13 +79,13 @@ namespace WingetUIWidgetProvider
             else if (e.Count == 0)
             {
                 updateOptions.Data = Templates.GetData_NoUpdatesFound();
-                Console.WriteLine("No updates were found");
+                Logger.Log("No updates were found");
                 WidgetManager.GetDefault().UpdateWidget(updateOptions);
             }
             else
             {
                 e.widget.AvailableUpdates = e.Updates;
-                Console.WriteLine("Showing available updates...");
+                Logger.Log("Showing available updates...");
                 string packages = "";
                 Package[] upgradablePackages = new Package[e.widget.AvailableUpdates.Length];
                 int nullPackages = 0;
@@ -123,9 +124,9 @@ namespace WingetUIWidgetProvider
                     updateOptions.Template = Templates.GetUpdatesTemplate(e.widget.AvailableUpdates.Length);
                     updateOptions.Data = Templates.GetData_UpdatesList(e.widget.AvailableUpdates.Length, upgradablePackages);
                 }
-                Console.WriteLine(e.widget.Name);
-                Console.WriteLine(updateOptions.Template);
-                Console.WriteLine(updateOptions.Data);
+                Logger.Log(e.widget.Name);
+                Logger.Log(updateOptions.Template);
+                Logger.Log(updateOptions.Data);
                 WidgetManager.GetDefault().UpdateWidget(updateOptions);
             }
         }
@@ -197,12 +198,12 @@ namespace WingetUIWidgetProvider
                         if (verb.Contains(Verbs.UpdatePackage))
                         {
                             int index = int.Parse(verb.Replace(Verbs.UpdatePackage, ""));
-                            Console.WriteLine(index);
+                            Logger.Log(index);
                             WingetUI.UpdatePackage(widget.AvailableUpdates[index]);
                             WingetUI.GetAvailableUpdates(widget);
                         } else
                         {
-                            Console.WriteLine("INVALID VERB " + verb);
+                            Logger.Log("INVALID VERB " + verb);
                             StartLoadingRoutine(widget);
                         }
                         break;
