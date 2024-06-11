@@ -1,21 +1,23 @@
-# Widgets for WingetUI
+# Widgets for UniGetUI (formerly WingetUI)
 
-This repository contains the code of a set of Windows Widgets that can be used to interact with WingetUI. The widgets are available on the **Windows Widgets** pane and on **Dev Home**.
+This repository contains the code of a set of Windows Widgets that can be used to interact with UniGetUI (formerly WingetUI). The widgets can be displayed on the **Windows Widgets** pane and/or on **Dev Home**.
 
-WingetUI Widgets are **ONLY** compatible with Windows 11
-
-[<img alt="alt_text" width="240px" src="https://get.microsoft.com/images/en-us%20dark.svg" href=""/>](https://www.microsoft.com/store/apps/9NB9M5KZ8SLX) 
-
-
-
-<img src="banner.png" width=800px></img>
-![image](https://github.com/marticliment/WingetUI-Widgets/assets/53119851/6e4ecd34-5a7e-4dca-a32b-d6629663b095)
-![image](https://github.com/marticliment/WingetUI-Widgets/assets/53119851/f0627589-9c59-4b0a-8319-08fad8f0f5ae)
-
+Please note that the widgets are **ONLY** compatible with Windows 11
 
 Currently, the widgets allow viewing available updates, updating specific packages and bulk-updating everything. A widget for each Package Manager is available, as well as a widget that will list every available package without source distinction.
 
+## Installation
+Widgets for UniGetUI can be installed from the Microsoft Store:
 
+<a href="https://www.microsoft.com/store/apps/9NB9M5KZ8SLX"><img alt="alt_text" width="240px" src="https://get.microsoft.com/images/en-us%20dark.svg" /></a> 
+
+Alternatively, you can dowload the `msix` installer from the [Releases](https://github.com/marticliment/WingetUI-Widgets/releases/tag/0.6) page. The `msix` installers are published a few days after a nw version passes Microsoft Store certification.
+
+## Screenshots
+
+<img src="banner.png" width=800px></img>
+<img src="https://github.com/marticliment/WingetUI-Widgets/assets/53119851/6e4ecd34-5a7e-4dca-a32b-d6629663b095" width=400px></img>
+<img src="https://github.com/marticliment/WingetUI-Widgets/assets/53119851/f0627589-9c59-4b0a-8319-08fad8f0f5ae" width=400px></img>
 
 ## More Screenshots:
 <details>
