@@ -1,4 +1,4 @@
-# Widgets for UniGetUI (formerly WingetUI)
+# <img src="https://raw.githubusercontent.com/marticliment/WingetUI/main/media/icon.png" height="40">Widgets for UniGetUI (formerly WingetUI)
 
 This repository contains the code of a set of Windows Widgets that can be used to interact with UniGetUI (formerly WingetUI). The widgets can be displayed on the **Windows Widgets** pane and/or on **Dev Home**.
 
