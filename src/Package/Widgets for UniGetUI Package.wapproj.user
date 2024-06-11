@@ -9,15 +9,15 @@
     <AppxShowAllApps>False</AppxShowAllApps>
     <AppxBuildConfigurationSelection>x64</AppxBuildConfigurationSelection>
     <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
-    <Source>Y:\WingetUI-Store\media\icon.png</Source>
-    <SmallTileSource>Y:\WingetUI-Store\media\icon.png</SmallTileSource>
-    <MediumTileSource>Y:\WingetUI-Store\media\icon.png</MediumTileSource>
-    <WideTileSource>Y:\WingetUI-Store\media\icon.png</WideTileSource>
-    <LargeTileSource>Y:\WingetUI-Store\media\icon.png</LargeTileSource>
-    <AppIconSource>Y:\WingetUI-Store\media\icon.png</AppIconSource>
-    <SplashScreenSource>Y:\WingetUI-Store\media\icon.png</SplashScreenSource>
-    <BadgeLogoSource>Y:\WingetUI-Store\media\icon.png</BadgeLogoSource>
-    <PackageLogoSource>Y:\WingetUI-Store\media\icon.png</PackageLogoSource>
+    <Source>Y:\WingetUI-Store\media\Icon sizes\4096.png</Source>
+    <SmallTileSource>Y:\WingetUI-Store\media\Icon sizes\4096.png</SmallTileSource>
+    <MediumTileSource>Y:\WingetUI-Store\media\Icon sizes\4096.png</MediumTileSource>
+    <WideTileSource>Y:\WingetUI-Store\media\Icon sizes\4096.png</WideTileSource>
+    <LargeTileSource>Y:\WingetUI-Store\media\Icon sizes\4096.png</LargeTileSource>
+    <AppIconSource>Y:\WingetUI-Store\media\Icon sizes\4096.png</AppIconSource>
+    <SplashScreenSource>Y:\WingetUI-Store\media\Icon sizes\4096.png</SplashScreenSource>
+    <BadgeLogoSource>Y:\WingetUI-Store\media\Icon sizes\4096.png</BadgeLogoSource>
+    <PackageLogoSource>Y:\WingetUI-Store\media\Icon sizes\4096.png</PackageLogoSource>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DebuggerFlavor>AppHostLocalDebugger</DebuggerFlavor>
