@@ -20,12 +20,12 @@ namespace WingetUIWidgetProvider
     {
         public static Dictionary<string, GenericWidget> RunningWidgets = new Dictionary<string, GenericWidget>();
 
-        WingetUIConnector WingetUI;
+        WingetUIConnector UniGetUI;
 
         public WidgetProvider()
         {
-            WingetUI = new WingetUIConnector();
-            WingetUI.UpdateCheckFinished += WingetUI_UpdateCheckFinished;
+            UniGetUI = new WingetUIConnector();
+            UniGetUI.UpdateCheckFinished += UniGetUI_UpdateCheckFinished;
 
             var runningWidgets = WidgetManager.GetDefault().GetWidgetInfos();
 
@@ -56,13 +56,13 @@ namespace WingetUIWidgetProvider
         {
             WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(widget.Id);
             updateOptions.Data = "{ \"IsLoading\": true }";
-            Logger.Log("Calling to WingetUI.GetAvailableUpdates(widget) from widget");
+            Logger.Log("Calling to UniGetUI.GetAvailableUpdates(widget) from widget");
             updateOptions.Template = Templates.BaseTemplate;
-            WingetUI.GetAvailableUpdates(widget);
+            UniGetUI.GetAvailableUpdates(widget);
             WidgetManager.GetDefault().UpdateWidget(updateOptions);
         }
 
-        private void WingetUI_UpdateCheckFinished(object? sender, UpdatesCheckFinishedEventArgs e)
+        private void UniGetUI_UpdateCheckFinished(object? sender, UpdatesCheckFinishedEventArgs e)
         {
             WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(e.widget.Id);
 
@@ -70,7 +70,7 @@ namespace WingetUIWidgetProvider
             if (!e.Succeeded)
             {
                 if (e.ErrorReason == "NO_WINGETUI")
-                    updateOptions.Data = Templates.GetData_NoWingetUI();
+                    updateOptions.Data = Templates.GetData_NoUniGetUI();
                 else
                     updateOptions.Data = Templates.GetData_ErrorOccurred(e.ErrorReason);
                 WidgetManager.GetDefault().UpdateWidget(updateOptions);
@@ -84,45 +84,31 @@ namespace WingetUIWidgetProvider
             }
             else
             {
+                int MAX_DISPLAYED_PACKAGES = e.widget.size == WidgetSize.Medium ? 4: 8;
+
                 e.widget.AvailableUpdates = e.Updates;
                 Logger.Log("Showing available updates...");
-                string packages = "";
-                Package[] upgradablePackages = new Package[e.widget.AvailableUpdates.Length];
-                int nullPackages = 0;
+                List<Package> upgradablePackages = new List<Package>();
                 for (int i = 0; i < e.widget.AvailableUpdates.Length; i++)
                 {
-                    if (e.widget.AvailableUpdates[i].Name == "")
+                    if (e.widget.AvailableUpdates[i].Name != String.Empty)
                     {
-                        nullPackages += 1;
-                    }
-                    else
-                    {
-                        const int MEDIUM_MAX_UPDATES = 3; // Updates from 0 to 3 will be shown
-                        const int LARGE_MAX_UPDATES = 7; // Updates from 0 to 7 will be shown
-                        upgradablePackages[i] = e.widget.AvailableUpdates[i];
-                        if (e.widget.size == WidgetSize.Medium && i == (MEDIUM_MAX_UPDATES + nullPackages) && e.widget.AvailableUpdates.Length > (MEDIUM_MAX_UPDATES + nullPackages))
-                        {
-                            i++;
-                            packages += (e.widget.AvailableUpdates.Length - i).ToString() + " more packages can also be upgraded";
-                            i = e.widget.AvailableUpdates.Length;
-                        }
-                        else if (e.widget.size == WidgetSize.Large && i == (LARGE_MAX_UPDATES + nullPackages) && e.widget.AvailableUpdates.Length > (LARGE_MAX_UPDATES + nullPackages) && e.widget.AvailableUpdates.Length > LARGE_MAX_UPDATES)
-                        {
-                            i++;
-                            packages += (e.widget.AvailableUpdates.Length - i).ToString() + " more packages can also be upgraded";
-                            i = e.widget.AvailableUpdates.Length;
-                        }
+                        upgradablePackages.Add(e.widget.AvailableUpdates[i]);
+                        
+                        if (upgradablePackages.Count >= MAX_DISPLAYED_PACKAGES)
+                            break;
                     }
                 }
-                if ((e.widget.AvailableUpdates.Length - nullPackages) == 0)
+
+                if (upgradablePackages.Count == 0)
                 {
                     updateOptions.Template = Templates.BaseTemplate;
                     updateOptions.Data = Templates.GetData_NoUpdatesFound();
                 }
                 else
                 {
-                    updateOptions.Template = Templates.GetUpdatesTemplate(e.widget.AvailableUpdates.Length);
-                    updateOptions.Data = Templates.GetData_UpdatesList(e.widget.AvailableUpdates.Length, upgradablePackages);
+                    updateOptions.Template = Templates.GetUpdatesTemplate(upgradablePackages.Count);
+                    updateOptions.Data = Templates.GetData_UpdatesList(e.widget.AvailableUpdates.Length, upgradablePackages.ToArray());
                 }
                 Logger.Log(e.widget.Name);
                 Logger.Log(updateOptions.Template);
@@ -171,24 +157,24 @@ namespace WingetUIWidgetProvider
                 {
                     case (Verbs.Reload):
                         widget.customState = 0;
-                        WingetUI.ResetConnection();
+                        UniGetUI.ResetConnection();
                         StartLoadingRoutine(widget);
                         break;
 
-                    case (Verbs.ViewUpdatesOnWingetUI):
-                        WingetUI.ViewOnWingetUI();
+                    case (Verbs.ViewUpdatesOnUniGetUI):
+                        UniGetUI.ViewOnWingetUI();
                         break;
 
-                    case (Verbs.OpenWingetUI):
-                        WingetUI.OpenWingetUI();
+                    case (Verbs.OpenUniGetUI):
+                        UniGetUI.OpenWingetUI();
                         break;
 
                     case (Verbs.UpdateAll):
                         widget.customState = 1;
                         if (widget.Name == Widgets.All)
-                            WingetUI.UpdateAllPackages();
+                            UniGetUI.UpdateAllPackages();
                         else
-                            WingetUI.UpdateAllPackagesForSource(WingetUI.WidgetSourceReference[widget.Name]);
+                            UniGetUI.UpdateAllPackagesForSource(UniGetUI.WidgetSourceReference[widget.Name]);
                         updateOptions.Data = Templates.GetData_UpdatesInCourse();
                         updateOptions.Template = Templates.BaseTemplate;
                         WidgetManager.GetDefault().UpdateWidget(updateOptions);
@@ -199,8 +185,8 @@ namespace WingetUIWidgetProvider
                         {
                             int index = int.Parse(verb.Replace(Verbs.UpdatePackage, ""));
                             Logger.Log(index);
-                            WingetUI.UpdatePackage(widget.AvailableUpdates[index]);
-                            WingetUI.GetAvailableUpdates(widget);
+                            UniGetUI.UpdatePackage(widget.AvailableUpdates[index]);
+                            UniGetUI.GetAvailableUpdates(widget);
                         } else
                         {
                             Logger.Log("INVALID VERB " + verb);
@@ -222,7 +208,7 @@ namespace WingetUIWidgetProvider
             {
                 var widget = RunningWidgets[widgetId];
                 widget.size = widgetContext.Size;
-                WingetUI.GetAvailableUpdates(widget);
+                UniGetUI.GetAvailableUpdates(widget);
 
             }
         }
@@ -236,7 +222,7 @@ namespace WingetUIWidgetProvider
                 var widget = RunningWidgets[widgetId];
                 widget.isActive = true;
                 widget.size = widgetContext.Size;
-                WingetUI.GetAvailableUpdates(widget);
+                UniGetUI.GetAvailableUpdates(widget);
             }
         }
         public void Deactivate(string widgetId)

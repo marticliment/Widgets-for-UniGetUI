@@ -81,7 +81,7 @@ namespace WingetUIWidgetProvider
             string AllowedSource = WidgetSourceReference[Widget.Name];
             Package[] found_updates;
 
-            // Connect to WingetUI if needed
+            // Connect to UniGetUI if needed
 
             try
             {
@@ -98,9 +98,9 @@ namespace WingetUIWidgetProvider
 
                     string SessionTokenFile;
                     if(!File.Exists(new_path))
-                        SessionTokenFile = new_path;
-                    else if(!File.Exists(old_path))
                         SessionTokenFile = old_path;
+                    else if(!File.Exists(old_path))
+                        SessionTokenFile = new_path;
                     else
                     {
                         FileInfo old_path_data = new FileInfo(old_path);
@@ -124,13 +124,13 @@ namespace WingetUIWidgetProvider
                     {
                         double host_version;
                         host_version = double.Parse(await task.Content.ReadAsStringAsync(), System.Globalization.CultureInfo.InvariantCulture);
-                        Logger.Log("Found WingetUI " + host_version.ToString());
+                        Logger.Log("Found UniGetUI " + host_version.ToString());
 
                         if (host_version < minimum_required_host_version)
                         {
                             Logger.Log("GetAvailableUpdates: ABORTED: minimum_required_host_version " + minimum_required_host_version.ToString() + " was not met by the host (host is " + host_version + ")");
                             result.Succeeded = is_connected_to_host = false;
-                            result.ErrorReason = "WingetUI " + minimum_required_host_version.ToString(System.Globalization.CultureInfo.InvariantCulture) + " is required. You are running WingetUI " + host_version.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                            result.ErrorReason = "UniGetUI (formerly WingetUI) " + minimum_required_host_version.ToString(System.Globalization.CultureInfo.InvariantCulture) + " is required. You are running UniGetUI " + host_version.ToString(System.Globalization.CultureInfo.InvariantCulture);
                             if (UpdateCheckFinished != null)
                                 UpdateCheckFinished(this, result);
                             return;
@@ -143,7 +143,7 @@ namespace WingetUIWidgetProvider
                     }
                     else if (task.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                     {
-                        Logger.Log("GetAvailableUpdates: ABORTED connection to WingetUI due to UNAUTHORIZED");
+                        Logger.Log("GetAvailableUpdates: ABORTED connection to UniGetUI due to UNAUTHORIZED");
                         result.Succeeded = is_connected_to_host = false;
                         result.ErrorReason = "UNAUTHORIZED";
                         if (UpdateCheckFinished != null)
@@ -152,7 +152,7 @@ namespace WingetUIWidgetProvider
                     }
                     else
                     {
-                        Logger.Log("GetAvailableUpdates: ABORTED connection to WingetUI due to StatusCode=" + task.StatusCode);
+                        Logger.Log("GetAvailableUpdates: ABORTED connection to UniGetUI due to StatusCode=" + task.StatusCode);
                         result.Succeeded = is_connected_to_host = false;
                         result.ErrorReason = "NO_WINGETUI";
                         if (UpdateCheckFinished != null)

@@ -19,13 +19,23 @@ using static System.Net.Mime.MediaTypeNames;
 namespace WingetUIWidgetProvider
 {
 
-    public class Verbs
+    public static class Verbs
     {
-        public const string Reload = "reload";
-        public const string OpenWingetUI = "openwingetui";
-        public const string ViewUpdatesOnWingetUI = "viewupdatesonwingetui";
-        public const string UpdateAll = "updateall";
-        public const string UpdatePackage = "updateindex";
+        public const string Reload = "Reload";
+        public const string OpenUniGetUI = "OpenUniGetUI";
+        public const string ViewUpdatesOnUniGetUI = "ViewUpdatesOnUniGetUI";
+        public const string UpdateAll = "UpdateAll";
+        public const string UpdatePackage = "UpdateIndex";
+    }
+
+    public static class Pages
+    {
+        public const string NotInstalled = "NoUniGetUI";
+        public const string LoadingPackages = "IsLoading";
+        public const string NoUpdatesFound = "NoUpdatesFound";
+        public const string UpdatesList = "UpdatesList";
+        public const string ErrorOccurred = "ErrorOccurred";
+        public const string UpdatingPackages = "UpdatesInCourse";
     }
 
     public class Widgets
@@ -43,616 +53,568 @@ namespace WingetUIWidgetProvider
     public class Templates
     {
 
-        public static string GetData_NoWingetUI()
+        public static string GetData_NoUniGetUI()
         {
-            return "{ \"NoWingetUI\": true }";
+            return $$"""
+                { 
+                    "{{Pages.NotInstalled}}": true 
+                }
+                """;
         }
-        
-        private const string NoWingetUI = @"
+        private const string NoWingetUI = $$"""
             {
-                ""type"": ""Container"",
-                ""items"": [
+                "type": "Container",
+                "items": [
                     {
-                        ""type"": ""Container"",
-                        ""items"": [
+                        "type": "Container",
+                        "items": [
                             {
-                                ""type"": ""TextBlock"",
-                                ""text"": ""Could not communicate with WingetUI"",
-                                ""wrap"": true,
-                                ""horizontalAlignment"": ""Center"",
-                                ""fontType"": ""Default"",
-                                ""size"": ""Default"",
-                                ""weight"": ""Bolder""
+                                "type": "TextBlock",
+                                "text": "Could not communicate with UniGetUI",
+                                "wrap": true,
+                                "horizontalAlignment": "Center",
+                                "fontType": "Default",
+                                "size": "Default",
+                                "weight": "Bolder"
                             },
                             {
-                                ""type"": ""Image"",
-                                ""url"": ""https://marticliment.com/resources/wingetui.png"",
-                                ""horizontalAlignment"": ""Center"",
-                                ""size"": ""Medium"",
-                                ""$when"": ""${$host.widgetSize!=\""small\""}""
+                                "type": "Image",
+                                "url": "https://marticliment.com/resources/widgets/unigetui_new.png",
+                                "horizontalAlignment": "Center",
+                                "size": "Medium",
+                                "$when": "${$host.widgetSize!=\"small\"}"
                             },
                             {
-                                ""type"": ""TextBlock"",
-                                ""text"": ""WingetUI is required for this widget to work.\nPlease make sure that WingetUI is installed and running on the background"",
-                                ""wrap"": true,
-                                ""horizontalAlignment"": ""Center"",
-                                ""size"": ""Small""
+                                "type": "TextBlock",
+                                "text": "UniGetUI (formerly WingetUI) is required for this widget to work.\nPlease make sure that UniGetUI is installed and running on the background",
+                                "wrap": true,
+                                "horizontalAlignment": "Center",
+                                "size": "Small"
                             }
                         ],
-                        ""verticalContentAlignment"": ""Center"",
-                        ""height"": ""stretch""
+                        "verticalContentAlignment": "Center",
+                        "height": "stretch"
                     },
                     {
-                        ""type"": ""ActionSet"",
-                        ""actions"": [
+                        "type": "ActionSet",
+                        "actions": [
                             {
-                                ""type"": ""Action.Execute"",
-                                ""title"": ""Retry"",
-                                ""verb"": """ + Verbs.Reload + @"""
+                                "type": "Action.Execute",
+                                "title": "Retry",
+                                "verb": "{{Verbs.Reload}}"
                             }
                         ],
-                        ""horizontalAlignment"": ""Center"",
-                        ""verticalContentAlignment"": ""Center"",
-                        ""$when"": ""${$host.widgetSize!=\""small\""}"",
-                        ""size"": ""Medium""
+                        "horizontalAlignment": "Center",
+                        "verticalContentAlignment": "Center",
+                        "$when": "${$host.widgetSize!=\"small\"}",
+                        "size": "Medium"
                     }
                 ],
-                ""verticalContentAlignment"": ""Center"",
-                ""style"": ""default"",
-                ""id"": ""NoWingetUIDiv"",
-                ""height"": ""stretch"",
-                ""$when"": ""${$root.NoWingetUI}""
-            }";
+                "verticalContentAlignment": "Center",
+                "style": "default",
+                "id": "NoWingetUIDiv",
+                "height": "stretch",
+                "$when": "${$root.{{Pages.NotInstalled}}}"
+            }
+            """;
+
 
         public static string GetData_IsLoading()
         {
-            return "{ \"IsLoading\": true }";
+            return $$"""
+                { 
+                    "{{Pages.LoadingPackages}}": true
+                }
+                """;
         }
-        private const string IsLoading = @"
+        private const string IsLoading = $$"""
             {
-                ""type"": ""Container"",
-                ""items"": [
+                "type": "Container",
+                "items": [
                     {
-                        ""type"": ""Container"",
-                        ""items"": [
+                        "type": "Container",
+                        "items": [
                             {
-                                ""type"": ""TextBlock"",
-                                ""text"": ""Checking for updates..."",
-                                ""wrap"": true,
-                                ""fontType"": ""Default"",
-                                ""size"": ""Default"",
-                                ""weight"": ""Bolder"",
-                                ""horizontalAlignment"": ""Center""
+                                "type": "TextBlock",
+                                "text": "Checking for updates...",
+                                "wrap": true,
+                                "fontType": "Default",
+                                "size": "Default",
+                                "weight": "Bolder",
+                                "horizontalAlignment": "Center"
                             },
                             {
-                                ""type"": ""Image"",
-                                ""url"": ""https://marticliment.com/resources/widgets/sandclock.png"",
-                                ""horizontalAlignment"": ""Center"",
-                                ""size"": ""Medium"",
-                                ""$when"": ""${$host.widgetSize!=\""small\""}""
+                                "type": "Image",
+                                "url": "https://marticliment.com/resources/widgets/sandclock.png",
+                                "horizontalAlignment": "Center",
+                                "size": "Medium",
+                                "$when": "${$host.widgetSize!=\"small\"}"
                             },
                             {
-                                ""type"": ""TextBlock"",
-                                ""text"": ""This won't take long"",
-                                ""wrap"": true,
-                                ""size"": ""Small"",
-                                ""horizontalAlignment"": ""Center""
+                                "type": "TextBlock",
+                                "text": "This won't take long",
+                                "wrap": true,
+                                "size": "Small",
+                                "horizontalAlignment": "Center"
                             }
                         ],
-                        ""verticalContentAlignment"": ""Center"",
-                        ""height"": ""stretch""
+                        "verticalContentAlignment": "Center",
+                        "height": "stretch"
                     }
                 ],
-                ""id"": ""LoadingDiv"",
-                ""height"": ""stretch"",
-                ""verticalContentAlignment"": ""Center"",
-                ""$when"": ""${$root.IsLoading}""
-            }";
+                "id": "LoadingDiv",
+                "height": "stretch",
+                "verticalContentAlignment": "Center",
+                "$when": "${$root.{{Pages.LoadingPackages}}}"
+            }
+            """;
 
 
         public static string GetData_NoUpdatesFound()
         {
-            return "{ \"NoUpdatesFound\": true }";
+            return $$"""
+                { 
+                    "{{Pages.NoUpdatesFound}}": true 
+                }
+                """;
         }
-        private const string NoUpdatesFound = @"
+        private const string NoUpdatesFound = $$"""
             {
-                ""type"": ""Container"",
-                ""items"": [
+                "type": "Container",
+                "items": [
                     {
-                        ""type"": ""Container"",
-                        ""items"": [
+                        "type": "Container",
+                        "items": [
                             {
-                                ""type"": ""TextBlock"",
-                                ""text"": ""Hooray! No updates were found!"",
-                                ""wrap"": true,
-                                ""horizontalAlignment"": ""Center"",
-                                ""fontType"": ""Default"",
-                                ""size"": ""Default"",
-                                ""weight"": ""Bolder""
+                                "type": "TextBlock",
+                                "text": "Hooray! No updates were found!",
+                                "wrap": true,
+                                "horizontalAlignment": "Center",
+                                "fontType": "Default",
+                                "size": "Default",
+                                "weight": "Bolder"
                             },
                             {
-                                ""type"": ""Image"",
-                                ""url"": ""https://marticliment.com/resources/widgets/laptop_checkmark.png"",
-                                ""horizontalAlignment"": ""Center"",
-                                ""size"": ""Medium"",
-                                ""$when"": ""${$host.widgetSize!=\""small\""}""
+                                "type": "Image",
+                                "url": "https://marticliment.com/resources/widgets/laptop_checkmark.png",
+                                "horizontalAlignment": "Center",
+                                "size": "Medium",
+                                "$when": "${$host.widgetSize!=\"small\"}"
                             },
                             {
-                                ""type"": ""TextBlock"",
-                                ""text"": ""Everything seems to be up-to-date"",
-                                ""wrap"": true,
-                                ""horizontalAlignment"": ""Center"",
-                                ""size"": ""Small"",
-                                ""$when"": ""${$host.widgetSize!=\""small\""}""
+                                "type": "TextBlock",
+                                "text": "Everything seems to be up-to-date",
+                                "wrap": true,
+                                "horizontalAlignment": "Center",
+                                "size": "Small",
+                                "$when": "${$host.widgetSize!=\"small\"}"
                             }
                         ],
-                        ""verticalContentAlignment"": ""Center"",
-                        ""height"": ""stretch""
+                        "verticalContentAlignment": "Center",
+                        "height": "stretch"
                     },
                     {
-                        ""type"": ""ActionSet"",
-                        ""actions"": [
+                        "type": "ActionSet",
+                        "actions": [
                             {
-                                ""type"": ""Action.Execute"",
-                                ""title"": ""Check again"",
-                                ""verb"": """ + Verbs.Reload + @"""
+                                "type": "Action.Execute",
+                                "title": "Check again",
+                                "verb": "{{Verbs.Reload}}"
                             },
                             {
-                                ""type"": ""Action.Execute"",
-                                ""title"": ""Show WingetUI"",
-                                ""verb"": """ + Verbs.OpenWingetUI + @"""
+                                "type": "Action.Execute",
+                                "title": "Show UniGetUI",
+                                "verb": "{{Verbs.OpenUniGetUI}}"
                             }
                         ],
-                        ""horizontalAlignment"": ""Center""
+                        "horizontalAlignment": "Center"
                     }
                 ],
-                ""verticalContentAlignment"": ""Center"",
-                ""style"": ""default"",
-                ""id"": ""NoUpdatesDiv"",
-                ""$when"": ""${$root.NoUpdatesFound}"",
-                ""height"": ""stretch""
-            }";
+                "verticalContentAlignment": "Center",
+                "style": "default",
+                "id": "NoUpdatesDiv",
+                "$when": "${$root.{{Pages.NoUpdatesFound}}}",
+                "height": "stretch"
+            }
+            """;
 
 
         private static string GeneratePackageStructure(int index)
         {
-            string package = @"
-                        {
-                            ""type"": ""TableRow"",
-                            ""cells"": [
-                                {
-                                    ""type"": ""TableCell"",
-                                    ""items"": [
-                                        {
-                                            ""type"": ""Image"",
-                                            ""url"": ""${Icon" + index.ToString()+ @"}"",
-                                            ""width"": ""24px"",
-                                            ""height"": ""24px"",
-                                            ""horizontalAlignment"": ""Center"",
-                                            ""altText"": ""📦""
-                                        }
-                                    ],
-                                    ""verticalContentAlignment"": ""Center"",
-                                    ""minHeight"": ""32px"",
-                                    ""spacing"": ""None""
-                                },
-                                {
-                                    ""type"": ""TableCell"",
-                                    ""items"": [
-                                        {
-                                            ""type"": ""Container"",
-                                            ""items"": [
-                                                {
-                                                    ""type"": ""TextBlock"",
-                                                    ""text"": ""${PackageName" + index.ToString()+ @"}"",
-                                                    ""wrap"": false,
-                                                    ""spacing"": ""None"",
-                                                    ""fontType"": ""Default"",
-                                                    ""size"": ""Small"",
-                                                    ""weight"": ""Bolder"",
-                                                    ""color"": ""Accent""
-                                                },
-                                                {
-                                                    ""type"": ""TextBlock"",
-                                                    ""text"": ""From ${Version"+index.ToString()+@"} to ${NewVersion"+index.ToString()+ @"}"",
-                                                    ""fontType"": ""Default"",
-                                                    ""size"": ""Small"",
-                                                    ""weight"": ""Lighter"",
-                                                    ""isSubtle"": true,
-                                                    ""spacing"": ""None"",
-                                                    ""wrap"": false,
-                                                    ""style"": ""default""
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    ""verticalContentAlignment"": ""Center"",
-                                    ""spacing"": ""None""
-                                },
-                                {
-                                    ""type"": ""TableCell"",
-                                    ""items"": [
-                                        {
-                                            ""type"": ""ActionSet"",
-                                            ""actions"": [
-                                                {
-                                                    ""type"": ""Action.Execute"",
-                                                    ""title"": ""🡇"",
-                                                    ""verb"": """ + Verbs.UpdatePackage + index.ToString() + @""",
-                                                    ""data"": {},
-                                                    ""tooltip"": ""Update this package"",
-                                                    ""spacing"": ""None""
-                                                }
-                                            ],
-                                            ""horizontalAlignment"": ""Center"",
-                                            ""spacing"": ""None""
-                                        }
-                                    ],
-                                    ""verticalContentAlignment"": ""Center"",
-                                    ""spacing"": ""None"",
-                                    ""minHeight"": ""32px"",
-                                    ""spacing"": ""None""
-                                }
-                            ],
-                        ""$when"": ""${$root.Package" + index.ToString()+ @"Visisble}"",
-                        ""spacing"": ""None""
-                        }";
+            string package = $$"""
+            {
+                "type": "TableRow",
+                "cells": [
+                    {
+                        "type": "TableCell",
+                        "items": [
+                            {
+                                "type": "Image",
+                                "url": "${Icon{{index.ToString()}}}",
+                                "width": "24px",
+                                "height": "24px",
+                                "horizontalAlignment": "Center",
+                                "altText": "📦"
+                            }
+                        ],
+                        "verticalContentAlignment": "Center",
+                        "minHeight": "32px",
+                        "spacing": "None"
+                    },
+                    {
+                        "type": "TableCell",
+                        "items": [
+                            {
+                                "type": "Container",
+                                "items": [
+                                    {
+                                        "type": "TextBlock",
+                                        "text": "${PackageName{{index.ToString()}}}",
+                                        "wrap": false,
+                                        "spacing": "None",
+                                        "fontType": "Default",
+                                        "size": "Small",
+                                        "weight": "Bolder",
+                                        "color": "Accent"
+                                    },
+                                    {
+                                        "type": "TextBlock",
+                                        "text": "From ${Version{{index.ToString()}}} to ${NewVersion{{index.ToString()}}}",
+                                        "fontType": "Default",
+                                        "size": "Small",
+                                        "weight": "Lighter",
+                                        "isSubtle": true,
+                                        "spacing": "None",
+                                        "wrap": false,
+                                        "style": "default"
+                                    }
+                                ]
+                            }
+                        ],
+                        "verticalContentAlignment": "Center",
+                        "spacing": "None"
+                    },
+                    {
+                        "type": "TableCell",
+                        "items": [
+                            {
+                                "type": "ActionSet",
+                                "actions": [
+                                    {
+                                        "type": "Action.Execute",
+                                        "title": "🡇",
+                                        "verb": "{{Verbs.UpdatePackage + index.ToString()}}",
+                                        "data": {},
+                                        "tooltip": "Update this package",
+                                        "spacing": "None"
+                                    }
+                                ],
+                                "horizontalAlignment": "Center",
+                                "spacing": "None"
+                            }
+                        ],
+                        "verticalContentAlignment": "Center",
+                        "minHeight": "32px",
+                        "spacing": "None"
+                    }
+                ],
+            "$when": "${$root.Package{{index.ToString()}}Visisble}",
+            "spacing": "None"
+            }
+            """;
             return package;
         }
-
         public static string GetData_UpdatesList(int count, Package[] upgradablePackages)
         {
-            string data = @"
+            string data = $$"""
                 { 
-                    ""UpdatesList"": true,  
-                    ""count"": """ + count.ToString() + @"""";
-            int maxPos = 0;
-            for(int i = 0; i<upgradablePackages.Length; i++)
+                    "{{Pages.UpdatesList}}": true,  
+                    "count": "{{count}}"
+                """;
+
+            for (int i = 0; i < upgradablePackages.Length; i++)
             {
                 if (upgradablePackages[i] != null)
                 {
-                    data += @",
-                        ""Package"+i.ToString()+ @"Visisble"": true,
-                        ""PackageName"+i.ToString()+@""": """ + upgradablePackages[i].Name + @""",
-                        ""Version"+i.ToString()+@""": """ + upgradablePackages[i].Version + @""",
-                        ""Icon"+i.ToString()+@""": """ + upgradablePackages[i].Icon + @""",
-                        ""NewVersion"+i.ToString()+@""": """ + upgradablePackages[i].NewVersion + @"""";
-                    maxPos = i;
+                    data += "," + $"""
+                         "Package{i}Visisble": true,
+                         "PackageName{i}":    "{upgradablePackages[i].Name}",
+                         "Version{i}":        "{upgradablePackages[i].Version}",
+                         "Icon{i}":           "{upgradablePackages[i].Icon}",
+                         "NewVersion{i}":     "{upgradablePackages[i].NewVersion}"
+
+                     """;
                 }
             }
 
-            if ((upgradablePackages.GetLength(0) - maxPos) > 1)
-            {
-                data += ",\"upgradablePackages\": \"" + (upgradablePackages.GetLength(0) - maxPos - 1) + " packages more can be updated\"}";
-            }
+            if ((count - upgradablePackages.Length) >= 1)
+                return data += "," + $$"""
+                    "upgradablePackages": "{{count - upgradablePackages.Length}} packages more can be updated"
+                }
+                """;
             else
-            {
-                data += ",\"upgradablePackages\": \"\\n\"}";
-            }
-
-            return data;
+                return data += "," + """
+                    "upgradablePackages": "\n"
+                }
+                """;
         }
-
         private static string GetUpdatesListTemplate(int numOfPackages)
         {
-            string basestr = @"
+            string basestr = $$"""
             {
-                ""type"": ""Container"",
-                ""items"": [
+                "type": "Container",
+                "items": [
                     {
-                        ""type"": ""TextBlock"",
-                        ""text"": ""Available Updates: ${count}"",
-                        ""wrap"": true,
-                        ""weight"": ""bolder"",
-                        ""size"": ""medium""
+                        "type": "TextBlock",
+                        "text": "Available Updates: ${count}",
+                        "wrap": true,
+                        "weight": "bolder",
+                        "size": "medium"
                     },
                     {
-                        ""type"": ""Table"",
-                        ""columns"": [
+                        "type": "Table",
+                        "columns": [
                             {
-                                ""width"": ""32px""
+                                "width": "32px"
                             },
                             {
-                                ""width"": 1
+                                "width": 1
                             },
                             {
-                                ""width"": ""42px""
+                                "width": "42px"
                             }
                         ],
-                        ""rows"": [";
+                        "rows": [
+            """;
 
             for (int i = 0; i < numOfPackages; i++)
-                basestr += GeneratePackageStructure(i) + ((i+1 == numOfPackages)? "\n": ",\n");
+                basestr += GeneratePackageStructure(i) + ((i + 1 == numOfPackages) ? "\n" : ",\n");
 
-            basestr += @"],
-                        ""spacing"": ""None"",
-                        ""showGridLines"": false,
-                        ""verticalCellContentAlignment"": ""Top""
+            basestr += $$"""
+                        ],
+                        "spacing": "None",
+                        "showGridLines": false,
+                        "verticalCellContentAlignment": "Top"
                     },
                     {
-                        ""type"": ""Container"",
-                        ""verticalContentAlignment"": ""Center"",
-                        ""items"": [
+                        "type": "Container",
+                        "verticalContentAlignment": "Center",
+                        "items": [
                             {
-                                ""type"": ""TextBlock"",
-                                ""text"": ""${upgradablePackages}"",
-                                ""horizontalAlignment"": ""Center"",
-                                ""spacing"": ""None"",
-                                ""weight"": ""Lighter"",
-                                ""isSubtle"": true
+                                "type": "TextBlock",
+                                "text": "${upgradablePackages}",
+                                "horizontalAlignment": "Center",
+                                "spacing": "None",
+                                "weight": "Lighter",
+                                "isSubtle": true
                             }
                         ],
-                        ""height"": ""stretch"",
-                        ""spacing"": ""None""
+                        "height": "stretch",
+                        "spacing": "None"
                     },
                     {
-                        ""type"": ""ActionSet"",
-                        ""actions"": [
+                        "type": "ActionSet",
+                        "actions": [
                             {
-                            ""type"": ""Action.Execute"",
-                                ""title"": ""Update all"",
-                                ""verb"": """ + Verbs.UpdateAll + @"""
+                            "type": "Action.Execute",
+                                "title": "Update all",
+                                "verb": "{{Verbs.UpdateAll}}"
                             },
                             {
-                                ""type"": ""Action.Execute"",
-                                ""title"": ""Reload"",
-                                ""verb"": """ + Verbs.Reload + @"""
+                                "type": "Action.Execute",
+                                "title": "Reload",
+                                "verb": "{{Verbs.Reload}}"
                             },
                             {
-                                ""type"": ""Action.Execute"",
-                                ""title"": ""WingetUI"",
-                                ""verb"": """ + Verbs.ViewUpdatesOnWingetUI + @"""
+                                "type": "Action.Execute",
+                                "title": "UniGetUI",
+                                "verb": "{{Verbs.ViewUpdatesOnUniGetUI}}"
                             }
                         ],
-                        ""id"": ""buttons"",
-                        ""horizontalAlignment"": ""Center"",
-                        ""spacing"": ""None""
+                        "id": "buttons",
+                        "horizontalAlignment": "Center",
+                        "spacing": "None"
                     }
                 ],
-                ""height"": ""stretch"",
-                ""$when"": ""${$root.UpdatesList}"",
-                ""spacing"": ""None"",
-                ""verticalContentAlignment"": ""Center""
-            }";
+                "height": "stretch",
+                "$when": "${$root.{{Pages.UpdatesList}}}",
+                "spacing": "None",
+                "verticalContentAlignment": "Center"
+            }
+            """;
 
             return basestr;
         }
 
-        private static string UpdatesList = @"
-            {
-                ""type"": ""Container"",
-                ""items"": [
-                    {
-                        ""type"": ""TextBlock"",
-                        ""text"": ""Available Updates: ${count}"",
-                        ""wrap"": true,
-                        ""weight"": ""Bolder"",
-                        ""size"": ""Medium""
-                    },
-                    {
-                        ""type"": ""Table"",
-                        ""columns"": [
-                            {
-                                ""width"": ""32px""
-                            },
-                            {
-                                ""width"": 1
-                            },
-                            {
-                                ""width"": ""34px""
-                            }
-                        ],
-                        ""rows"": [
-                            " + GeneratePackageStructure(0) + @",
-                            " + GeneratePackageStructure(1) + @",
-                            " + GeneratePackageStructure(2) + @",
-                            " + GeneratePackageStructure(3) + @",
-                            " + GeneratePackageStructure(4) + @",
-                            " + GeneratePackageStructure(5) + @",
-                            " + GeneratePackageStructure(6) + @",
-                            " + GeneratePackageStructure(7) + @"
-                        ]
-                    },
-
-                    {
-                        ""type"": ""Container"",
-                        ""verticalContentAlignment"": ""Center"",
-                        ""items"": [
-                            {
-                                ""type"": ""TextBlock"",
-                                ""text"": ""${upgradablePackages}"",
-                                ""horizontalAlignment"": ""Center"",
-                                ""spacing"": ""None"",
-                                ""weight"": ""Lighter"",
-                                ""isSubtle"": true
-                            }
-                        ],
-                        ""height"": ""stretch"",
-                        ""spacing"": ""None""
-                    },
-                    {
-                        ""type"": ""ActionSet"",
-                        ""actions"": [
-                            {
-                                ""type"": ""Action.Execute"",
-                                ""title"": ""Update all"",
-                                ""verb"": """ + Verbs.UpdateAll + @"""
-                            },
-                            {
-                                ""type"": ""Action.Execute"",
-                                ""title"": ""Reload"",
-                                ""verb"": """ + Verbs.Reload + @"""
-                            },
-                            {
-                                ""type"": ""Action.Execute"",
-                                ""title"": ""WingetUI"",
-                                ""verb"": """ + Verbs.ViewUpdatesOnWingetUI + @"""
-                            }
-                        ],
-                        ""id"": ""buttons"",
-                        ""horizontalAlignment"": ""Center"",
-                        ""spacing"": ""None""
-                    }
-                ],
-                ""height"": ""stretch"",
-                ""$when"": ""${$root.UpdatesList}""
-            }";
-
         public static string GetData_ErrorOccurred(string error)
         {
-            return "{ \"ErrorOccurred\": true, \"errorcode\": \""+ error + "\"}";
+            return $$"""
+                { 
+                    "{{Pages.ErrorOccurred}}": true, 
+                    "errorcode": "{{error}}"
+                }
+                """;
         }
-        private const string ErrorOccurred = @"
+
+        private const string ErrorOccurred = $$"""
             {
-                ""type"": ""Container"",
-                ""items"": [
+                "type": "Container",
+                "items": [
                     {
-                        ""type"": ""Container"",
-                        ""items"": [
+                        "type": "Container",
+                        "items": [
                             {
-                                ""type"": ""TextBlock"",
-                                ""text"": ""Woops! Something went wrong!"",
-                                ""wrap"": true,
-                                ""horizontalAlignment"": ""Center"",
-                                ""fontType"": ""Default"",
-                                ""size"": ""Default"",
-                                ""weight"": ""Bolder""
+                                "type": "TextBlock",
+                                "text": "Something went wrong...",
+                                "wrap": true,
+                                "horizontalAlignment": "Center",
+                                "fontType": "Default",
+                                "size": "Default",
+                                "weight": "Bolder"
                             },
                             {
-                                ""type"": ""Image"",
-                                ""url"": ""https://marticliment.com/resources/error.png"",
-                                ""horizontalAlignment"": ""Center"",
-                                ""size"": ""Medium"",
-                                ""$when"": ""${$host.widgetSize!=\""small\""}""
+                                "type": "Image",
+                                "url": "https://marticliment.com/resources/error.png",
+                                "horizontalAlignment": "Center",
+                                "size": "Medium",
+                                "$when": "${$host.widgetSize!=\"small\"}"
                             },
                             {
-                                ""type"": ""TextBlock"",
-                                ""text"": ""An error occurred with this widget: ${errorcode}"",
-                                ""wrap"": true,
-                                ""horizontalAlignment"": ""Center"",
-                                ""size"": ""Small"",
-                                ""$when"": ""${$host.widgetSize!=\""small\""}""
+                                "type": "TextBlock",
+                                "text": "An error occurred with this widget: ${errorcode}",
+                                "wrap": true,
+                                "horizontalAlignment": "Center",
+                                "size": "Small",
+                                "$when": "${$host.widgetSize!=\"small\"}"
                             }
                         ],
-                        ""height"": ""stretch""
+                        "height": "stretch"
                     },
                     {
-                        ""type"": ""ActionSet"",
-                        ""actions"": [
+                        "type": "ActionSet",
+                        "actions": [
                             {
-                                ""type"": ""Action.Execute"",
-                                ""title"": ""Try again"",
-                                ""verb"": """ + Verbs.Reload + @"""
+                                "type": "Action.Execute",
+                                "title": "Try again",
+                                "verb": "{{Verbs.Reload}}"
                             }
                         ],
-                        ""horizontalAlignment"": ""Center""
+                        "horizontalAlignment": "Center"
                     }
                 ],
-                ""verticalContentAlignment"": ""Center"",
-                ""style"": ""default"",
-                ""id"": ""ErrorOccurredDiv"",
-                ""$when"": ""${$root.ErrorOccurred}"",
-                ""height"": ""stretch""
-            }";
+                "verticalContentAlignment": "Center",
+                "style": "default",
+                "id": "ErrorOccurredDiv",
+                "$when": "${$root.{{Pages.ErrorOccurred}}}",
+                "height": "stretch"
+            }
+            """;
 
         public static string GetData_UpdatesInCourse()
         {
-            return "{ \"UpdatesInCourse\": true }";
+            return $$"""
+                {
+                    "{{Pages.UpdatingPackages}}": true 
+                }
+                """;
         }
-        private const string UpdatesInCourse = @"
+        private const string UpdatesInCourse = $$"""
             {
-                ""type"": ""Container"",
-                ""items"": [
+                "type": "Container",
+                "items": [
                     {
-                        ""type"": ""Container"",
-                        ""items"": [
+                        "type": "Container",
+                        "items": [
                             {
-                                ""type"": ""TextBlock"",
-                                ""text"": ""Your packages are being updated!"",
-                                ""wrap"": true,
-                                ""horizontalAlignment"": ""Center"",
-                                ""fontType"": ""Default"",
-                                ""size"": ""Default"",
-                                ""weight"": ""Bolder""
+                                "type": "TextBlock",
+                                "text": "Your packages are being updated!",
+                                "wrap": true,
+                                "horizontalAlignment": "Center",
+                                "fontType": "Default",
+                                "size": "Default",
+                                "weight": "Bolder"
                             },
                             {
-                                ""type"": ""Image"",
-                                ""url"": ""https://marticliment.com/resources/widgets/laptop_checkmark.png"",
-                                ""horizontalAlignment"": ""Center"",
-                                ""size"": ""Medium"",
-                                ""$when"": ""${$host.widgetSize!=\""small\""}""
+                                "type": "Image",
+                                "url": "https://marticliment.com/resources/widgets/laptop_checkmark.png",
+                                "horizontalAlignment": "Center",
+                                "size": "Medium",
+                                "$when": "${$host.widgetSize!=\"small\"}"
                             },
                             {
-                                ""type"": ""TextBlock"",
-                                ""text"": ""The updates will be ready soon. You can check their progress on WingetUI"",
-                                ""wrap"": true,
-                                ""horizontalAlignment"": ""Center"",
-                                ""size"": ""Small""
+                                "type": "TextBlock",
+                                "text": "The updates will be ready soon. You can check their progress on UniGetUI (formerly WingetUI)",
+                                "wrap": true,
+                                "horizontalAlignment": "Center",
+                                "size": "Small"
                             }
                         ],
-                        ""height"": ""stretch""
+                        "height": "stretch"
                     },
                     {
-                        ""type"": ""ActionSet"",
-                        ""actions"": [
+                        "type": "ActionSet",
+                        "actions": [
                             {
-                                ""type"": ""Action.Execute"",
-                                ""title"": ""Refresh"",
-                                ""verb"": """ + Verbs.Reload + @"""
+                                "type": "Action.Execute",
+                                "title": "Refresh",
+                                "verb": "{{Verbs.Reload}}"
                             }
                         ],
-                        ""horizontalAlignment"": ""Center"",
-                        ""$when"": ""${$host.widgetSize!=\""small\""}"",
-                            ""size"": ""Medium""
+                        "horizontalAlignment": "Center",
+                        "$when": "${$host.widgetSize!=\"small\"}",
+                        "size": "Medium"
                     }
                 ],
-                ""verticalContentAlignment"": ""Center"",
-                ""style"": ""default"",
-                ""id"": ""UpdatesOnTheGo"",
-                ""height"": ""stretch"",
-                ""$when"": ""${$root.UpdatesInCourse}""
-            }";
+                "verticalContentAlignment": "Center",
+                "style": "default",
+                "id": "UpdatesOnTheGo",
+                "height": "stretch",
+                "$when": "${$root.{{Pages.UpdatingPackages}}}"
+            }
+            """;
 
 
-        public const string BaseTemplate = @"
+        public const string BaseTemplate = $$"""
             {
-                ""type"": ""AdaptiveCard"",
-                ""$schema"": ""http://adaptivecards.io/schemas/adaptive-card.json"",
-                ""version"": ""1.5"",
-                ""body"": [
-                    " + NoWingetUI + @",
-                    " + IsLoading + @",
-                    " + NoUpdatesFound + @",
-                    " + UpdatesInCourse + @",
-                    " + ErrorOccurred + @"
+                "type": "AdaptiveCard",
+                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                "version": "1.5",
+                "body": [
+                    {{NoWingetUI}},
+                    {{IsLoading}},
+                    {{NoUpdatesFound}},
+                    {{UpdatesInCourse}},
+                    {{ErrorOccurred}}
                 ],
-                ""rtl"": false,
-                ""refresh"": {
-                    ""action"": {
-                        ""type"": ""Action.Execute"",
-                        ""verb"": """ + Verbs.Reload + @"""
+                "rtl": false,
+                "refresh": {
+                    "action": {
+                        "type": "Action.Execute",
+                        "verb": "{{Verbs.Reload}}"
                     }
                 }
-            }";
+            }
+            """;
 
         public static string GetUpdatesTemplate(int numOfUpdates)
         {
-            return @"
+            return $$"""
             {
-                ""type"": ""AdaptiveCard"",
-                ""$schema"": ""http://adaptivecards.io/schemas/adaptive-card.json"",
-                ""version"": ""1.5"",
-                ""body"": [
-                    " + GetUpdatesListTemplate(numOfUpdates) + @"
+                "type": "AdaptiveCard",
+                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                "version": "1.5",
+                "body": [
+                    {{GetUpdatesListTemplate(numOfUpdates)}}
                 ],
-                ""rtl"": false,
-                ""refresh"": {
-                    ""action"": {
-                        ""type"": ""Action.Execute"",
-                        ""verb"": """ + Verbs.Reload + @"""
+                "rtl": false,
+                "refresh": {
+                    "action": {
+                        "type": "Action.Execute",
+                        "verb": "{{Verbs.Reload}}"
                     }
                 }
-            }";
+            }
+            """;
         }
     }
 }
