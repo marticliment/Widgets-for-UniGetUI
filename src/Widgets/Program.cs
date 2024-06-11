@@ -1,12 +1,9 @@
 ﻿// Program.cs
 
-using System.Runtime.InteropServices;
-using ComTypes = System.Runtime.InteropServices.ComTypes;
-using Microsoft.Windows.Widgets;
-using WingetUIWidgetProvider;
 using COM;
-using System;
+using System.Runtime.InteropServices;
 using Widgets_for_UniGetUI;
+using WingetUIWidgetProvider;
 
 [DllImport("kernel32.dll")]
 static extern IntPtr GetConsoleWindow();
@@ -40,7 +37,7 @@ if (GetConsoleWindow() != IntPtr.Zero)
 else
 {
     // Wait until the manager has disposed of the last widget provider.
-    using (var emptyWidgetListEvent = WidgetProvider.GetEmptyWidgetListEvent())
+    using (ManualResetEvent emptyWidgetListEvent = WidgetProvider.GetEmptyWidgetListEvent())
     {
         emptyWidgetListEvent.WaitOne();
     }

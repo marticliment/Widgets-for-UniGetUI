@@ -1,24 +1,7 @@
-﻿using Microsoft.Windows.ApplicationModel.DynamicDependency;
-using Microsoft.Windows.Widgets.Providers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.Diagnostics;
-using System.Linq;
+﻿using Microsoft.Windows.Widgets.Providers;
 using System.Net.Http.Headers;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using Widgets_for_UniGetUI;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Background;
-using Windows.ApplicationModel.UserDataTasks;
-using Windows.Devices.Printers;
-using Windows.Management.Deployment;
-using Windows.Media.Protection.PlayReady;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace WingetUIWidgetProvider
 {
@@ -34,9 +17,9 @@ namespace WingetUIWidgetProvider
         private bool update_cache_is_valid = false;
         private Package[] cached_updates = new Package[0];
 
-        private System.Timers.Timer CacheExpirationTimer = new System.Timers.Timer();
+        private System.Timers.Timer CacheExpirationTimer = new();
 
-        public Dictionary<string, string> WidgetSourceReference = new Dictionary<string, string>()
+        public Dictionary<string, string> WidgetSourceReference = new()
         {
             {Widgets.All, ""},
             {Widgets.Winget, "Winget"},
@@ -77,7 +60,7 @@ namespace WingetUIWidgetProvider
         async public void GetAvailableUpdates(GenericWidget Widget, bool DeepCheck = false)
         {
             Logger.Log("BEGIN GetAvailableUpdates(). Widget.Name=" + Widget.Name + ", DeepCheck=" + DeepCheck.ToString());
-            UpdatesCheckFinishedEventArgs result = new UpdatesCheckFinishedEventArgs(Widget);
+            UpdatesCheckFinishedEventArgs result = new(Widget);
             string AllowedSource = WidgetSourceReference[Widget.Name];
             Package[] found_updates;
 
@@ -88,13 +71,13 @@ namespace WingetUIWidgetProvider
                 if (!is_connected_to_host)
                 {
                     Logger.Log("GetAvailableUpdates: BEGIN connection to the host");
-                    WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(Widget.Id);
+                    WidgetUpdateRequestOptions updateOptions = new(Widget.Id);
                     updateOptions.Template = Templates.BaseTemplate;
                     updateOptions.Data = Templates.GetData_IsLoading();
                     WidgetManager.GetDefault().UpdateWidget(updateOptions);
 
-                    var old_path = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".wingetui", "CurrentSessionToken");
-                    var new_path = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "UniGetUI", "CurrentSessionToken");
+                    string old_path = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".wingetui", "CurrentSessionToken");
+                    string new_path = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "UniGetUI", "CurrentSessionToken");
 
                     string SessionTokenFile;
                     if(!File.Exists(new_path))
@@ -103,18 +86,18 @@ namespace WingetUIWidgetProvider
                         SessionTokenFile = new_path;
                     else
                     {
-                        FileInfo old_path_data = new FileInfo(old_path);
-                        var old_created = old_path_data.LastWriteTimeUtc; //File Creation
-                        FileInfo new_path_data = new FileInfo(new_path);
-                        var new_created = new_path_data.LastWriteTimeUtc; //File Creation
+                        FileInfo old_path_data = new(old_path);
+                        DateTime old_created = old_path_data.LastWriteTimeUtc; //File Creation
+                        FileInfo new_path_data = new(new_path);
+                        DateTime new_created = new_path_data.LastWriteTimeUtc; //File Creation
                         SessionTokenFile = old_created > new_created ? old_path : new_path;
                     }
 
-                    StreamReader reader = new StreamReader(SessionTokenFile);
+                    StreamReader reader = new(SessionTokenFile);
                     SessionToken = reader.ReadToEnd().ToString().Replace("\n", "").Trim();
                     reader.Close();
 
-                    HttpClient client = new HttpClient();
+                    HttpClient client = new();
                     client.BaseAddress = new Uri("http://localhost:7058//");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -180,13 +163,13 @@ namespace WingetUIWidgetProvider
                 try
                 {
                     Logger.Log("GetAvailableUpdates: BEGIN retrieving updates from the host");
-                    WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(Widget.Id);
+                    WidgetUpdateRequestOptions updateOptions = new(Widget.Id);
                     updateOptions.Template = Templates.BaseTemplate;
                     updateOptions.Data = Templates.GetData_IsLoading();
                     WidgetManager.GetDefault().UpdateWidget(updateOptions);
 
                     Logger.Log("Fetching updates from server");
-                    HttpClient client = new HttpClient();
+                    HttpClient client = new();
                     client.BaseAddress = new Uri("http://localhost:7058//");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -210,7 +193,7 @@ namespace WingetUIWidgetProvider
                     cached_updates = new Package[updateCount];
                     for (int i = 0; i < updateCount; i++)
                     {
-                        Package package = new Package(packageStrings[i]);
+                        Package package = new(packageStrings[i]);
                         cached_updates[i] = package;
                     }
                     update_cache_is_valid = true;
@@ -284,7 +267,7 @@ namespace WingetUIWidgetProvider
         {
             try
             {
-                HttpClient client = new HttpClient();
+                HttpClient client = new();
                 client.BaseAddress = new Uri("http://localhost:7058//");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -302,7 +285,7 @@ namespace WingetUIWidgetProvider
         {
             try
             {
-                HttpClient client = new HttpClient();
+                HttpClient client = new();
                 client.BaseAddress = new Uri("http://localhost:7058//");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -320,7 +303,7 @@ namespace WingetUIWidgetProvider
         {
             try
             {
-                HttpClient client = new HttpClient();
+                HttpClient client = new();
                 client.BaseAddress = new Uri("http://localhost:7058//");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -339,7 +322,7 @@ namespace WingetUIWidgetProvider
         {
             try
             {
-                HttpClient client = new HttpClient();
+                HttpClient client = new();
                 client.BaseAddress = new Uri("http://localhost:7058//");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -357,7 +340,7 @@ namespace WingetUIWidgetProvider
         {
             try
             {
-                HttpClient client = new HttpClient();
+                HttpClient client = new();
                 client.BaseAddress = new Uri("http://localhost:7058//");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

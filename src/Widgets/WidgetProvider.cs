@@ -1,24 +1,13 @@
 ﻿using Microsoft.Windows.Widgets;
 using Microsoft.Windows.Widgets.Providers;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Widgets_for_UniGetUI;
-using Windows.ApplicationModel.Chat;
-using Windows.Management.Deployment;
-using Windows.Security.Cryptography.Core;
-using Windows.Storage.Pickers;
 
 namespace WingetUIWidgetProvider
 {
 
     internal class WidgetProvider : IWidgetProvider
     {
-        public static Dictionary<string, GenericWidget> RunningWidgets = new Dictionary<string, GenericWidget>();
+        public static Dictionary<string, GenericWidget> RunningWidgets = new();
 
         WingetUIConnector UniGetUI;
 
@@ -27,16 +16,16 @@ namespace WingetUIWidgetProvider
             UniGetUI = new WingetUIConnector();
             UniGetUI.UpdateCheckFinished += UniGetUI_UpdateCheckFinished;
 
-            var runningWidgets = WidgetManager.GetDefault().GetWidgetInfos();
+            WidgetInfo[] runningWidgets = WidgetManager.GetDefault().GetWidgetInfos();
 
-            foreach (var widgetInfo in runningWidgets)
+            foreach (WidgetInfo? widgetInfo in runningWidgets)
             {
-                var widgetContext = widgetInfo.WidgetContext;
-                var widgetId = widgetContext.Id;
-                var widgetName = widgetContext.DefinitionId;
+                WidgetContext widgetContext = widgetInfo.WidgetContext;
+                string widgetId = widgetContext.Id;
+                string widgetName = widgetContext.DefinitionId;
                 if (!RunningWidgets.ContainsKey(widgetId))
                 {
-                    GenericWidget runningWidgetInfo = new GenericWidget(widgetId, widgetName);
+                    GenericWidget runningWidgetInfo = new(widgetId, widgetName);
                     try
                     {
                         runningWidgetInfo.isActive = true;
@@ -54,7 +43,7 @@ namespace WingetUIWidgetProvider
 
         private void StartLoadingRoutine(GenericWidget widget)
         {
-            WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(widget.Id);
+            WidgetUpdateRequestOptions updateOptions = new(widget.Id);
             updateOptions.Data = "{ \"IsLoading\": true }";
             Logger.Log("Calling to UniGetUI.GetAvailableUpdates(widget) from widget");
             updateOptions.Template = Templates.BaseTemplate;
@@ -64,7 +53,7 @@ namespace WingetUIWidgetProvider
 
         private void UniGetUI_UpdateCheckFinished(object? sender, UpdatesCheckFinishedEventArgs e)
         {
-            WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(e.widget.Id);
+            WidgetUpdateRequestOptions updateOptions = new(e.widget.Id);
 
             updateOptions.Template = Templates.BaseTemplate;
             if (!e.Succeeded)
@@ -88,7 +77,7 @@ namespace WingetUIWidgetProvider
 
                 e.widget.AvailableUpdates = e.Updates;
                 Logger.Log("Showing available updates...");
-                List<Package> upgradablePackages = new List<Package>();
+                List<Package> upgradablePackages = new();
                 for (int i = 0; i < e.widget.AvailableUpdates.Length; i++)
                 {
                     if (e.widget.AvailableUpdates[i].Name != String.Empty)
@@ -119,9 +108,9 @@ namespace WingetUIWidgetProvider
 
         public void CreateWidget(WidgetContext widgetContext)
         {
-            var widgetId = widgetContext.Id;
-            var widgetName = widgetContext.DefinitionId;
-            GenericWidget runningWidgetInfo = new GenericWidget(widgetId, widgetName);
+            string widgetId = widgetContext.Id;
+            string widgetName = widgetContext.DefinitionId;
+            GenericWidget runningWidgetInfo = new(widgetId, widgetName);
             RunningWidgets[widgetId] = runningWidgetInfo;
             StartLoadingRoutine(runningWidgetInfo);
         }
@@ -136,7 +125,7 @@ namespace WingetUIWidgetProvider
             }
         }
 
-        static ManualResetEvent emptyWidgetListEvent = new ManualResetEvent(false);
+        static ManualResetEvent emptyWidgetListEvent = new(false);
 
         public static ManualResetEvent GetEmptyWidgetListEvent()
         {
@@ -145,13 +134,13 @@ namespace WingetUIWidgetProvider
 
         public void OnActionInvoked(WidgetActionInvokedArgs actionInvokedArgs)
         {
-            var widgetId = actionInvokedArgs.WidgetContext.Id;
-            var data = actionInvokedArgs.Data;
-            WidgetUpdateRequestOptions updateOptions = new WidgetUpdateRequestOptions(widgetId);
+            string widgetId = actionInvokedArgs.WidgetContext.Id;
+            string data = actionInvokedArgs.Data;
+            WidgetUpdateRequestOptions updateOptions = new(widgetId);
             if (RunningWidgets.ContainsKey(widgetId))
             {
                 GenericWidget widget = RunningWidgets[widgetId];
-                var verb = actionInvokedArgs.Verb;
+                string verb = actionInvokedArgs.Verb;
 
                 switch (verb)
                 {
@@ -201,12 +190,12 @@ namespace WingetUIWidgetProvider
 
         public void OnWidgetContextChanged(WidgetContextChangedArgs contextChangedArgs)
         {
-            var widgetContext = contextChangedArgs.WidgetContext;
-            var widgetId = widgetContext.Id;
-            var widgetSize = widgetContext.Size;
+            WidgetContext widgetContext = contextChangedArgs.WidgetContext;
+            string widgetId = widgetContext.Id;
+            WidgetSize widgetSize = widgetContext.Size;
             if (RunningWidgets.ContainsKey(widgetId))
             {
-                var widget = RunningWidgets[widgetId];
+                GenericWidget widget = RunningWidgets[widgetId];
                 widget.size = widgetContext.Size;
                 UniGetUI.GetAvailableUpdates(widget);
 
@@ -215,11 +204,11 @@ namespace WingetUIWidgetProvider
 
         public void Activate(WidgetContext widgetContext)
         {
-            var widgetId = widgetContext.Id;
+            string widgetId = widgetContext.Id;
 
             if (RunningWidgets.ContainsKey(widgetId))
             {
-                var widget = RunningWidgets[widgetId];
+                GenericWidget widget = RunningWidgets[widgetId];
                 widget.isActive = true;
                 widget.size = widgetContext.Size;
                 UniGetUI.GetAvailableUpdates(widget);
@@ -229,7 +218,7 @@ namespace WingetUIWidgetProvider
         {
             if (RunningWidgets.ContainsKey(widgetId))
             {
-                var widget = RunningWidgets[widgetId];
+                GenericWidget widget = RunningWidgets[widgetId];
                 widget.isActive = false;
             }
         }

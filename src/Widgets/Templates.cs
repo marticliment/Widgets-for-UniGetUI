@@ -1,22 +1,4 @@
-﻿using ABI.System;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.VisualBasic;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Net.WebSockets;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.ApplicationModel;
-using Windows.Graphics.Printing.PrintSupport;
-using Windows.UI.Text;
-using WingetUIWidgetProvider;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace WingetUIWidgetProvider
+﻿namespace WingetUIWidgetProvider
 {
 
     public static class Verbs
