@@ -1,16 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows10.0.22000.0</TargetFramework>
-	<TargetPlatformMinVersion>10.0.22000.0</TargetPlatformMinVersion>
-	<TargetMinVersion>10.0.22000.0</TargetMinVersion>
+    <TargetPlatformMinVersion>10.0.22000.0</TargetPlatformMinVersion>
+    <TargetMinVersion>10.0.22000.0</TargetMinVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Platforms>x64</Platforms>
     <SignAssembly>False</SignAssembly>
-	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
-	<RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

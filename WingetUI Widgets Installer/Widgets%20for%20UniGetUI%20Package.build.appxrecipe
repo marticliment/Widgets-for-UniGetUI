@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>DESKTOP-TDSK6R6</Machine>
+    <WindowsUser>marti</WindowsUser>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetOsVersion>10.0</TargetOsVersion>
+    <TargetOsDescription>Windows 10.0</TargetOsDescription>
+    <SolutionConfiguration>Release|x64</SolutionConfiguration>
+    <PackageArchitecture>x64</PackageArchitecture>
+    <PackageIdentityName>9932MartCliment.WingetUIWidgets</PackageIdentityName>
+    <PackageIdentityPublisher>CN=7054F010-7BE3-4163-B64E-D51DF58CF867</PackageIdentityPublisher>
+    <IntermediateOutputPath>C:\SomePrograms\WingetUI-Widgets\src\Package\obj\x64\Release\</IntermediateOutputPath>
+    <RemoteDeploymentType></RemoteDeploymentType>
+    <PackageRegistrationPath></PackageRegistrationPath>
+    <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
+    <DeployOptionalPackages>false</DeployOptionalPackages>
+    <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
+    <LayoutDir>C:\SomePrograms\WingetUI-Widgets\src\Package\bin\x64\Release\AppX</LayoutDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\SomePrograms\WingetUI-Widgets\src\Package\bin\x64\Release\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\BadgeLogo.scale-100.png">
+      <PackagePath>Images\BadgeLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\BadgeLogo.scale-125.png">
+      <PackagePath>Images\BadgeLogo.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\BadgeLogo.scale-150.png">
+      <PackagePath>Images\BadgeLogo.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\BadgeLogo.scale-200.png">
+      <PackagePath>Images\BadgeLogo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\BadgeLogo.scale-400.png">
+      <PackagePath>Images\BadgeLogo.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\choco_color.png">
+      <PackagePath>Images\choco_color.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\dotnet_color.png">
+      <PackagePath>Images\dotnet_color.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.altform-lightunplated_targetsize-16.png">
+      <PackagePath>Images\icon.altform-lightunplated_targetsize-16.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.altform-lightunplated_targetsize-24.png">
+      <PackagePath>Images\icon.altform-lightunplated_targetsize-24.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.altform-lightunplated_targetsize-256.png">
+      <PackagePath>Images\icon.altform-lightunplated_targetsize-256.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.altform-lightunplated_targetsize-32.png">
+      <PackagePath>Images\icon.altform-lightunplated_targetsize-32.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.altform-lightunplated_targetsize-48.png">
+      <PackagePath>Images\icon.altform-lightunplated_targetsize-48.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.altform-unplated_targetsize-16.png">
+      <PackagePath>Images\icon.altform-unplated_targetsize-16.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.altform-unplated_targetsize-24.png">
+      <PackagePath>Images\icon.altform-unplated_targetsize-24.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.altform-unplated_targetsize-256.png">
+      <PackagePath>Images\icon.altform-unplated_targetsize-256.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.altform-unplated_targetsize-32.png">
+      <PackagePath>Images\icon.altform-unplated_targetsize-32.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.altform-unplated_targetsize-48.png">
+      <PackagePath>Images\icon.altform-unplated_targetsize-48.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.scale-100.png">
+      <PackagePath>Images\icon.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.scale-125.png">
+      <PackagePath>Images\icon.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.scale-150.png">
+      <PackagePath>Images\icon.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.scale-200.png">
+      <PackagePath>Images\icon.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.scale-400.png">
+      <PackagePath>Images\icon.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.targetsize-16.png">
+      <PackagePath>Images\icon.targetsize-16.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.targetsize-24.png">
+      <PackagePath>Images\icon.targetsize-24.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.targetsize-256.png">
+      <PackagePath>Images\icon.targetsize-256.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.targetsize-32.png">
+      <PackagePath>Images\icon.targetsize-32.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\icon.targetsize-48.png">
+      <PackagePath>Images\icon.targetsize-48.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\LargeTile.scale-100.png">
+      <PackagePath>Images\LargeTile.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\LargeTile.scale-125.png">
+      <PackagePath>Images\LargeTile.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\LargeTile.scale-150.png">
+      <PackagePath>Images\LargeTile.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\LargeTile.scale-200.png">
+      <PackagePath>Images\LargeTile.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\LargeTile.scale-400.png">
+      <PackagePath>Images\LargeTile.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\node_color.png">
+      <PackagePath>Images\node_color.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\pip_color.png">
+      <PackagePath>Images\pip_color.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\powershell_color.png">
+      <PackagePath>Images\powershell_color.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\scoop_color.png">
+      <PackagePath>Images\scoop_color.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\SmallTile.scale-100.png">
+      <PackagePath>Images\SmallTile.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\SmallTile.scale-125.png">
+      <PackagePath>Images\SmallTile.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\SmallTile.scale-150.png">
+      <PackagePath>Images\SmallTile.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\SmallTile.scale-200.png">
+      <PackagePath>Images\SmallTile.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\SmallTile.scale-400.png">
+      <PackagePath>Images\SmallTile.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\StoreLogo.scale-100.png">
+      <PackagePath>Images\StoreLogo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\StoreLogo.scale-125.png">
+      <PackagePath>Images\StoreLogo.scale-125.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\StoreLogo.scale-150.png">
+      <PackagePath>Images\StoreLogo.scale-150.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\StoreLogo.scale-200.png">
+      <PackagePath>Images\StoreLogo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\StoreLogo.scale-400.png">
+      <PackagePath>Images\StoreLogo.scale-400.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\all_dark.png">
+      <PackagePath>Images\WidgetCovers\all_dark.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\all_light.png">
+      <PackagePath>Images\WidgetCovers\all_light.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\choco_dark.png">
+      <PackagePath>Images\WidgetCovers\choco_dark.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\choco_light.png">
+      <PackagePath>Images\WidgetCovers\choco_light.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\dotnet_dark.png">
+      <PackagePath>Images\WidgetCovers\dotnet_dark.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\dotnet_light.png">
+      <PackagePath>Images\WidgetCovers\dotnet_light.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\npm_dark.png">
+      <PackagePath>Images\WidgetCovers\npm_dark.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\npm_light.png">
+      <PackagePath>Images\WidgetCovers\npm_light.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\pip_dark.png">
+      <PackagePath>Images\WidgetCovers\pip_dark.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\pip_light.png">
+      <PackagePath>Images\WidgetCovers\pip_light.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\powershell_dark.png">
+      <PackagePath>Images\WidgetCovers\powershell_dark.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\powershell_light.png">
+      <PackagePath>Images\WidgetCovers\powershell_light.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\scoop_dark.png">
+      <PackagePath>Images\WidgetCovers\scoop_dark.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\scoop_light.png">
+      <PackagePath>Images\WidgetCovers\scoop_light.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\winget_dark.png">
+      <PackagePath>Images\WidgetCovers\winget_dark.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\WidgetCovers\winget_light.png">
+      <PackagePath>Images\WidgetCovers\winget_light.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\wingetui_color.png">
+      <PackagePath>Images\wingetui_color.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\Images\winget_color.png">
+      <PackagePath>Images\winget_color.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Package\bin\x64\Release\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.InteractiveExperiences.Projection.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.InteractiveExperiences.Projection.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.WinUI.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.WinUI.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.AppLifecycle.Projection.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.Windows.AppLifecycle.Projection.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.AppNotifications.Builder.Projection.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.Windows.AppNotifications.Builder.Projection.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.AppNotifications.Projection.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.Windows.AppNotifications.Projection.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.Windows.ApplicationModel.DynamicDependency.Projection.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.ApplicationModel.Resources.Projection.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.Windows.ApplicationModel.Resources.Projection.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.Windows.ApplicationModel.WindowsAppRuntime.Projection.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.Management.Deployment.Projection.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.Windows.Management.Deployment.Projection.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.PushNotifications.Projection.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.Windows.PushNotifications.Projection.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.Security.AccessControl.Projection.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.Windows.Security.AccessControl.Projection.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.System.Power.Projection.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.Windows.System.Power.Projection.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.System.Projection.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.Windows.System.Projection.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.Windows.Widgets.Projection.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.Windows.Widgets.Projection.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\lib\net6.0-windows10.0.18362.0\Microsoft.WindowsAppRuntime.Bootstrap.Net.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.WindowsAppRuntime.Bootstrap.Net.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\runtimes\win-x64\native\Microsoft.WindowsAppRuntime.Bootstrap.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.WindowsAppRuntime.Bootstrap.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.22000.31\lib\net6.0\Microsoft.Windows.SDK.NET.dll">
+      <PackagePath>Widgets for UniGetUI\Microsoft.Windows.SDK.NET.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\marti\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.22000.31\lib\net6.0\WinRT.Runtime.dll">
+      <PackagePath>Widgets for UniGetUI\WinRT.Runtime.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Widgets\bin\x64\Release\net8.0-windows10.0.22000.0\win-x64\Widgets for UniGetUI.deps.json">
+      <PackagePath>Widgets for UniGetUI\Widgets for UniGetUI.deps.json</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Widgets\obj\x64\Release\net8.0-windows10.0.22000.0\win-x64\apphost.exe">
+      <PackagePath>Widgets for UniGetUI\Widgets for UniGetUI.exe</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Widgets\bin\x64\Release\net8.0-windows10.0.22000.0\win-x64\Widgets for UniGetUI.runtimeconfig.json">
+      <PackagePath>Widgets for UniGetUI\Widgets for UniGetUI.runtimeconfig.json</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\SomePrograms\WingetUI-Widgets\src\Widgets\bin\x64\Release\net8.0-windows10.0.22000.0\win-x64\Widgets for UniGetUI.dll">
+      <PackagePath>Widgets for UniGetUI\Widgets for UniGetUI.dll</PackagePath>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResolvedSDKReference Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\buildTransitive\..\tools\MSIX\win10-x86\Microsoft.WindowsAppRuntime.1.5.msix">
+      <Name>Microsoft.WindowsAppRuntime.1.5</Name>
+      <Version>5001.119.156.0</Version>
+      <Architecture>x86</Architecture>
+      <FrameworkIdentity>Name = Microsoft.WindowsAppRuntime.1.5, MinVersion = 5001.119.156.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\buildTransitive\..\tools\MSIX\win10-x86\Microsoft.WindowsAppRuntime.1.5.msix</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\buildTransitive\..\tools\MSIX\win10-x86\Microsoft.WindowsAppRuntime.1.5.msix">
+      <Name>Microsoft.WindowsAppRuntime.1.5</Name>
+      <Version>5001.119.156.0</Version>
+      <Architecture>win32</Architecture>
+      <FrameworkIdentity>Name = Microsoft.WindowsAppRuntime.1.5, MinVersion = 5001.119.156.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\buildTransitive\..\tools\MSIX\win10-x86\Microsoft.WindowsAppRuntime.1.5.msix</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\buildTransitive\..\tools\MSIX\win10-x64\Microsoft.WindowsAppRuntime.1.5.msix">
+      <Name>Microsoft.WindowsAppRuntime.1.5</Name>
+      <Version>5001.119.156.0</Version>
+      <Architecture>x64</Architecture>
+      <FrameworkIdentity>Name = Microsoft.WindowsAppRuntime.1.5, MinVersion = 5001.119.156.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\buildTransitive\..\tools\MSIX\win10-x64\Microsoft.WindowsAppRuntime.1.5.msix</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\buildTransitive\..\tools\MSIX\win10-arm64\Microsoft.WindowsAppRuntime.1.5.msix">
+      <Name>Microsoft.WindowsAppRuntime.1.5</Name>
+      <Version>5001.119.156.0</Version>
+      <Architecture>arm64</Architecture>
+      <FrameworkIdentity>Name = Microsoft.WindowsAppRuntime.1.5, MinVersion = 5001.119.156.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Users\marti\.nuget\packages\microsoft.windowsappsdk\1.5.240428000\buildTransitive\..\tools\MSIX\win10-arm64\Microsoft.WindowsAppRuntime.1.5.msix</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
+      <Name>Microsoft.VCLibs.140.00</Name>
+      <Version>14.0.33519.0</Version>
+      <Architecture>ARM</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00, MinVersion = 14.0.33519.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Retail\ARM\Microsoft.VCLibs.ARM.14.00.appx</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
+      <Name>Microsoft.VCLibs.140.00</Name>
+      <Version>14.0.33519.0</Version>
+      <Architecture>ARM64</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00, MinVersion = 14.0.33519.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Retail\ARM64\Microsoft.VCLibs.ARM64.14.00.appx</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
+      <Name>Microsoft.VCLibs.140.00</Name>
+      <Version>14.0.33519.0</Version>
+      <Architecture>x64</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00, MinVersion = 14.0.33519.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Retail\x64\Microsoft.VCLibs.x64.14.00.appx</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\">
+      <Name>Microsoft.VCLibs.140.00</Name>
+      <Version>14.0.33519.0</Version>
+      <Architecture>x86</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00, MinVersion = 14.0.33519.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs\14.0\.\AppX\Retail\x86\Microsoft.VCLibs.x86.14.00.appx</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs.Desktop\14.0\">
+      <Name>Microsoft.VCLibs.140.00.UWPDesktop</Name>
+      <Version>14.0.33728.0</Version>
+      <Architecture>ARM</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.UWPDesktop, MinVersion = 14.0.33728.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs.Desktop\14.0\.\AppX\Retail\ARM\Microsoft.VCLibs.ARM.14.00.Desktop.appx</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs.Desktop\14.0\">
+      <Name>Microsoft.VCLibs.140.00.UWPDesktop</Name>
+      <Version>14.0.33728.0</Version>
+      <Architecture>ARM64</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.UWPDesktop, MinVersion = 14.0.33728.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs.Desktop\14.0\.\AppX\Retail\ARM64\Microsoft.VCLibs.ARM64.14.00.Desktop.appx</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs.Desktop\14.0\">
+      <Name>Microsoft.VCLibs.140.00.UWPDesktop</Name>
+      <Version>14.0.33728.0</Version>
+      <Architecture>x64</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.UWPDesktop, MinVersion = 14.0.33728.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs.Desktop\14.0\.\AppX\Retail\x64\Microsoft.VCLibs.x64.14.00.Desktop.appx</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+    <ResolvedSDKReference Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs.Desktop\14.0\">
+      <Name>Microsoft.VCLibs.140.00.UWPDesktop</Name>
+      <Version>14.0.33728.0</Version>
+      <Architecture>x86</Architecture>
+      <FrameworkIdentity>Name = Microsoft.VCLibs.140.00.UWPDesktop, MinVersion = 14.0.33728.0, Publisher = %27CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US%27</FrameworkIdentity>
+      <AppxLocation>C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.VCLibs.Desktop\14.0\.\AppX\Retail\x86\Microsoft.VCLibs.x86.14.00.Desktop.appx</AppxLocation>
+      <MoreInfo></MoreInfo>
+    </ResolvedSDKReference>
+  </ItemGroup>
+</Project>
