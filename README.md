@@ -1,4 +1,4 @@
-# WingetUI Widgets (Preview)
+# Widgets for WingetUI
 
 This repository contains the code of a set of Windows Widgets that can be used to interact with WingetUI. The widgets are available on the **Windows Widgets** pane and on **Dev Home**.
 
