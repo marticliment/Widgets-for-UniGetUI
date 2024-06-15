@@ -13,7 +13,7 @@
 	<Identity
 	  Name="9932MartCliment.WingetUIWidgets"
 	  Publisher="CN=7054F010-7BE3-4163-B64E-D51DF58CF867"
-	  Version="0.6.0.0" />
+	  Version="0.6.1.0" />
 
 	<Properties>
 		<DisplayName>Widgets for UniGetUI (formerly WingetUI)</DisplayName>
