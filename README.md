@@ -2,7 +2,7 @@
 
 This repository contains the code of a set of Windows Widgets that can be used to interact with UniGetUI (formerly WingetUI). The widgets can be displayed on the **Windows Widgets** pane and/or on **Dev Home**.
 
-Please note that the widgets are **ONLY** compatible with Windows 11
+Please note that the widgets are **ONLY** compatible with Windows 10 and 11
 
 Currently, the widgets allow viewing available updates, updating specific packages and bulk-updating everything. A widget for each Package Manager is available, as well as a widget that will list every available package without source distinction.
 
