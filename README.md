@@ -4,14 +4,14 @@ This repository contains the code of a set of Windows Widgets that can be used t
 
 Please note that the widgets are **ONLY** compatible with Windows 10 and 11
 
-Currently, the widgets allow viewing available updates, updating specific packages and bulk-updating everything. A widget for each Package Manager is available, as well as a widget that will list every available package without source distinction.
+Currently, the widgets allow viewing available updates, updating specific packages, and bulk-updating everything. A widget for each Package Manager is available, as well as a widget that will list every available package without source distinction.
 
 ## Installation
 Widgets for UniGetUI can be installed from the Microsoft Store:
 
 <a href="https://www.microsoft.com/store/apps/9NB9M5KZ8SLX"><img alt="alt_text" width="240px" src="https://get.microsoft.com/images/en-us%20dark.svg" /></a> 
 
-Alternatively, you can dowload the `msix` installer from the [Releases](https://github.com/marticliment/WingetUI-Widgets/releases/tag/0.6) page. The `msix` installers are published a few days after a nw version passes Microsoft Store certification.
+Alternatively, you can download the `msix` installer from the [Releases](https://github.com/marticliment/WingetUI-Widgets/releases/tag/0.6) page. The `msix` installers are published a few days after a new version passes Microsoft Store certification.
 
 ## Screenshots
 
