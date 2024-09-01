@@ -1,4 +1,7 @@
-﻿using Microsoft.Windows.Widgets.Providers;
+﻿using Microsoft.UI.Xaml.Data;
+using Microsoft.Windows.Widgets.Providers;
+using System.Diagnostics;
+using System.Globalization;
 using System.Net.Http.Headers;
 using System.Timers;
 using Widgets_for_UniGetUI;
@@ -8,7 +11,8 @@ namespace WingetUIWidgetProvider
 
     internal class WingetUIConnector
     {
-        private double minimum_required_host_version = 2.119;
+        private const double MINIMUM_REQUIRED_HOST_VERSION = 3.119;
+        private const string MINIMUM_REQUIRED_HOST_VERSION_STRING = "3.1.2-beta0";
 
         public event EventHandler<UpdatesCheckFinishedEventArgs>? UpdateCheckFinished;
 
@@ -109,13 +113,17 @@ namespace WingetUIWidgetProvider
                         host_version = double.Parse(await task.Content.ReadAsStringAsync(), System.Globalization.CultureInfo.InvariantCulture);
                         Logger.Log("Found UniGetUI " + host_version.ToString());
 
-                        if (host_version < minimum_required_host_version)
+                        if (host_version < MINIMUM_REQUIRED_HOST_VERSION)
                         {
-                            Logger.Log("GetAvailableUpdates: ABORTED: minimum_required_host_version " + minimum_required_host_version.ToString() + " was not met by the host (host is " + host_version + ")");
+                            string minVersion = MINIMUM_REQUIRED_HOST_VERSION.ToString(CultureInfo.InvariantCulture);
+                            string minVersionName = MINIMUM_REQUIRED_HOST_VERSION_STRING;
+
+                            Logger.Log("GetAvailableUpdates: ABORTED: MINIMUM_REQUIRED_HOST_VERSION " 
+                                + $"{minVersion} ({minVersionName}) was not met by the host (host is {host_version})");
                             result.Succeeded = is_connected_to_host = false;
-                            result.ErrorReason = "UniGetUI (formerly WingetUI) " + minimum_required_host_version.ToString(System.Globalization.CultureInfo.InvariantCulture) + " is required. You are running UniGetUI " + host_version.ToString(System.Globalization.CultureInfo.InvariantCulture);
-                            if (UpdateCheckFinished != null)
-                                UpdateCheckFinished(this, result);
+                            result.ErrorReason = "UniGetUI (formerly WingetUI) "
+                                + $"{minVersion} ({minVersionName}) is required. You are running UniGetUI version {host_version.ToString(CultureInfo.InvariantCulture)})";
+                            if (UpdateCheckFinished != null) UpdateCheckFinished(this, result);
                             return;
                         }
                         else
@@ -263,16 +271,21 @@ namespace WingetUIWidgetProvider
             }
         }
         
-        async public void OpenWingetUI()
+        public void OpenWingetUI()
         {
             try
             {
-                HttpClient client = new();
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "unigetui://showUniGetUI",
+                    UseShellExecute = true
+                });
+                /*HttpClient client = new();
                 client.BaseAddress = new Uri("http://localhost:7058//");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                await client.GetAsync("/widgets/v1/open_wingetui?token=" + SessionToken);
+                await client.GetAsync("/widgets/v1/open_wingetui?token=" + SessionToken);*/
             }
             catch (Exception ex)
             {
@@ -281,16 +294,20 @@ namespace WingetUIWidgetProvider
             }
         }
 
-        async public void ViewOnWingetUI()
+        public void ViewOnWingetUI()
         {
             try
             {
-                HttpClient client = new();
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "unigetui://showUpdatesPage",
+                    UseShellExecute = true
+                });                /*HttpClient client = new();
                 client.BaseAddress = new Uri("http://localhost:7058//");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                await client.GetAsync("/widgets/v1/view_on_wingetui?token=" + SessionToken);
+                await client.GetAsync("/widgets/v1/view_on_wingetui?token=" + SessionToken);*/
             }
             catch (Exception ex)
             {
