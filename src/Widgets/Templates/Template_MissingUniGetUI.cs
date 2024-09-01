@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Widgets_for_UniGetUI.Templates;
-using WingetUIWidgetProvider;
+﻿
 
-namespace Widgets_for_UniGetUI.Templates
+namespace WidgetsForUniGetUI.Templates
 {
     internal class Template_MissingUniGetUI : AbstractTemplate
     {
@@ -22,7 +16,7 @@ namespace Widgets_for_UniGetUI.Templates
         {
             return "{}";
         }
-    
+
         public const string TemplateBody = $$"""
             {
                 "type": "Container",

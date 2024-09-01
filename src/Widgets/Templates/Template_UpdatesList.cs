@@ -1,14 +1,6 @@
-﻿using Microsoft.UI.Composition.Interactions;
-using Microsoft.Windows.Widgets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WingetUIWidgetProvider;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using Microsoft.Windows.Widgets;
 
-namespace Widgets_for_UniGetUI.Templates
+namespace WidgetsForUniGetUI.Templates
 {
     internal class Template_UpdatesList : AbstractTemplate
     {
@@ -33,11 +25,11 @@ namespace Widgets_for_UniGetUI.Templates
         {
             _widget = widget;
             _totalPackages = widget.AvailableUpdates.Length;
-            
+
             maxPackages = GetMaxPackageCount(widget.size);
             Logger.Log("Showing available updates...");
 
-            if(widget.PackageOffset > (_totalPackages - maxPackages)) widget.PackageOffset = (_totalPackages - maxPackages);
+            if (widget.PackageOffset > (_totalPackages - maxPackages)) widget.PackageOffset = (_totalPackages - maxPackages);
             if (widget.PackageOffset < 0) widget.PackageOffset = 0;
 
             CanGoSmaller = widget.PackageOffset > 0;
@@ -157,7 +149,7 @@ namespace Widgets_for_UniGetUI.Templates
                                                     "type": "AdaptiveCard"
                                                 },
                                                 "verb": "{{Verbs.GoBigger}}",
-                                                "isEnabled": {{(CanGoBigger? "true": "false")}}
+                                                "isEnabled": {{(CanGoBigger ? "true" : "false")}}
                                             }
                                         ]
                                     }
@@ -336,7 +328,7 @@ namespace Widgets_for_UniGetUI.Templates
                                     },
                                     {
                                         "type": "TextBlock",
-                                        "text": "From ${Version{{index}}} to ${NewVersion{{index +_widget.PackageOffset}}}",
+                                        "text": "From ${Version{{index}}} to ${NewVersion{{index + _widget.PackageOffset}}}",
                                         "fontType": "Default",
                                         "size": "Small",
                                         "weight": "Lighter",
@@ -382,6 +374,6 @@ namespace Widgets_for_UniGetUI.Templates
             return package;
         }
 
- 
+
     }
 }

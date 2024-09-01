@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Widgets_for_UniGetUI.Templates
+namespace WidgetsForUniGetUI.Templates
 {
     public static class Verbs
     {

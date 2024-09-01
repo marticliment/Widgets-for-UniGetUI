@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Widgets_for_UniGetUI.Templates;
-using WingetUIWidgetProvider;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace Widgets_for_UniGetUI.Templates
+﻿
+namespace WidgetsForUniGetUI.Templates
 {
     internal class Template_Error : AbstractTemplate
     {
@@ -30,7 +22,7 @@ namespace Widgets_for_UniGetUI.Templates
                 }
                 """;
         }
-        
+
         public const string TemplateBody = $$"""
             {
                 "type": "Container",

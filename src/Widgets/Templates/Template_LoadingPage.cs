@@ -1,15 +1,7 @@
-﻿using Microsoft.Windows.Widgets.Providers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Widgets_for_UniGetUI.Templates;
-using WingetUIWidgetProvider;
-
-namespace Widgets_for_UniGetUI.Templates
+﻿
+namespace WidgetsForUniGetUI.Templates
 {
-    internal class Template_LoadingPage: AbstractTemplate
+    internal class Template_LoadingPage : AbstractTemplate
     {
         public Template_LoadingPage(GenericWidget widget) : base(widget)
         { }
@@ -23,7 +15,7 @@ namespace Widgets_for_UniGetUI.Templates
         {
             return "{}";
         }
-   
+
         private const string TemplateBody = $$"""
             {
                 "type": "Container",

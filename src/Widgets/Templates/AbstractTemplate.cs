@@ -1,12 +1,6 @@
 ﻿using Microsoft.Windows.Widgets.Providers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WingetUIWidgetProvider;
 
-namespace Widgets_for_UniGetUI.Templates
+namespace WidgetsForUniGetUI.Templates
 {
     internal abstract class AbstractTemplate
     {
@@ -17,7 +11,7 @@ namespace Widgets_for_UniGetUI.Templates
         }
 
         public void UpdateWidget()
-        { 
+        {
             options.Data = GenerateTemplateData();
             options.Template = GenerateTemplate();
 

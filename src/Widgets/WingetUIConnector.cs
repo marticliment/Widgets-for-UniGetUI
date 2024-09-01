@@ -1,13 +1,10 @@
-﻿using Microsoft.UI.Xaml.Data;
-using Microsoft.Windows.Widgets.Providers;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
 using System.Net.Http.Headers;
 using System.Timers;
-using Widgets_for_UniGetUI;
-using Widgets_for_UniGetUI.Templates;
+using WidgetsForUniGetUI.Templates;
 
-namespace WingetUIWidgetProvider
+namespace WidgetsForUniGetUI
 {
 
     internal class WingetUIConnector
@@ -84,9 +81,9 @@ namespace WingetUIWidgetProvider
                     string new_path = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "UniGetUI", "CurrentSessionToken");
 
                     string SessionTokenFile;
-                    if(!File.Exists(new_path))
+                    if (!File.Exists(new_path))
                         SessionTokenFile = old_path;
-                    else if(!File.Exists(old_path))
+                    else if (!File.Exists(old_path))
                         SessionTokenFile = new_path;
                     else
                     {
@@ -118,7 +115,7 @@ namespace WingetUIWidgetProvider
                             string minVersion = MINIMUM_REQUIRED_HOST_VERSION.ToString(CultureInfo.InvariantCulture);
                             string minVersionName = MINIMUM_REQUIRED_HOST_VERSION_STRING;
 
-                            Logger.Log("GetAvailableUpdates: ABORTED: MINIMUM_REQUIRED_HOST_VERSION " 
+                            Logger.Log("GetAvailableUpdates: ABORTED: MINIMUM_REQUIRED_HOST_VERSION "
                                 + $"{minVersion} ({minVersionName}) was not met by the host (host is {host_version})");
                             result.Succeeded = is_connected_to_host = false;
                             result.ErrorReason = "UniGetUI (formerly WingetUI) "
@@ -173,7 +170,7 @@ namespace WingetUIWidgetProvider
                     Logger.Log("GetAvailableUpdates: BEGIN retrieving updates from the host");
 
                     new Template_LoadingPage(Widget).UpdateWidget();
-                    
+
                     Logger.Log("Fetching updates from server");
                     HttpClient client = new();
                     client.BaseAddress = new Uri("http://localhost:7058//");
@@ -187,7 +184,7 @@ namespace WingetUIWidgetProvider
                     if (!task.IsSuccessStatusCode)
                     {
                         Logger.Log("GetAvailableUpdates: ABORT checking for updates due to StatusCode=" + task.StatusCode.ToString());
-                        throw new Exception("Update fetching failed with code "+task.StatusCode.ToString());
+                        throw new Exception("Update fetching failed with code " + task.StatusCode.ToString());
                     }
 
                     string purifiedString = outputString.Replace("\",\"status\":\"success\"}", "").Replace("{\"packages\":\"", "").Replace("\n", "").Trim();
@@ -231,8 +228,8 @@ namespace WingetUIWidgetProvider
                 Package[] valid_updates = new Package[found_updates.Length];
 
                 int skippedPackages = 0;
-                
-                for(int i = 0; i < found_updates.Length; i++)
+
+                for (int i = 0; i < found_updates.Length; i++)
                 {
                     if (AllowedSource == "" || AllowedSource == found_updates[i].ManagerName)
                         valid_updates[i - skippedPackages] = found_updates[i];
@@ -241,7 +238,7 @@ namespace WingetUIWidgetProvider
                 }
 
                 Package[] updates = new Package[found_updates.Length - skippedPackages];
-                for(int i = 0;i < found_updates.Length - skippedPackages; i++)
+                for (int i = 0; i < found_updates.Length - skippedPackages; i++)
                     updates[i] = valid_updates[i];
 
                 result.Updates = updates;
@@ -268,7 +265,7 @@ namespace WingetUIWidgetProvider
                 return;
             }
         }
-        
+
         public void OpenWingetUI()
         {
             try
@@ -376,10 +373,10 @@ namespace WingetUIWidgetProvider
         public string Name { get; set; }
         public string Id { get; set; }
         public string Version { get; set; }
-        public string NewVersion{ get; set; }
+        public string NewVersion { get; set; }
         public string Source { get; set; }
         public string ManagerName { get; set; }
-        public string Icon {  get; set; }
+        public string Icon { get; set; }
         public bool isValid = true;
 
         public Package(string packageString)
@@ -397,7 +394,8 @@ namespace WingetUIWidgetProvider
                     Icon = packageParts[6];
                 else
                     Icon = "https://marticliment.com/resources/widgets/package_color.png";
-            } catch
+            }
+            catch
             {
                 isValid = false;
                 Name = "";

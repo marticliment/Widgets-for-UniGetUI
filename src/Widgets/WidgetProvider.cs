@@ -1,9 +1,8 @@
 ﻿using Microsoft.Windows.Widgets;
 using Microsoft.Windows.Widgets.Providers;
-using Widgets_for_UniGetUI;
-using Widgets_for_UniGetUI.Templates;
+using WidgetsForUniGetUI.Templates;
 
-namespace WingetUIWidgetProvider
+namespace WidgetsForUniGetUI
 {
 
     internal class WidgetProvider : IWidgetProvider
@@ -44,7 +43,7 @@ namespace WingetUIWidgetProvider
 
         private void StartLoadingRoutine(GenericWidget widget)
         {
-            new Template_LoadingPage(widget).UpdateWidget();   
+            new Template_LoadingPage(widget).UpdateWidget();
             Logger.Log("Calling to UniGetUI.GetAvailableUpdates(widget) from widget");
             UniGetUI.GetAvailableUpdates(widget);
         }
@@ -57,7 +56,7 @@ namespace WingetUIWidgetProvider
                 Logger.Log("UnGetUI was not found or is not running");
             }
             else if (!e.Succeeded)
-            { 
+            {
                 new Template_Error(e.widget, e.ErrorReason).UpdateWidget();
                 Logger.Log($"Check for updates failed with error code {e.ErrorReason}");
             }
@@ -70,7 +69,7 @@ namespace WingetUIWidgetProvider
             {
                 e.widget.AvailableUpdates = e.Updates;
                 new Template_UpdatesList(e.widget).UpdateWidget();
-                Logger.Log(e.widget.Name);   
+                Logger.Log(e.widget.Name);
             }
         }
 
@@ -152,7 +151,8 @@ namespace WingetUIWidgetProvider
                             Logger.Log(index);
                             UniGetUI.UpdatePackage(widget.AvailableUpdates[index]);
                             UniGetUI.GetAvailableUpdates(widget);
-                        } else
+                        }
+                        else
                         {
                             Logger.Log("INVALID VERB " + verb);
                             StartLoadingRoutine(widget);
@@ -161,7 +161,7 @@ namespace WingetUIWidgetProvider
 
                 }
             }
-            
+
         }
 
         public void OnWidgetContextChanged(WidgetContextChangedArgs contextChangedArgs)
@@ -202,7 +202,8 @@ namespace WingetUIWidgetProvider
 
     public class GenericWidget
     {
-        public GenericWidget(string widgetId, string widgetName) {
+        public GenericWidget(string widgetId, string widgetName)
+        {
             AvailableUpdates = [];
             this.Id = widgetId;
             this.Name = widgetName;

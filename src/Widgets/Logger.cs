@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Widgets_for_UniGetUI
+namespace WidgetsForUniGetUI
 {
     internal static class Logger
     {
