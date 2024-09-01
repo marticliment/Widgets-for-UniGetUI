@@ -13,7 +13,7 @@
 	<Identity
 	  Name="9932MartCliment.WingetUIWidgets"
 	  Publisher="CN=7054F010-7BE3-4163-B64E-D51DF58CF867"
-	  Version="0.6.1.0" />
+	  Version="0.7.0.0" />
 
 	<Properties>
 		<DisplayName>Widgets for UniGetUI (formerly WingetUI)</DisplayName>
@@ -23,7 +23,7 @@
 
 	<Dependencies>
 		<TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
-		<TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.22000.0" MaxVersionTested="10.0.22635.0" />
+		<TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.22000.0" MaxVersionTested="10.0.26100.0" />
 		<PackageDependency Name="Microsoft.WindowsAppRuntime.1.5" MinVersion="1.5.3.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
 	</Dependencies>
 
