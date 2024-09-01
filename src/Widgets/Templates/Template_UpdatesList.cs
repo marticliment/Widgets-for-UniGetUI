@@ -328,7 +328,7 @@ namespace WidgetsForUniGetUI.Templates
                                     },
                                     {
                                         "type": "TextBlock",
-                                        "text": "From ${Version{{index}}} to ${NewVersion{{index + _widget.PackageOffset}}}",
+                                        "text": "From ${Version{{index}}} to ${NewVersion{{index}}}",
                                         "fontType": "Default",
                                         "size": "Small",
                                         "weight": "Lighter",
