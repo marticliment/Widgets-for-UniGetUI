@@ -3,7 +3,6 @@
 using COM;
 using System.Runtime.InteropServices;
 using WidgetsForUniGetUI;
-using WidgetsForUniGetUI;
 
 [DllImport("kernel32.dll")]
 static extern IntPtr GetConsoleWindow();
