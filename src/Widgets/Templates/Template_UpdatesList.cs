@@ -166,28 +166,91 @@ namespace Widgets_for_UniGetUI.Templates
                         ]
                     },
                     {
-                        "type": "ActionSet",
-                        "actions": [
-                            {
-                            "type": "Action.Execute",
-                                "title": " Update all ",
-                                "verb": "{{Verbs.UpdateAll}}"
-                            },
-                            {
-                                "type": "Action.Execute",
-                                "title": " Reload ",
-                                "verb": "{{Verbs.Reload}}"
-                            },
-                            {
-                                "type": "Action.Execute",
-                                "title": " UniGetUI ",
-                                "verb": "{{Verbs.ViewUpdatesOnUniGetUI}}"
-                            }
-                        ],
-                        "id": "buttons",
-                        "horizontalAlignment": "Center",
-                        "spacing": "Small"
-                    }
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "auto",
+                            "items": [
+                                {
+                                    "type": "ActionSet",
+                                    "actions": [
+                                        {
+                                            "type": "Action.Execute",
+                                            "title": "Update all",
+                                            "verb": "{{Verbs.UpdateAll}}"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "spacing": "None",
+                            "height": "stretch"
+                        },
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "spacing": "None",
+                            "height": "stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": " ",
+                                    "wrap": true
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "auto",
+                            "items": [
+                                {
+                                    "type": "ActionSet",
+                                    "actions": [
+                                        {
+                                            "type": "Action.Execute",
+                                            "title": "Reload",
+                                            "verb": "{{Verbs.Reload}}"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "spacing": "None",
+                            "height": "stretch"
+                        },
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "spacing": "None",
+                            "height": "stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": " ",
+                                    "wrap": true
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "auto",
+                            "items": [
+                                {
+                                    "type": "ActionSet",
+                                    "actions": [
+                                        {
+                                            "type": "Action.Execute",
+                                            "title": "UniGetUI",
+                                            "verb": "{{Verbs.ViewUpdatesOnUniGetUI}}"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "spacing": "None",
+                            "height": "stretch"
+                        }
+                    ],
+                    "spacing": "Small"
+                }
                 ],
                 "height": "stretch",
                 "spacing": "None",

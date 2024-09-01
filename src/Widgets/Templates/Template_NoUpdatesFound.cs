@@ -59,20 +59,59 @@ namespace Widgets_for_UniGetUI.Templates
                         "height": "stretch"
                     },
                     {
-                        "type": "ActionSet",
-                        "actions": [
+                        "type": "ColumnSet",
+                        "columns": [
                             {
-                                "type": "Action.Execute",
-                                "title": "Check again",
-                                "verb": "{{Verbs.Reload}}"
+                                "type": "Column",
+                                "width": "auto",
+                                "items": [
+                                    {
+                                        "type": "ActionSet",
+                                        "actions": [
+                                            {
+                                                "type": "Action.Execute",
+                                                "title": "Check again",
+                                                "verb": "{{Verbs.Reload}}"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "spacing": "None",
+                                "height": "stretch"
                             },
                             {
-                                "type": "Action.Execute",
-                                "title": "Show UniGetUI",
-                                "verb": "{{Verbs.OpenUniGetUI}}"
+                                "type": "Column",
+                                "width": "stretch",
+                                "spacing": "None",
+                                "height": "stretch",
+                                "items": [
+                                    {
+                                        "type": "TextBlock",
+                                        "text": " ",
+                                        "wrap": true
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Column",
+                                "width": "auto",
+                                "items": [
+                                    {
+                                        "type": "ActionSet",
+                                        "actions": [
+                                            {
+                                                "type": "Action.Execute",
+                                                "title": "Show UniGetUI",
+                                                "verb": "{{Verbs.OpenUniGetUI}}"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "spacing": "None",
+                                "height": "stretch"
                             }
                         ],
-                        "horizontalAlignment": "Center"
+                        "spacing": "Small"
                     }
                 ],
                 "verticalContentAlignment": "Center",

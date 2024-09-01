@@ -63,18 +63,58 @@ namespace Widgets_for_UniGetUI.Templates
                                 "$when": "${$host.widgetSize!=\"small\"}"
                             }
                         ],
+                        "verticalContentAlignment": "Center",
                         "height": "stretch"
                     },
                     {
-                        "type": "ActionSet",
-                        "actions": [
+                        "type": "ColumnSet",
+                        "columns": [
                             {
-                                "type": "Action.Execute",
-                                "title": "Try again",
-                                "verb": "{{Verbs.Reload}}"
+                                "type": "Column",
+                                "width": "stretch",
+                                "spacing": "None",
+                                "height": "stretch",
+                                "items": [
+                                    {
+                                        "type": "TextBlock",
+                                        "text": " ",
+                                        "wrap": true
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Column",
+                                "width": "auto",
+                                "items": [
+                                    {
+                                        "type": "ActionSet",
+                                        "actions": [
+                                            {
+                                                "type": "Action.Execute",
+                                                "title": "Try again",
+                                                "verb": "{{Verbs.Reload}}"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "spacing": "None",
+                                "height": "stretch"
+                            },
+                            {
+                                "type": "Column",
+                                "width": "stretch",
+                                "spacing": "None",
+                                "height": "stretch",
+                                "items": [
+                                    {
+                                        "type": "TextBlock",
+                                        "text": " ",
+                                        "wrap": true
+                                    }
+                                ]
                             }
                         ],
-                        "horizontalAlignment": "Center"
+                        "spacing": "Small"
                     }
                 ],
                 "verticalContentAlignment": "Center",

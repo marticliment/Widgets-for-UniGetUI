@@ -57,17 +57,54 @@ namespace Widgets_for_UniGetUI.Templates
                         "height": "stretch"
                     },
                     {
-                        "type": "ActionSet",
-                        "actions": [
+                        "type": "ColumnSet",
+                        "columns": [
                             {
-                                "type": "Action.Execute",
-                                "title": "Refresh",
-                                "verb": "{{Verbs.Reload}}"
+                                "type": "Column",
+                                "width": "stretch",
+                                "spacing": "None",
+                                "height": "stretch",
+                                "items": [
+                                    {
+                                        "type": "TextBlock",
+                                        "text": " ",
+                                        "wrap": true
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "Column",
+                                "width": "auto",
+                                "items": [
+                                    {
+                                        "type": "ActionSet",
+                                        "actions": [
+                                            {
+                                                "type": "Action.Execute",
+                                                "title": "Refresh",
+                                                "verb": "{{Verbs.Reload}}"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "spacing": "None",
+                                "height": "stretch"
+                            },
+                            {
+                                "type": "Column",
+                                "width": "stretch",
+                                "spacing": "None",
+                                "height": "stretch",
+                                "items": [
+                                    {
+                                        "type": "TextBlock",
+                                        "text": " ",
+                                        "wrap": true
+                                    }
+                                ]
                             }
                         ],
-                        "horizontalAlignment": "Center",
-                        "$when": "${$host.widgetSize!=\"small\"}",
-                        "size": "Medium"
+                        "spacing": "Small"
                     }
                 ],
                 "verticalContentAlignment": "Center",
