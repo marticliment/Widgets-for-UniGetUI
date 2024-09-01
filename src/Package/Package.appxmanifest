@@ -111,6 +111,9 @@
 										AllowMultiple="true">
 										<Capabilities>
 											<Capability>
+												<Size Name="small" />
+											</Capability>
+											<Capability>
 												<Size Name="medium" />
 											</Capability>
 											<Capability>

@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Net.Http.Headers;
 using System.Timers;
 using Widgets_for_UniGetUI;
+using Widgets_for_UniGetUI.Templates;
 
 namespace WingetUIWidgetProvider
 {
@@ -75,10 +76,8 @@ namespace WingetUIWidgetProvider
                 if (!is_connected_to_host)
                 {
                     Logger.Log("GetAvailableUpdates: BEGIN connection to the host");
-                    WidgetUpdateRequestOptions updateOptions = new(Widget.Id);
-                    updateOptions.Template = Templates.BaseTemplate;
-                    updateOptions.Data = Templates.GetData_IsLoading();
-                    WidgetManager.GetDefault().UpdateWidget(updateOptions);
+
+                    new Template_LoadingPage(Widget).UpdateWidget();
 
                     string old_path = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".wingetui", "CurrentSessionToken");
                     string new_path = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "UniGetUI", "CurrentSessionToken");
@@ -171,11 +170,9 @@ namespace WingetUIWidgetProvider
                 try
                 {
                     Logger.Log("GetAvailableUpdates: BEGIN retrieving updates from the host");
-                    WidgetUpdateRequestOptions updateOptions = new(Widget.Id);
-                    updateOptions.Template = Templates.BaseTemplate;
-                    updateOptions.Data = Templates.GetData_IsLoading();
-                    WidgetManager.GetDefault().UpdateWidget(updateOptions);
 
+                    new Template_LoadingPage(Widget).UpdateWidget();
+                    
                     Logger.Log("Fetching updates from server");
                     HttpClient client = new();
                     client.BaseAddress = new Uri("http://localhost:7058//");
@@ -302,7 +299,8 @@ namespace WingetUIWidgetProvider
                 {
                     FileName = "unigetui://showUpdatesPage",
                     UseShellExecute = true
-                });                /*HttpClient client = new();
+                });
+                /*HttpClient client = new();
                 client.BaseAddress = new Uri("http://localhost:7058//");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
