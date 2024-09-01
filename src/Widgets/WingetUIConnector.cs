@@ -33,7 +33,8 @@ namespace WingetUIWidgetProvider
             {Widgets.Pip, "Pip"},
             {Widgets.Npm, "Npm"},
             {Widgets.Dotnet, ".NET Tool"},
-            {Widgets.Powershell, "PowerShell"},
+            {Widgets.PowerShell5, "PowerShell"},
+            {Widgets.PowerShell7, "PowerShell7"},
         };
 
         public WingetUIConnector()

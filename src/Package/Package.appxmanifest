@@ -106,13 +106,10 @@
 									</Definition>
 
 									<Definition Id="updates_winget"
-										DisplayName="Winget updates"
-										Description="Winget packages that can be updated"
+										DisplayName="WinGet updates"
+										Description="WinGet packages that can be updated"
 										AllowMultiple="true">
 										<Capabilities>
-											<Capability>
-												<Size Name="small" />
-											</Capability>
 											<Capability>
 												<Size Name="medium" />
 											</Capability>
@@ -283,8 +280,8 @@
 
 
 									<Definition Id="updates_powershell"
-										DisplayName="PowerShell updates"
-										Description="PowerShell modules that can be updated"
+										DisplayName="PowerShell 5.x updates"
+										Description="PowerShell 5.x modules that can be updated"
 										AllowMultiple="true">
 										<Capabilities>
 											<Capability>
@@ -297,6 +294,35 @@
 										<ThemeResources>
 											<Icons>
 												<Icon Path="Images\powershell_color.png" />
+											</Icons>
+											<DarkMode>
+												<Screenshots>
+													<Screenshot Path="Images\WidgetCovers\powershell_dark.png" />
+												</Screenshots>
+											</DarkMode>
+											<LightMode>
+												<Screenshots>
+													<Screenshot Path="Images\WidgetCovers\powershell_light.png" />
+												</Screenshots>
+											</LightMode>
+										</ThemeResources>
+									</Definition>
+
+									<Definition Id="updates_powershell7"
+										DisplayName="PowerShell 7.x updates"
+										Description="PowerShell 7.x modules that can be updated"
+										AllowMultiple="true">
+										<Capabilities>
+											<Capability>
+												<Size Name="medium" />
+											</Capability>
+											<Capability>
+												<Size Name="large" />
+											</Capability>
+										</Capabilities>
+										<ThemeResources>
+											<Icons>
+												<Icon Path="Images\powershell7_color.png" />
 											</Icons>
 											<DarkMode>
 												<Screenshots>

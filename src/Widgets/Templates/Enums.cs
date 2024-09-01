@@ -26,7 +26,8 @@ namespace Widgets_for_UniGetUI.Templates
         public const string Pip = "updates_pip";
         public const string Npm = "updates_npm";
         public const string Dotnet = "updates_dotnet";
-        public const string Powershell = "updates_powershell";
+        public const string PowerShell5 = "updates_powershell";
+        public const string PowerShell7 = "updates_powershell7";
     }
 
 }

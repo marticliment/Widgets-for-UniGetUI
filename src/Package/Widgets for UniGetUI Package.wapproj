@@ -147,6 +147,7 @@
     <Content Include="Images\pip_color.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\powershell7_color.png" />
     <Content Include="Images\powershell_color.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
