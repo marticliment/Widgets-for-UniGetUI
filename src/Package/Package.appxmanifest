@@ -16,7 +16,7 @@
 	  Version="0.7.0.0" />
 
 	<Properties>
-		<DisplayName>Widgets for UniGetUI (formerly WingetUI)</DisplayName>
+		<DisplayName>Widgets for UniGetUI</DisplayName>
 		<PublisherDisplayName>Martí Climent</PublisherDisplayName>
 		<Logo>Images\StoreLogo.png</Logo>
 	</Properties>
@@ -34,7 +34,7 @@
 	<Applications>
 		<Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="null">
 			<uap:VisualElements
-			  DisplayName="Widgets for UniGetUI (formerly WingetUI)"
+			  DisplayName="Widgets for UniGetUI"
 			  Description="A collection of Windows Widgets designed to manage your UniGetUI updates from the Windows Widgets panel and Dev Home"
 			  Square150x150Logo="Images\LargeTile.png"
 			  AppListEntry="none"
@@ -376,8 +376,8 @@
 					<uap3:AppExtension Name="com.microsoft.devhome"
 				   Id="9b0c4abb-ca72-42ec-936a-02d4830a14a9"
 				   PublicFolder="Public"
-				   DisplayName="Widgets for UniGetUI (formerly WingetUI)"
-				   Description="Widgets for UniGetUI (formerly WingetUI)">
+				   DisplayName="Widgets for UniGetUI"
+				   Description="Widgets for UniGetUI">
 						<uap3:Properties>
 							<DevHomeProvider>
 								<Activation>

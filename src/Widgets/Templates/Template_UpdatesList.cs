@@ -283,7 +283,7 @@ namespace WidgetsForUniGetUI.Templates
                 """;
             else
                 return data += "," + $$"""
-                    "upgradablePackages": "{{0}} - {{_totalPackages}} out of {{_totalPackages}}"
+                    "upgradablePackages": "{{1}} - {{_totalPackages}} out of {{_totalPackages}}"
                 }
                 """;
         }

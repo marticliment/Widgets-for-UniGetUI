@@ -40,7 +40,7 @@
                             },
                             {
                                 "type": "TextBlock",
-                                "text": "The updates will be ready soon. You can check their progress on UniGetUI (formerly WingetUI)",
+                                "text": "The updates will be ready soon. You can check their progress on UniGetUI",
                                 "wrap": true,
                                 "horizontalAlignment": "Center",
                                 "size": "Small"

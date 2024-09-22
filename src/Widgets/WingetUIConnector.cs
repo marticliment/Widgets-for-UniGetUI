@@ -119,8 +119,8 @@ namespace WidgetsForUniGetUI
                             Logger.Log("GetAvailableUpdates: ABORTED: MINIMUM_REQUIRED_HOST_VERSION "
                                 + $"{minVersion} ({minVersionName}) was not met by the host (host is {host_version})");
                             result.Succeeded = is_connected_to_host = false;
-                            result.ErrorReason = "UniGetUI (formerly WingetUI) "
-                                + $"{minVersion} ({minVersionName}) is required. You are running UniGetUI version {host_version.ToString(CultureInfo.InvariantCulture)})";
+                            result.ErrorReason = "UniGetUI"
+                                + $" {minVersion} ({minVersionName}) is required. You are running UniGetUI version {host_version.ToString(CultureInfo.InvariantCulture)})";
                             if (UpdateCheckFinished != null) UpdateCheckFinished(this, result);
                             return;
                         }

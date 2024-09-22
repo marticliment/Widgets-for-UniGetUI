@@ -42,7 +42,7 @@ namespace WidgetsForUniGetUI.Templates
                             },
                             {
                                 "type": "TextBlock",
-                                "text": "UniGetUI (formerly WingetUI) is required for this widget to work.\nPlease make sure that UniGetUI is installed and running on the background",
+                                "text": "UniGetUI is required for this widget to work.\nPlease make sure that UniGetUI is installed and running on the background",
                                 "wrap": true,
                                 "horizontalAlignment": "Center",
                                 "size": "Small"
