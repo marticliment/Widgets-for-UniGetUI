@@ -32,6 +32,7 @@ namespace WidgetsForUniGetUI
             {Widgets.Dotnet, ".NET Tool"},
             {Widgets.PowerShell5, "PowerShell"},
             {Widgets.PowerShell7, "PowerShell7"},
+            {Widgets.Cargo, "Cargo"},
         };
 
         public WingetUIConnector()
