@@ -295,12 +295,12 @@
 											</Icons>
 											<DarkMode>
 												<Screenshots>
-													<Screenshot Path="Images\WidgetCovers\all_dark.png" />
+													<Screenshot Path="Images\WidgetCovers\cargo_dark.png" />
 												</Screenshots>
 											</DarkMode>
 											<LightMode>
 												<Screenshots>
-													<Screenshot Path="Images\WidgetCovers\all_light.png" />
+													<Screenshot Path="Images\WidgetCovers\cargo_light.png" />
 												</Screenshots>
 											</LightMode>
 										</ThemeResources>
@@ -355,12 +355,12 @@
 											</Icons>
 											<DarkMode>
 												<Screenshots>
-													<Screenshot Path="Images\WidgetCovers\powershell_dark.png" />
+													<Screenshot Path="Images\WidgetCovers\powershell7_dark.png" />
 												</Screenshots>
 											</DarkMode>
 											<LightMode>
 												<Screenshots>
-													<Screenshot Path="Images\WidgetCovers\powershell_light.png" />
+													<Screenshot Path="Images\WidgetCovers\powershell7_light.png" />
 												</Screenshots>
 											</LightMode>
 										</ThemeResources>
