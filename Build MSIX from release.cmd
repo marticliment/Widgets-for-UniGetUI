@@ -22,7 +22,7 @@ pause
 cd ..
 cd ..
 
-MakeAppx.exe pack /d Release /p "installer.msix"
+MakeAppx.exe pack /d "Release" /p "installer.msix"
 move "installer.msix" ..\..\..\..\
 
 cd ..\..\..\..\
