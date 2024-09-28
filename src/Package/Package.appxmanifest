@@ -36,16 +36,16 @@
 			<uap:VisualElements
 			  DisplayName="Widgets for UniGetUI"
 			  Description="A collection of Windows Widgets designed to manage your UniGetUI updates from the Windows Widgets panel and Dev Home"
-			  Square150x150Logo="Images\LargeTile.png"
+			  Square150x150Logo="Images\MediumTile.png"
 			  AppListEntry="none"
-			  Square44x44Logo="Images\icon.png" BackgroundColor="transparent">
-				<uap:DefaultTile Wide310x150Logo="Images\icon.png"  Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png" ShortName="UniGetUI">
+			  Square44x44Logo="Images\AppIcon.png" BackgroundColor="transparent">
+				<uap:DefaultTile Wide310x150Logo="Images\WideTile.png"  Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png" ShortName="UniGetUI">
 					<uap:ShowNameOnTiles>
 						<uap:ShowOn Tile="square150x150Logo"/>
 						<uap:ShowOn Tile="wide310x150Logo"/>
 					</uap:ShowNameOnTiles>
 				</uap:DefaultTile >
-				<uap:SplashScreen Image="Images\icon.png" />
+				<uap:SplashScreen Image="Images\SplashScreen.png" />
 				<uap:LockScreen BadgeLogo="Images\BadgeLogo.png" Notification="badge"/>
 			</uap:VisualElements>
 			<Extensions>
