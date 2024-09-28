@@ -300,7 +300,6 @@ namespace WidgetsForUniGetUI.Templates
                             {
                                 "type": "Image",
                                 "url": "${Icon{{index}}}",
-                                "width": "24px",
                                 "height": "24px",
                                 "horizontalAlignment": "Center",
                                 "altText": "📦"
