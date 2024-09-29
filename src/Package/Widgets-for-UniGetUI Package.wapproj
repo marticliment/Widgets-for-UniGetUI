@@ -233,6 +233,7 @@
     <Content Include="Images\WidgetCovers\cargo_light.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\WidgetCovers\choco_dark.png" />
     <Content Include="Images\WidgetCovers\choco_light.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
