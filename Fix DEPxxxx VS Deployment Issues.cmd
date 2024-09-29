@@ -6,4 +6,4 @@ rmdir /Q /S bin
 cd ..
 cd Package
 rmdir /Q /S bin
-pause
+exit 0

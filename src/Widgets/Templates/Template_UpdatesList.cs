@@ -56,8 +56,9 @@ namespace WidgetsForUniGetUI.Templates
                         "type": "TextBlock",
                         "text": "Available Updates: ${count}",
                         "wrap": true,
-                        "weight": "bolder",
-                        "size": "medium"
+                        "weight": "Bolder",
+                        "size": "Default",
+                        "spacing": "None"
                     },
                     {
                         "type": "Container",
@@ -86,11 +87,13 @@ namespace WidgetsForUniGetUI.Templates
                             ],
                             "spacing": "None",
                             "showGridLines": false,
-                            "verticalCellContentAlignment": "Top"
+                            "verticalCellContentAlignment": "Top",
+                            "firstRowAsHeaders": false
                         }
                     ],
                     "height": "stretch",
-                    "spacing": "None"
+                    "spacing": "None",
+                    "verticalContentAlignment": "Top"
                     },
                     {
                         "type": "ColumnSet",
@@ -155,7 +158,8 @@ namespace WidgetsForUniGetUI.Templates
                                     }
                                 ]
                             }
-                        ]
+                        ],
+                        "spacing": "Small"
                     },
                     {
                     "type": "ColumnSet",
@@ -163,9 +167,12 @@ namespace WidgetsForUniGetUI.Templates
                         {
                             "type": "Column",
                             "width": "auto",
+                            "spacing": "None",
+                            "height": "stretch",
                             "items": [
                                 {
                                     "type": "ActionSet",
+                                    "spacing": "None",
                                     "actions": [
                                         {
                                             "type": "Action.Execute",
@@ -174,9 +181,7 @@ namespace WidgetsForUniGetUI.Templates
                                         }
                                     ]
                                 }
-                            ],
-                            "spacing": "None",
-                            "height": "stretch"
+                            ]
                         },
                         {
                             "type": "Column",
@@ -187,48 +192,29 @@ namespace WidgetsForUniGetUI.Templates
                                 {
                                     "type": "TextBlock",
                                     "text": " ",
-                                    "wrap": true
+                                    "wrap": true,
+                                    "size": "Small",
+                                    "weight": "Lighter",
+                                    "spacing": "None",
+                                    "horizontalAlignment": "Center"
                                 }
                             ]
                         },
                         {
                             "type": "Column",
                             "width": "auto",
+                            "spacing": "None",
+                            "height": "stretch",
                             "items": [
                                 {
                                     "type": "ActionSet",
+                                    "spacing": "None",
                                     "actions": [
                                         {
                                             "type": "Action.Execute",
-                                            "title": "Reload",
+                                            "title": "↻",
                                             "verb": "{{Verbs.Reload}}"
-                                        }
-                                    ]
-                                }
-                            ],
-                            "spacing": "None",
-                            "height": "stretch"
-                        },
-                        {
-                            "type": "Column",
-                            "width": "stretch",
-                            "spacing": "None",
-                            "height": "stretch",
-                            "items": [
-                                {
-                                    "type": "TextBlock",
-                                    "text": " ",
-                                    "wrap": true
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Column",
-                            "width": "auto",
-                            "items": [
-                                {
-                                    "type": "ActionSet",
-                                    "actions": [
+                                        },
                                         {
                                             "type": "Action.Execute",
                                             "title": "UniGetUI",
@@ -236,9 +222,7 @@ namespace WidgetsForUniGetUI.Templates
                                         }
                                     ]
                                 }
-                            ],
-                            "spacing": "None",
-                            "height": "stretch"
+                            ]
                         }
                     ],
                     "spacing": "Small"
@@ -336,7 +320,8 @@ namespace WidgetsForUniGetUI.Templates
                                         "wrap": false,
                                         "style": "default"
                                     }
-                                ]
+                                ],
+                                "spacing": "None"
                             }
                         ],
                         "verticalContentAlignment": "Center",

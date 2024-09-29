@@ -32,14 +32,14 @@
 	</Resources>
 
 	<Applications>
-		<Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="null">
+		<Application Id="App" Executable="Widgets for UniGetUI.exe" EntryPoint="null">
 			<uap:VisualElements
 			  DisplayName="Widgets for UniGetUI"
 			  Description="A collection of Windows Widgets designed to manage your UniGetUI updates from the Windows Widgets panel and Dev Home"
 			  Square150x150Logo="Images\MediumTile.png"
 			  AppListEntry="none"
 			  Square44x44Logo="Images\AppIcon.png" BackgroundColor="transparent">
-				<uap:DefaultTile Wide310x150Logo="Images\WideTile.png"  Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png" ShortName="UniGetUI">
+				<uap:DefaultTile Wide310x150Logo="Images\WideTile.png"  Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png" ShortName="Widgets for UniGetUI">
 					<uap:ShowNameOnTiles>
 						<uap:ShowOn Tile="square150x150Logo"/>
 						<uap:ShowOn Tile="wide310x150Logo"/>
@@ -72,10 +72,7 @@
 									<TrustedPackageFamilyName>Microsoft.MicrosoftEdge.Stable_8wekyb3d8bbwe</TrustedPackageFamilyName>
 								</TrustedPackageFamilyNames>
 
-								<Definitions>
-
-									
-									
+								<Definitions>									
 									<Definition Id="updates_all"
 											DisplayName="Package updates"
 											Description="Packages that can be updated"
