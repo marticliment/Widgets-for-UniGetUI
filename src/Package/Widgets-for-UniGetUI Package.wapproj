@@ -31,8 +31,8 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <EntryPointProjectUniqueName>..\Widgets\Widgets for UniGetUI.csproj</EntryPointProjectUniqueName>
     <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
+    <EntryPointProjectUniqueName>..\Widgets\Widgets-for-UniGetUI.csproj</EntryPointProjectUniqueName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <AppxBundle>Always</AppxBundle>
@@ -227,12 +227,10 @@
     <Content Include="Images\WidgetCovers\all_light.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-   
-	  
-	  <Content Include="Images\WidgetCovers\cargo_dark.png">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
-	  <Content Include="Images\WidgetCovers\cargo_light.png">
+    <Content Include="Images\WidgetCovers\cargo_dark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\WidgetCovers\cargo_light.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\WidgetCovers\choco_light.png">
@@ -256,13 +254,13 @@
     <Content Include="Images\WidgetCovers\pip_light.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-	<Content Include="Images\WidgetCovers\powershell7_light.png">
-	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-	<Content Include="Images\WidgetCovers\powershell7_dark.png">
-	  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-	<Content Include="Images\WidgetCovers\powershell_dark.png">
+    <Content Include="Images\WidgetCovers\powershell7_light.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\WidgetCovers\powershell7_dark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\WidgetCovers\powershell_dark.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\WidgetCovers\powershell_light.png">
@@ -288,7 +286,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Widgets\Widgets for UniGetUI.csproj" />
+    <ProjectReference Include="..\Widgets\Widgets-for-UniGetUI.csproj" />
   </ItemGroup>
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
   <!--ExampleWidgetProviderPackage.wapproj-->

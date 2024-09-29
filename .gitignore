@@ -13,4 +13,5 @@ WingetUI Widgets.msix
 WingetUI Widgets Installer.msix
 Sign.lnk
 src/Package/Package.StoreAssociation.xml
+Widgets for UniGetUI Installer/
 Widgets for UniGetUI Installer.msix

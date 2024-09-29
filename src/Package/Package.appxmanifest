@@ -32,7 +32,7 @@
 	</Resources>
 
 	<Applications>
-		<Application Id="App" Executable="Widgets for UniGetUI.exe" EntryPoint="null">
+		<Application Id="App" Executable="Widgets-for-UniGetUI.exe" EntryPoint="null">
 			<uap:VisualElements
 			  DisplayName="Widgets for UniGetUI"
 			  Description="A collection of Windows Widgets designed to manage your UniGetUI updates from the Windows Widgets panel and Dev Home"
@@ -51,7 +51,7 @@
 			<Extensions>
 				<com:Extension Category="windows.comServer">
 					<com:ComServer>
-						<com:ExeServer Executable="Widgets for UniGetUI\Widgets for UniGetUI.exe" DisplayName="Widgets for UniGetUI">
+						<com:ExeServer Executable="Widgets-for-UniGetUI\Widgets-for-UniGetUI.exe" DisplayName="Widgets for UniGetUI">
 							<com:Class Id="34D3940F-84D6-47C5-B446-32D6865D8852" DisplayName="Widgets for UniGetUI" />
 						</com:ExeServer>
 					</com:ComServer>

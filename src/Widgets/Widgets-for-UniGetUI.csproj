@@ -13,7 +13,9 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     <ApplicationIcon>icon.ico</ApplicationIcon>
-    <PublishAot>False</PublishAot>
+	<PublishTrimmed>true</PublishTrimmed>
+	<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+	<AssemblyName>Widgets-for-UniGetUI</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

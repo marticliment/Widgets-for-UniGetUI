@@ -2,7 +2,7 @@
 
 echo BEFORE RUNNING THIS COMMAND THE SOLUTION MUST BE BUILT WITH THE CONFIGURATION RELEASE x64!
 
-pause
+pause 
 
 cd src\Package\bin\x64
 del "Widgets for UniGetUI Installer.msix"
@@ -13,11 +13,13 @@ cd "Widgets for UniGetUI"
 del Microsoft.WinUI.dll
 del Microsoft.InteractiveExperiences.Projection.dll
 
-echo "You may want to change now MSVC++ Redist UWP version"
+cls
+echo You may want to change now MSVC++ Redist UWP version
+cd ..
+echo %cd%
 pause 
 
-cd ..\..
-
+cd ..
 MakeAppx.exe pack /d "Release" /p "installer.msix"
 move "installer.msix" ..\..\..\..\
 
