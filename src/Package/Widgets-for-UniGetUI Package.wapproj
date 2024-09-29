@@ -46,27 +46,70 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\AppIcon.altform-lightunplated_targetsize-16.png" />
-    <Content Include="Images\AppIcon.altform-lightunplated_targetsize-24.png" />
-    <Content Include="Images\AppIcon.altform-lightunplated_targetsize-256.png" />
-    <Content Include="Images\AppIcon.altform-lightunplated_targetsize-32.png" />
-    <Content Include="Images\AppIcon.altform-lightunplated_targetsize-48.png" />
-    <Content Include="Images\AppIcon.altform-unplated_targetsize-16.png" />
-    <Content Include="Images\AppIcon.altform-unplated_targetsize-24.png" />
-    <Content Include="Images\AppIcon.altform-unplated_targetsize-256.png" />
-    <Content Include="Images\AppIcon.altform-unplated_targetsize-32.png" />
-    <Content Include="Images\AppIcon.altform-unplated_targetsize-48.png" />
-    <Content Include="Images\AppIcon.scale-100.png" />
-    <Content Include="Images\AppIcon.scale-125.png" />
-    <Content Include="Images\AppIcon.scale-150.png" />
-    <Content Include="Images\AppIcon.scale-200.png" />
-    <Content Include="Images\AppIcon.scale-400.png" />
-    <Content Include="Images\AppIcon.targetsize-16.png" />
-    <Content Include="Images\AppIcon.targetsize-24.png" />
-    <Content Include="Images\AppIcon.targetsize-256.png" />
-    <Content Include="Images\AppIcon.targetsize-32.png" />
-    <Content Include="Images\AppIcon.targetsize-48.png" />
-    <Content Include="Images\BadgeLogo.scale-100.png">
+    <Content Include="Images\AppIcon.altform-lightunplated_targetsize-16.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.altform-lightunplated_targetsize-24.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.altform-lightunplated_targetsize-256.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.altform-lightunplated_targetsize-32.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.altform-lightunplated_targetsize-48.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.altform-unplated_targetsize-16.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.altform-unplated_targetsize-24.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.altform-unplated_targetsize-256.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.altform-unplated_targetsize-32.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.altform-unplated_targetsize-48.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.scale-100.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.scale-125.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.scale-150.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.scale-200.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.scale-400.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.targetsize-16.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.targetsize-24.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.targetsize-256.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.targetsize-32.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\AppIcon.targetsize-48.png" >
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+	<Content Include="Images\BadgeLogo.scale-100.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\BadgeLogo.scale-125.png">
@@ -81,7 +124,9 @@
     <Content Include="Images\BadgeLogo.scale-400.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\cargo_color.png" />
+    <Content Include="Images\cargo_color.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\choco_color.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -163,18 +208,33 @@
     <Content Include="Images\LargeTile.scale-400.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\MediumTile.scale-100.png" />
-    <Content Include="Images\MediumTile.scale-125.png" />
-    <Content Include="Images\MediumTile.scale-150.png" />
-    <Content Include="Images\MediumTile.scale-200.png" />
-    <Content Include="Images\MediumTile.scale-400.png" />
+    <Content Include="Images\MediumTile.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\MediumTile.scale-100.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\MediumTile.scale-125.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\MediumTile.scale-150.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\MediumTile.scale-200.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\MediumTile.scale-400.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\node_color.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\pip_color.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\powershell7_color.png" />
+    <Content Include="Images\powershell7_color.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\powershell_color.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -196,11 +256,24 @@
     <Content Include="Images\SmallTile.scale-400.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\SplashScreen.scale-100.png" />
-    <Content Include="Images\SplashScreen.scale-125.png" />
-    <Content Include="Images\SplashScreen.scale-150.png" />
-    <Content Include="Images\SplashScreen.scale-200.png" />
-    <Content Include="Images\SplashScreen.scale-400.png" />
+    <Content Include="Images\SplashScreen.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SplashScreen.scale-100.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SplashScreen.scale-125.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SplashScreen.scale-150.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SplashScreen.scale-200.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SplashScreen.scale-400.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\StoreLogo.scale-100.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -216,11 +289,24 @@
     <Content Include="Images\StoreLogo.scale-400.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\WideTile.scale-100.png" />
-    <Content Include="Images\WideTile.scale-125.png" />
-    <Content Include="Images\WideTile.scale-150.png" />
-    <Content Include="Images\WideTile.scale-200.png" />
-    <Content Include="Images\WideTile.scale-400.png" />
+    <Content Include="Images\WideTile.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\WideTile.scale-100.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\WideTile.scale-125.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\WideTile.scale-150.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\WideTile.scale-200.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\WideTile.scale-400.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\WidgetCovers\all_dark.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -233,7 +319,9 @@
     <Content Include="Images\WidgetCovers\cargo_light.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\WidgetCovers\choco_dark.png" />
+    <Content Include="Images\WidgetCovers\choco_dark.png" >
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\WidgetCovers\choco_light.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

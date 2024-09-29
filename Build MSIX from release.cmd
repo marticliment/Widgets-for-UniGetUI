@@ -19,7 +19,6 @@ cd ..
 echo %cd%
 pause 
 
-cd ..
 MakeAppx.exe pack /d "Release" /p "installer.msix"
 move "installer.msix" ..\..\..\..\
 
