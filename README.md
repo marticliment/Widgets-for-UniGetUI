@@ -16,8 +16,9 @@ Alternatively, you can download the `msix` installer from the [Releases](https:/
 ## Screenshots
 
 <img src="https://github.com/user-attachments/assets/87d0f263-b43f-4220-ade1-2af54581c7c0" width=800px></img>
-<img src="https://github.com/marticliment/WingetUI-Widgets/assets/53119851/6e4ecd34-5a7e-4dca-a32b-d6629663b095" width=400px></img>
-<img src="https://github.com/marticliment/WingetUI-Widgets/assets/53119851/f0627589-9c59-4b0a-8319-08fad8f0f5ae" width=400px></img>
+
+<img src="https://github.com/user-attachments/assets/43a2fcae-420d-4c5d-a25b-9e6dd974221e" width=400px></img>
+<img src="https://github.com/user-attachments/assets/5c21fa2a-19c3-4e4c-82d5-342efe5c250f" width=400px></img>
 
 ## More Screenshots:
 <details>
