@@ -363,6 +363,35 @@
 										</ThemeResources>
 									</Definition>
 
+									<Definition Id="updates_vcpkg"
+										DisplayName="vckpg updates"
+										Description="vckpg packages that can be updated"
+										AllowMultiple="true">
+										<Capabilities>
+											<Capability>
+												<Size Name="medium" />
+											</Capability>
+											<Capability>
+												<Size Name="large" />
+											</Capability>
+										</Capabilities>
+										<ThemeResources>
+											<Icons>
+												<Icon Path="Images\vcpkg_color.png" />
+											</Icons>
+											<DarkMode>
+												<Screenshots>
+													<Screenshot Path="Images\WidgetCovers\vcpkg_dark.png" />
+												</Screenshots>
+											</DarkMode>
+											<LightMode>
+												<Screenshots>
+													<Screenshot Path="Images\WidgetCovers\vcpkg_light.png" />
+												</Screenshots>
+											</LightMode>
+										</ThemeResources>
+									</Definition>
+
 
 								</Definitions>
 							</WidgetProvider>

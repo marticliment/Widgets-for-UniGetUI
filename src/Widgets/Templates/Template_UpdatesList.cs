@@ -15,8 +15,8 @@ namespace WidgetsForUniGetUI.Templates
         {
             return size switch
             {
-                WidgetSize.Medium => 4,
-                WidgetSize.Large => 8,
+                WidgetSize.Medium => 3,
+                WidgetSize.Large => 7,
                 _ => 1
             };
         }
@@ -58,7 +58,8 @@ namespace WidgetsForUniGetUI.Templates
                         "wrap": true,
                         "weight": "Bolder",
                         "size": "Default",
-                        "spacing": "None"
+                        "horizontalAlignment": "Center",
+                        "spacing": "Large"
                     },
                     {
                         "type": "Container",
@@ -92,7 +93,7 @@ namespace WidgetsForUniGetUI.Templates
                         }
                     ],
                     "height": "stretch",
-                    "spacing": "None",
+                    "spacing": "Medium",
                     "verticalContentAlignment": "Top"
                     },
                     {

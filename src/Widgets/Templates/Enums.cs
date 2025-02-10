@@ -24,6 +24,7 @@ namespace WidgetsForUniGetUI.Templates
         public const string PowerShell5 = "updates_powershell";
         public const string PowerShell7 = "updates_powershell7";
         public const string Cargo = "updates_cargo";
+        public const string Vcpkg = "updates_vcpkg";
     }
 
 }
