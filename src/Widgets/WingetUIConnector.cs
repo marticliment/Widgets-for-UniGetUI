@@ -233,8 +233,11 @@ namespace WidgetsForUniGetUI
 
                 for (int i = 0; i < found_updates.Length; i++)
                 {
-                    if (AllowedSource == "" || AllowedSource == found_updates[i].ManagerName)
+                    if ((AllowedSource == "" && found_updates[i].ManagerName != "") || (AllowedSource != "" && AllowedSource == found_updates[i].ManagerName))
+                    {
+                        Logger.Log($"\"{found_updates[i].ManagerName}\"");
                         valid_updates[i - skippedPackages] = found_updates[i];
+                    }
                     else
                         skippedPackages++;
                 }
