@@ -108,17 +108,25 @@ namespace WidgetsForUniGetUI.Templates
                                         "type": "ActionSet",
                                         "actions": [
                                             {
-                                                "type": "Action.Execute",
-                                                "title": "🠈",
+                                                "title": "🠜",
                                                 "card": {
                                                     "type": "AdaptiveCard"
                                                 },
+                                                "type": "Action.Execute",
                                                 "verb": "{{Verbs.GoSmaller}}",
-                                                "isEnabled": {{(CanGoSmaller ? "true" : "false")}}
+                                                "isEnabled": true
                                             }
                                         ]
                                     }
-                                ]
+                                ],
+                                "isVisible": {{(CanGoSmaller ? "true" : "false")}}
+                            },
+                            {
+                                "type": "Column",
+                                "spacing": "None",
+                                "width": "38px",
+                                "items": [],
+                                "isVisible": {{(CanGoSmaller ? "false" : "true")}}
                             },
                             {
                                 "type": "Column",
@@ -147,17 +155,26 @@ namespace WidgetsForUniGetUI.Templates
                                         "type": "ActionSet",
                                         "actions": [
                                             {
-                                                "type": "Action.Execute",
-                                                "title": "🠊",
+                                                "title": "🠞",
                                                 "card": {
                                                     "type": "AdaptiveCard"
                                                 },
+                                                "type": "Action.Execute",
                                                 "verb": "{{Verbs.GoBigger}}",
-                                                "isEnabled": {{(CanGoBigger ? "true" : "false")}}
+                                                "isEnabled": true
                                             }
                                         ]
                                     }
-                                ]
+                                ],
+                                "isVisible": {{(CanGoBigger ? "true" : "false")}}
+                            },
+                            {
+                                "type": "Column",
+                                "spacing": "None",
+                                "width": "38px",
+                                "items": [
+                                ],
+                                "isVisible": {{(CanGoBigger ? "false" : "true")}}
                             }
                         ],
                         "spacing": "Small"
@@ -336,7 +353,7 @@ namespace WidgetsForUniGetUI.Templates
                                 "actions": [
                                     {
                                         "type": "Action.Execute",
-                                        "title": "🡇",
+                                        "title": "🠟",
                                         "verb": "{{Verbs.UpdatePackage}}_{{_widget.PackageOffset + index}}",
                                         "data": {},
                                         "tooltip": "Update this package",
